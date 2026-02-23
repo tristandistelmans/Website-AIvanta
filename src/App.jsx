@@ -886,10 +886,14 @@ function ContactCTA() {
     e.preventDefault()
     setStatus('sending')
     try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const res = await fetch('https://formsubmit.co/ajax/tristan.distelmans@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          _subject: `Nieuwe intake via Aivanta — ${form.naam}`,
+          _captcha: 'false',
+        }),
       })
       setStatus(res.ok ? 'sent' : 'error')
     } catch {
@@ -924,9 +928,26 @@ function ContactCTA() {
 
         {/* Form / Succes */}
         {status === 'sent' ? (
-          <div className="cta-elem opacity-0 py-16 text-center border border-white/10 rounded-sm">
-            <p className="font-heading font-bold text-cream text-2xl">Bericht ontvangen.</p>
-            <p className="font-body text-cream/40 mt-3">Ik neem zo snel mogelijk contact met u op.</p>
+          <div className="flex flex-col items-start gap-6 py-14 px-8 border border-white/10 rounded-sm" style={{ background: 'rgba(255,255,255,0.03)' }}>
+            {/* Vinkje */}
+            <div className="flex items-center justify-center w-12 h-12 rounded-full border border-clay/40 text-clay">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            {/* Tekst */}
+            <div>
+              <p className="font-drama italic text-cream text-4xl md:text-5xl leading-tight">
+                Uw bericht is verzonden.
+              </p>
+              <p className="font-body text-cream/40 text-base mt-4 leading-relaxed">
+                Ik neem zo snel mogelijk contact met u op — doorgaans binnen één werkdag.
+              </p>
+            </div>
+            {/* Scheidingslijn + label */}
+            <div className="w-full border-t border-white/10 pt-5">
+              <p className="font-mono-brand text-[10px] text-cream/20 tracking-widest uppercase">
+                Aivanta · tristan.distelmans@gmail.com
+              </p>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="cta-elem opacity-0 flex flex-col gap-5">
