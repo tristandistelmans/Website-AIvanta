@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowRight, Menu, X, ChevronRight, Sparkles, Workflow, MessageCircle, MessageSquare, Mail, FileText, Share2, Users, Receipt, BookOpen, CalendarCheck, BarChart2, UserPlus, Globe, Monitor } from 'lucide-react'
+import { ArrowRight, Menu, X, ChevronRight, Check } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IconCloud } from '@/components/ui/icon-cloud'
 import tristanPhoto from './assets/0267e3e3-c7ba-4952-a327-10ed2614011d.jpg'
+import { DIENSTEN } from './data/diensten'
 gsap.registerPlugin(ScrollTrigger)
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -45,7 +46,7 @@ function Navbar() {
 
   const links = [
     { label: 'Werkwijze', href: `${base}#werkwijze` },
-    { label: 'Over mij', href: `${base}#over-mij` },
+    { label: 'Over ons', href: '/over-ons' },
     { label: 'Contact', href: `${base}#contact` },
   ]
 
@@ -376,310 +377,7 @@ function Features() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   DATA — Themes & Use Cases
-───────────────────────────────────────────────────────────────────────── */
-const THEMES = [
-  {
-    slug: 'chatbot',
-    Icon: MessageSquare,
-    title: 'Chatbot',
-    tagline: 'Altijd bereikbaar, nooit een vraag onbeantwoord',
-    description: 'Een AI-chatbot beantwoordt klantvragen dag en nacht — getraind op uw producten, diensten en veelgestelde vragen. Zodat u en uw team zich kunnen focussen op werk dat er echt toe doet.',
-    useCaseIds: ['chatbot', 'reviews'],
-  },
-  {
-    slug: 'lead-generatie',
-    Icon: UserPlus,
-    title: 'Lead generatie',
-    tagline: 'Meer kwalitatieve klanten, minder moeite',
-    description: 'Identificeer wie uw website bezoekt, kwalificeer leads automatisch en volg ze op op het perfecte moment — zodat u enkel praat met mensen die écht geïnteresseerd zijn.',
-    useCaseIds: ['leads', 'website-leads'],
-  },
-  {
-    slug: 'verkoop',
-    Icon: FileText,
-    title: 'Verkoop & Offertes',
-    tagline: 'Van interesse tot getekend contract',
-    description: 'Automatiseer e-mailcampagnes, offertes en CRM-opvolging. Reageer sneller, sluit meer deals en houd elke klantrelatie altijd up-to-date — zonder extra handmatig werk.',
-    useCaseIds: ['email', 'offers', 'crm'],
-  },
-  {
-    slug: 'content',
-    Icon: Sparkles,
-    title: 'Content & Social media',
-    tagline: 'Consistent aanwezig online, elke dag',
-    description: 'Van blogs en nieuwsbrieven tot social media posts — AI genereert content in uw eigen stijl en plant die automatisch in op de beste tijdstippen.',
-    useCaseIds: ['social', 'content'],
-  },
-  {
-    slug: 'administratie',
-    Icon: Receipt,
-    title: 'Administratie',
-    tagline: 'Minder papierwerk, meer tijd voor uw werk',
-    description: 'Facturen opmaken, versturen en opvolgen. Rapporten automatisch samenstellen. Nooit meer manueel kopiëren of controleren — het systeem doet het voor u.',
-    useCaseIds: ['reports', 'invoice'],
-  },
-  {
-    slug: 'intern',
-    Icon: Workflow,
-    title: 'Interne processen',
-    tagline: 'Uw team efficiënter, zonder extra druk',
-    description: 'Vergaderingen automatisch samenvatten, een slimme kennisbank bouwen en nieuwe klanten naadloos onboarden — zodat uw team sneller werkt en minder vragen heeft.',
-    useCaseIds: ['meetings', 'knowledge', 'onboarding'],
-  },
-  {
-    slug: 'webdesign',
-    Icon: Monitor,
-    title: 'Webdesign',
-    tagline: 'Een website die klanten aantrekt en converteert',
-    description: 'Wij bouwen snelle, moderne websites voor KMO\'s en zelfstandigen — volledig op maat, zonder sjablonen. Met optionele AI-functies die uw website laten werken als een 24/7 verkoper.',
-    useCaseIds: [],
-  },
-]
-
-const USE_CASES = [
-  {
-    id: 'email',
-    category: 'Verkoop',
-    title: 'E-mailcampagnes automatiseren',
-    summary: 'Stuur de juiste e-mail op het juiste moment — automatisch en persoonlijk.',
-    benefits: [
-      'Automatische opvolging op het perfecte moment',
-      'Gepersonaliseerde berichten per contactsegment',
-      'Meer omzet uit bestaande contacten',
-    ],
-    impact: '~4–6u/week bespaard',
-    image: 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=800&h=500&fit=crop&q=80',
-    icon: <Mail size={16} />,
-    problem: 'U besteedt uren aan het handmatig opvolgen van leads en klanten. Opvolgmails worden vergeten, reacties blijven uit, en kansen gaan verloren door een gebrek aan consistentie.',
-    how: 'Het systeem analyseert het gedrag van uw contacten: opent hij de mail? Klikt hij door? Op basis daarvan stuurt het automatisch gepersonaliseerde opvolgberichten. U bepaalt de regels, de rest loopt vanzelf.',
-    value: 'Meer omzet uit uw bestaande contacten, minder handmatig werk en geen enkele kans meer verloren door een gemiste opvolging.',
-  },
-  {
-    id: 'leads',
-    category: 'Verkoop',
-    title: 'Leadkwalificatie op autopilot',
-    summary: 'Ontdek automatisch welke leads écht kansrijk zijn — zonder zelf te moeten sorteren.',
-    benefits: [
-      'AI scoort elke lead op kans en prioriteit',
-      'Enkel waardevolle contacten bereiken u',
-      'Hogere conversieratio per gesprek',
-    ],
-    impact: '~3–5u/week bespaard',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&q=80',
-    icon: <UserPlus size={16} />,
-    problem: 'U ontvangt contactformulieren, berichten en aanvragen, maar niet elke lead is de moeite waard. Het handmatig beoordelen en sorteren kost waardevolle tijd die u liever anders besteedt.',
-    how: 'AI beoordeelt elk nieuw contact op basis van criteria die u bepaalt: budget, sector, nood, urgentie. Elk contact krijgt een score en wordt automatisch doorgestuurd naar de juiste opvolgstap.',
-    value: 'U verspilt geen tijd meer aan koude leads en focust al uw energie op contacten met de hoogste kans op conversie.',
-  },
-  {
-    id: 'offers',
-    category: 'Verkoop',
-    title: 'Offerte- en contractbeheer',
-    summary: 'Professionele offertes en contracten in minuten — niet in uren.',
-    benefits: [
-      'Offertes gegenereerd op basis van bestaande klantdata',
-      'Versturen met één klik na uw goedkeuring',
-      'Snellere reactietijd leidt tot meer gewonnen deals',
-    ],
-    impact: '~1–2u per offerte bespaard',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=500&fit=crop&q=80',
-    icon: <FileText size={16} />,
-    problem: 'Een offerte opstellen kost elke keer opnieuw veel tijd: klantgegevens opzoeken, prijzen berekenen, de juiste template invullen en daarna nog eens nalezen op fouten.',
-    how: 'AI combineert klantdata uit uw CRM, uw prijsstructuur en uw templates tot een klaar-voor-verzending document. U keurt het enkel goed en verstuurt met één klik.',
-    value: 'U reageert sneller op aanvragen, maakt een professionelere indruk en sluit meer deals — met aanzienlijk minder moeite.',
-  },
-  {
-    id: 'crm',
-    category: 'Verkoop',
-    title: 'CRM-synchronisatie & opvolging',
-    summary: 'Uw klantdata altijd actueel — in elk systeem, zonder manueel werk.',
-    benefits: [
-      'Contacten gesynchroniseerd over al uw tools',
-      'Automatische opvolgingen op het juiste moment',
-      'Volledige klanthistoriek altijd up-to-date',
-    ],
-    impact: '~3–4u/week bespaard',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80',
-    icon: <Users size={16} />,
-    problem: 'Klantinformatie staat verspreid over uw mailbox, spreadsheets en CRM. Contacten worden dubbel opgeslagen, opvolgingen gemist en kansen onnodig verloren.',
-    how: 'Aivanta synchroniseert contacten, gesprekken en acties tussen al uw tools, zodat alles op één plek staat en up-to-date blijft. Nieuwe interacties triggeren automatisch de juiste opvolgstap.',
-    value: 'Betere klantrelaties, geen gemiste opvolgingen en een volledig overzicht van elke klant op elk moment.',
-  },
-  {
-    id: 'website-leads',
-    category: 'Verkoop',
-    title: 'Websitebezoekers automatisch opvolgen',
-    summary: 'Ontdek wie uw website bezoekt — en volg ze op vóór uw concurrentie dat doet.',
-    benefits: [
-      'Identificeer welke bedrijven uw website bezoeken',
-      'Automatische gepersonaliseerde opvolgberichten',
-      'Meer kwalitatieve leads zonder extra advertentiebudget',
-    ],
-    impact: 'Extra leads uit bestaand websiteverkeer',
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=500&fit=crop&q=80',
-    icon: <Globe size={16} />,
-    problem: 'Dagelijks bezoeken potentiële klanten uw website, bekijken uw diensten en verdwijnen weer zonder contact op te nemen. U heeft geen idee wie het zijn en kunt ze niet opvolgen.',
-    how: 'De tool herkent bedrijven die uw website bezoeken op basis van IP-data, analyseert welke pagina\'s ze bekeken en stuurt automatisch een gerichte opvolgmail of LinkedIn-connectie namens u.',
-    value: 'Meer kwalitatieve leads uit uw bestaande websiteverkeer, zonder extra advertentiebudget.',
-  },
-  {
-    id: 'chatbot',
-    category: 'Klantenservice',
-    title: '24/7 klantenservice chatbot',
-    summary: 'Beantwoord klantvragen automatisch — dag en nacht, ook als u slaapt.',
-    benefits: [
-      'Direct antwoord dag en nacht, ook buiten kantooruren',
-      'Getraind op uw producten, diensten en FAQ',
-      'Complexe vragen automatisch doorgestuurd naar u',
-    ],
-    impact: '24/7 bereikbaar, ~5u/week minder vragen',
-    image: 'https://images.unsplash.com/photo-1587560699334-cc4ff634909a?w=800&h=500&fit=crop&q=80',
-    icon: <MessageSquare size={16} />,
-    problem: 'Klanten stellen elke dag opnieuw dezelfde vragen. Buiten de kantooruren blijven berichten onbeantwoord, wat frustratie veroorzaakt en klanten doet afhaken.',
-    how: 'We bouwen een AI-chatbot volledig op maat, getraind op uw producten, diensten en veelgestelde vragen. Complexe of gevoelige vragen worden automatisch doorgestuurd naar u of uw team.',
-    value: 'Tevreden klanten die snel antwoord krijgen, minder herhaalde vragen voor u, en een professionele bereikbaarheid 24 uur op 24.',
-  },
-  {
-    id: 'reviews',
-    category: 'Klantenservice',
-    title: 'Klantreviews automatisch beantwoorden',
-    summary: 'Beantwoord elke review professioneel — zonder er zelf naar om te kijken.',
-    benefits: [
-      'Elke review beantwoord in uw eigen stijl',
-      'Negatieve reviews constructief en professioneel afgehandeld',
-      'Betere online reputatie, meer vertrouwen bij nieuwe klanten',
-    ],
-    impact: '~1–2u/week bespaard',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop&q=80',
-    icon: <MessageCircle size={16} />,
-    problem: 'Reviews op Google, Trustpilot of andere platformen blijven onbeantwoord of krijgen een generieke reactie. Dat kost u vertrouwen bij potentiële klanten die uw reacties lezen.',
-    how: 'AI leest elke nieuwe review en stelt een antwoord op in uw stem en stijl. Positieve reviews krijgen een warme bedanking, negatieve een constructieve en kalme respons. U keurt goed of laat het volledig automatisch lopen.',
-    value: 'Een professionele online reputatie, meer vertrouwen bij nieuwe klanten en minder tijd verloren aan het beantwoorden van reviews.',
-  },
-  {
-    id: 'reports',
-    category: 'Administratie',
-    title: 'Automatische rapportage',
-    summary: 'Uw cijfers altijd up-to-date — zonder spreadsheets of handmatig kopiëren.',
-    benefits: [
-      'Data uit al uw tools automatisch samengevoegd',
-      'Rapport klaar op vaste dag en tijdstip',
-      'Altijd actuele, correcte bedrijfscijfers',
-    ],
-    impact: '~2–4u/week bespaard',
-    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=500&fit=crop&q=80',
-    icon: <BarChart2 size={16} />,
-    problem: 'Elke week of maand kopieert u cijfers uit verschillende tools om een rapport samen te stellen. Tijdrovend, foutgevoelig en weinig inspirerend werk.',
-    how: 'Aivanta koppelt uw bestaande tools (CRM, boekhouding, website, advertenties) en trekt de relevante data samen tot een leesbaar rapport dat automatisch en op vaste tijdstippen wordt verzonden.',
-    value: 'Altijd een actueel beeld van uw bedrijf, minder tijdverspilling en betere beslissingen op basis van correcte, betrouwbare data.',
-  },
-  {
-    id: 'invoice',
-    category: 'Administratie',
-    title: 'Slimme facturatie & administratie',
-    summary: 'Facturen opmaken, versturen en opvolgen — volledig automatisch.',
-    benefits: [
-      'Facturen automatisch aangemaakt en verstuurd',
-      'Betalingsherinneringen zonder manuele opvolging',
-      'Volledige facturatiecyclus op autopilot',
-    ],
-    impact: '~2–3u/week bespaard',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=500&fit=crop&q=80',
-    icon: <Receipt size={16} />,
-    problem: 'Facturen maken, versturen en opvolgen op betalingen is noodzakelijk maar tijdrovend administratief werk dat u liever zou delegeren aan iemand anders.',
-    how: 'Zodra een deal is afgesloten of een dienst geleverd, maakt het systeem automatisch de factuur aan met de juiste gegevens en verstuurt die naar de klant. Betaalt de klant niet op tijd? Dan volgt er automatisch een herinnering.',
-    value: 'Snellere betalingen, minder achterstallige facturen en geen administratieve achterstanden meer — zodat u zich kunt focussen op uw echte werk.',
-  },
-  {
-    id: 'social',
-    category: 'Marketing',
-    title: 'Social media op autopilot',
-    summary: 'Consistent aanwezig op social media — zonder er dagelijks aan te denken.',
-    benefits: [
-      'AI schrijft posts in uw eigen tone of voice',
-      'Automatisch ingepland op optimale tijdstippen',
-      'Consistente aanwezigheid zonder dagelijkse moeite',
-    ],
-    impact: '~3–5u/week bespaard',
-    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&h=500&fit=crop&q=80',
-    icon: <Share2 size={16} />,
-    problem: 'U weet dat regelmatige aanwezigheid op social media belangrijk is, maar u heeft nauwelijks tijd om consistent te posten — laat staan originele content te schrijven.',
-    how: 'AI genereert posts op basis van uw expertise, uw aanbod en actuele thema\'s in uw sector. De content wordt ingepland op de beste tijdstippen en gepubliceerd zonder dat u er naar hoeft om te kijken.',
-    value: 'Meer zichtbaarheid, meer bereik en een sterkere online aanwezigheid — met een fractie van de tijdsinvestering.',
-  },
-  {
-    id: 'content',
-    category: 'Marketing',
-    title: 'Content & teksten op maat genereren',
-    summary: 'Blogs, nieuwsbrieven en productbeschrijvingen — in uw stijl, op de helft van de tijd.',
-    benefits: [
-      'Blogs, mails en productbeschrijvingen in uw stijl',
-      'Klaar om te publiceren of licht te bewerken',
-      'Meer content in minder tijd',
-    ],
-    impact: '~4–8u/week bespaard',
-    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=500&fit=crop&q=80',
-    icon: <Sparkles size={16} />,
-    problem: 'Goede content schrijven kost uren die u niet heeft. U stelt het steeds uit, wat ten koste gaat van uw zichtbaarheid en geloofwaardigheid online.',
-    how: 'AI leert uw schrijfstijl, uw aanbod en uw doelgroep kennen. Op basis van een onderwerp of trefwoord genereert het volledige teksten: blogs, productpagina\'s, e-mailcontent, beschrijvingen — alles in uw stem.',
-    value: 'Meer content in minder tijd, een sterkere online aanwezigheid en een consistente merkboodschap zonder externe copywriter.',
-  },
-  {
-    id: 'meetings',
-    category: 'Intern',
-    title: 'Vergaderingen automatisch samenvatten',
-    summary: 'Notulen, actiepunten en afspraken — klaar zodra de meeting voorbij is.',
-    benefits: [
-      'Automatische transcriptie en gestructureerde samenvatting',
-      'Actiepunten direct toebedeeld met verantwoordelijke',
-      'Nooit meer een afspraak of beslissing gemist',
-    ],
-    impact: '~30–60 min per vergadering bespaard',
-    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=500&fit=crop&q=80',
-    icon: <CalendarCheck size={16} />,
-    problem: 'Na elke vergadering schrijft u handmatig notities uit, stuurt u een samenvatting en probeert u actiepunten bij te houden. Een tijdrovende en foutgevoelige klus.',
-    how: 'AI transcribeert de meeting in realtime, filtert de belangrijkste punten eruit en stelt een heldere samenvatting op met actiepunten, verantwoordelijken en deadlines — binnen de minuut na afloop.',
-    value: 'Minder administratie na vergaderingen, duidelijkere opvolgingen en nooit meer iets vergeten dat besproken werd.',
-  },
-  {
-    id: 'knowledge',
-    category: 'Intern',
-    title: 'Interne kennisbank op autopilot',
-    summary: 'Uw medewerkers vinden altijd het juiste antwoord — meteen en zonder te zoeken.',
-    benefits: [
-      'AI-assistent getraind op uw eigen documenten',
-      'Medewerkers vinden antwoorden in seconden',
-      'Consistente informatie in heel uw organisatie',
-    ],
-    impact: 'Snellere onboarding, minder herhaalde vragen',
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=500&fit=crop&q=80',
-    icon: <BookOpen size={16} />,
-    problem: 'Medewerkers stellen steeds opnieuw dezelfde vragen over procedures, prijzen, producten of beleid. Dit kost tijd van u én van hen, en leidt tot inconsistente antwoorden.',
-    how: 'We bouwen een AI-assistent getraind op uw eigen documenten, handleidingen en FAQ\'s. Medewerkers kunnen vragen stellen in gewone taal en krijgen meteen een correct, bronverwezen antwoord.',
-    value: 'Minder herhaalde vragen, snellere onboarding van nieuwe medewerkers en consistente informatie binnen uw hele team.',
-  },
-  {
-    id: 'onboarding',
-    category: 'Intern',
-    title: 'Automatische klantintake & onboarding',
-    summary: 'Nieuwe klanten naadloos verwelkomen — van eerste contact tot actieve klant, automatisch.',
-    benefits: [
-      'Volledige onboardingflow automatisch getriggerd',
-      'Welkomstmail, contract en toegang automatisch verstuurd',
-      'Professionele eerste indruk zonder handmatig werk',
-    ],
-    impact: '~2–3u per nieuwe klant bespaard',
-    image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=500&fit=crop&q=80',
-    icon: <Workflow size={16} />,
-    problem: 'Het onboarden van een nieuwe klant vraagt telkens dezelfde stappen: formulieren, welkomstmails, contracten, uitleg. Tijdrovend en inconsistent als het handmatig gebeurt.',
-    how: 'Zodra een nieuwe klant tekent of betaalt, triggert het systeem automatisch de volledige onboardingflow: welkomstmail, contract, toegang tot tools, eerste afspraak en introductiedocumenten — alles op het juiste moment.',
-    value: 'Een professionele eerste indruk, tevreden nieuwe klanten en minder administratief werk bij elke nieuwe samenwerking.',
-  },
-]
-
-/* ─────────────────────────────────────────────────────────────────────────
-   SERVICE THEMES — Scanbare tegels
+   SERVICE THEMES — Scanbare categorietegels (homepage)
 ───────────────────────────────────────────────────────────────────────── */
 function ServiceThemes() {
   const sectionRef = useRef(null)
@@ -717,13 +415,13 @@ function ServiceThemes() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-12">
-          {THEMES.map((theme) => {
-            const { Icon } = theme
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mt-12">
+          {DIENSTEN.map((dienst) => {
+            const { Icon } = dienst
             return (
               <Link
-                key={theme.slug}
-                to={`/diensten/${theme.slug}`}
+                key={dienst.slug}
+                to={`/diensten/${dienst.slug}`}
                 className="theme-tile opacity-0 group flex flex-col gap-5 p-6 bg-white rounded-2xl border border-charcoal/8 hover:border-clay/25 hover:shadow-md transition-all duration-200"
               >
                 <div className="w-10 h-10 rounded-xl bg-charcoal/6 flex items-center justify-center text-charcoal/40 group-hover:bg-clay/10 group-hover:text-clay transition-colors flex-shrink-0">
@@ -731,10 +429,10 @@ function ServiceThemes() {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-heading font-bold text-charcoal text-base leading-snug mb-1.5 group-hover:text-clay transition-colors duration-150">
-                    {theme.title}
+                    {dienst.title}
                   </h3>
                   <p className="font-body text-charcoal/45 text-sm leading-snug">
-                    {theme.tagline}
+                    {dienst.tagline}
                   </p>
                 </div>
                 <div className="flex items-center gap-1.5 font-mono-brand text-[10px] tracking-widest uppercase text-clay group-hover:gap-2.5 transition-all duration-200">
@@ -754,127 +452,207 @@ function ServiceThemes() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   USE CASE DETAIL — Card op detailpagina
+   SUBDIENST CARD — Accordion op detailpagina
 ───────────────────────────────────────────────────────────────────────── */
-function UseCaseDetail({ useCase, index }) {
-  const isEven = index % 2 === 0
+function SubdienstCard({ subdienst, index }) {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-      {/* Afbeelding */}
-      <div className={isEven ? '' : 'md:order-2'}>
-        <img
-          src={useCase.image}
-          alt={useCase.title}
-          className="w-full rounded-2xl object-cover aspect-[4/3]"
-        />
-      </div>
-
-      {/* Inhoud */}
-      <div className={isEven ? '' : 'md:order-1'}>
-        <div className="flex items-center gap-2 mb-4">
-          <span className="w-7 h-7 rounded-full bg-clay/10 flex items-center justify-center text-clay flex-shrink-0">
-            {useCase.icon}
+    <div className="border-b border-charcoal/10">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-start justify-between gap-6 py-7 text-left group"
+      >
+        <div className="flex-1">
+          <span className="font-mono-brand text-[10px] text-clay/70 tracking-widest uppercase">
+            {String(index + 1).padStart(2, '0')}
           </span>
-          <span className="font-mono-brand text-clay text-[10px] tracking-widest uppercase">{useCase.category}</span>
+          <h3 className="font-heading font-bold text-charcoal text-xl md:text-2xl mt-1 leading-snug group-hover:text-clay transition-colors duration-150">
+            {subdienst.titel}
+          </h3>
+          <p className="font-body text-charcoal/45 text-sm mt-2 leading-relaxed max-w-2xl">
+            {subdienst.omschrijving}
+          </p>
         </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+          className="flex-shrink-0 mt-2 w-8 h-8 rounded-full border border-charcoal/15 flex items-center justify-center"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 4L6 8L10 4" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </motion.div>
+      </button>
 
-        <h3 className="font-heading font-bold text-charcoal text-2xl md:text-3xl mb-7 leading-tight">
-          {useCase.title}
-        </h3>
+      <AnimatePresence mode="wait">
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1, transition: { height: { type: 'spring', stiffness: 280, damping: 30 }, opacity: { duration: 0.2, delay: 0.08 } } }}
+            exit={{ height: 0, opacity: 0, transition: { height: { type: 'spring', stiffness: 280, damping: 30 }, opacity: { duration: 0.1 } } }}
+            className="overflow-hidden"
+          >
+            <div className="pb-8 space-y-5">
 
-        <div className="flex flex-col gap-6">
-          {[
-            { label: 'Het probleem', content: useCase.problem },
-            { label: 'Hoe werkt het?', content: useCase.how },
-            { label: 'Wat levert het u op', content: useCase.value },
-          ].map(({ label, content }) => (
-            <div key={label}>
-              <span className="font-mono-brand text-moss text-[10px] tracking-widest uppercase">{label}</span>
-              <p className="font-body text-charcoal/65 text-base leading-relaxed mt-1.5">{content}</p>
+              {/* Voor wie / Wanneer */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-5 bg-charcoal/[0.03] rounded-xl">
+                  <span className="font-mono-brand text-[10px] text-moss tracking-widest uppercase">Voor wie</span>
+                  <p className="font-body text-charcoal/65 text-sm mt-2 leading-relaxed">{subdienst.voorWie}</p>
+                </div>
+                <div className="p-5 bg-charcoal/[0.03] rounded-xl">
+                  <span className="font-mono-brand text-[10px] text-moss tracking-widest uppercase">Wanneer inzetten</span>
+                  <p className="font-body text-charcoal/65 text-sm mt-2 leading-relaxed">{subdienst.wanneer}</p>
+                </div>
+              </div>
+
+              {/* Wat levert het op */}
+              <div>
+                <span className="font-mono-brand text-[10px] text-moss tracking-widest uppercase">Wat levert het op</span>
+                <ul className="mt-3 flex flex-col gap-2">
+                  {subdienst.waarde.map(w => (
+                    <li key={w} className="flex items-start gap-2.5">
+                      <Check size={13} className="text-clay flex-shrink-0 mt-0.5" />
+                      <span className="font-body text-charcoal/70 text-sm">{w}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Hoe werkt AI hier */}
+              <div className="p-5 rounded-xl" style={{ background: 'linear-gradient(135deg, rgba(46,64,54,0.06) 0%, rgba(26,26,26,0.04) 100%)' }}>
+                <span className="font-mono-brand text-[10px] text-moss tracking-widest uppercase">Hoe werkt AI hier?</span>
+                <p className="font-body text-charcoal/65 text-sm mt-2 leading-relaxed">{subdienst.hoeAI}</p>
+              </div>
+
+              {/* Inbegrepen / Niet inbegrepen */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-5 bg-moss/[0.06] rounded-xl">
+                  <span className="font-mono-brand text-[10px] text-moss tracking-widest uppercase">Inbegrepen</span>
+                  <ul className="mt-3 flex flex-col gap-2">
+                    {subdienst.inbegrepen.map(item => (
+                      <li key={item} className="flex items-start gap-2">
+                        <Check size={12} className="text-moss flex-shrink-0 mt-0.5" />
+                        <span className="font-body text-charcoal/65 text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-5 bg-charcoal/[0.03] rounded-xl">
+                  <span className="font-mono-brand text-[10px] text-charcoal/35 tracking-widest uppercase">Niet inbegrepen</span>
+                  <ul className="mt-3 flex flex-col gap-2">
+                    {subdienst.nietInbegrepen.map(item => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="text-charcoal/25 flex-shrink-0 mt-0.5 text-xs font-mono-brand">—</span>
+                        <span className="font-body text-charcoal/40 text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Integraties */}
+              <div>
+                <span className="font-mono-brand text-[10px] text-charcoal/35 tracking-widest uppercase">Werkt samen met</span>
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {subdienst.integraties.map(tool => (
+                    <span key={tool} className="font-mono-brand text-[10px] text-charcoal/45 tracking-wide px-3 py-1.5 bg-charcoal/[0.05] rounded-full border border-charcoal/8">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   WERKWIJZE BLOK — Aanpak in 5 stappen
+───────────────────────────────────────────────────────────────────────── */
+function WerkwijzeBlok({ werkwijze }) {
+  return (
+    <section
+      className="py-20 md:py-24 px-6 md:px-12"
+      style={{ background: 'linear-gradient(135deg, #1e2b24 0%, #1A1A1A 100%)' }}
+    >
+      <div className="max-w-5xl mx-auto">
+        <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">Aanpak</span>
+        <h2 className="font-heading font-bold text-cream text-2xl md:text-3xl mt-3 mb-12 leading-tight">
+          Zo werken we samen.
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 md:gap-4">
+          {werkwijze.map((stap, i) => (
+            <div key={stap.stap} className="flex flex-col gap-3">
+              <div className="flex items-center gap-3 mb-1">
+                <span className="font-mono-brand text-xs text-clay/60 tracking-widest">{String(i + 1).padStart(2, '0')}</span>
+                {i < werkwijze.length - 1 && (
+                  <div className="hidden md:block flex-1 h-px bg-cream/10" />
+                )}
+              </div>
+              <h3 className="font-heading font-bold text-cream text-base">{stap.stap}</h3>
+              <p className="font-body text-cream/45 text-sm leading-relaxed">{stap.beschrijving}</p>
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  )
+}
 
-        <div className="mt-6 pt-6 border-t border-charcoal/8">
-          <span className="font-mono-brand text-moss text-xs tracking-wide">{useCase.impact}</span>
+/* ─────────────────────────────────────────────────────────────────────────
+   SCOPE BLOK — Wat wel en niet inbegrepen is
+───────────────────────────────────────────────────────────────────────── */
+function ScopeBlok({ scope }) {
+  return (
+    <section className="py-20 md:py-24 px-6 md:px-12 bg-cream border-t border-charcoal/8">
+      <div className="max-w-5xl mx-auto">
+        <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">Scope</span>
+        <h2 className="font-heading font-bold text-charcoal text-2xl md:text-3xl mt-3 mb-10 leading-tight">
+          Wat is inbegrepen?
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <span className="font-mono-brand text-xs text-moss tracking-widest uppercase">Wel inbegrepen</span>
+            <ul className="mt-4 flex flex-col gap-3">
+              {scope.wel.map(item => (
+                <li key={item} className="flex items-start gap-3">
+                  <Check size={14} className="text-moss flex-shrink-0 mt-0.5" />
+                  <span className="font-body text-charcoal/70 text-sm">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <span className="font-mono-brand text-xs text-charcoal/40 tracking-widest uppercase">Niet inbegrepen</span>
+            <ul className="mt-4 flex flex-col gap-3">
+              {scope.niet.map(item => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="text-charcoal/25 flex-shrink-0 mt-0.5 font-mono-brand text-xs">—</span>
+                  <span className="font-body text-charcoal/45 text-sm">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   WEBDESIGN CONTENT — Aangepaste inhoud voor webdesign detailpagina
+   CATEGORIE DETAIL PAGE
 ───────────────────────────────────────────────────────────────────────── */
-function WebdesignContent() {
-  const items = [
-    {
-      Icon: Monitor,
-      title: 'Op maat ontworpen, geen sjablonen',
-      description: 'Uw website wordt volledig op maat gebouwd — afgestemd op uw merk, uw doelgroep en uw doelen. Geen WordPress-sjabloon, geen compromissen.',
-    },
-    {
-      Icon: Sparkles,
-      title: 'Snel, mobielvriendelijk en SEO-klaar',
-      description: 'Een moderne website die razendsnel laadt op elk toestel en geoptimaliseerd is voor zoekmachines, zodat potentiële klanten u gemakkelijk vinden.',
-    },
-    {
-      Icon: MessageSquare,
-      title: 'Ingebouwde AI-chatbot',
-      description: 'Optioneel voegen we een AI-chatbot toe die vragen van bezoekers dag en nacht beantwoordt — en leads automatisch opvolgt.',
-    },
-    {
-      Icon: UserPlus,
-      title: 'Slimme leadcapture',
-      description: 'Geïntegreerde formulieren en leadcapture flows die bezoekers omzetten in contacten, automatisch gekoppeld aan uw CRM of mailsysteem.',
-    },
-    {
-      Icon: Globe,
-      title: 'Naadloze integraties',
-      description: 'Gekoppeld aan uw bestaande tools: CRM, boekhouding, agenda of mailsysteem. Alles werkt samen zonder handmatige tussenkomst.',
-    },
-    {
-      Icon: Workflow,
-      title: 'Doorlopende begeleiding',
-      description: 'Na de lancering staan we klaar voor aanpassingen, updates en uitbreidingen. U staat er nooit alleen voor.',
-    },
-  ]
-
-  return (
-    <div>
-      <div className="mb-14">
-        <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">Wat u krijgt</span>
-        <h2 className="font-heading font-bold text-charcoal text-3xl md:text-4xl mt-3 mb-4 leading-tight">
-          Een website die voor u werkt.
-        </h2>
-        <p className="font-body text-charcoal/60 text-lg leading-relaxed max-w-2xl">
-          Niet enkel een mooie website — maar een digitale vertegenwoordiger die dag en nacht bezoekers omzet in klanten.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {items.map(({ Icon, title, description }) => (
-          <div key={title} className="flex flex-col gap-4 p-7 bg-white rounded-2xl border border-charcoal/8">
-            <div className="w-10 h-10 rounded-xl bg-clay/8 flex items-center justify-center text-clay flex-shrink-0">
-              <Icon size={18} />
-            </div>
-            <h3 className="font-heading font-bold text-charcoal text-base leading-snug">{title}</h3>
-            <p className="font-body text-charcoal/55 text-sm leading-relaxed">{description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/* ─────────────────────────────────────────────────────────────────────────
-   DIENST DETAIL PAGE
-───────────────────────────────────────────────────────────────────────── */
-function DienstDetailPage() {
+function CategorieDetailPage() {
   const { slug } = useParams()
-  const theme = THEMES.find(t => t.slug === slug)
+  const categorie = DIENSTEN.find(d => d.slug === slug)
 
-  if (!theme) {
+  if (!categorie) {
     return (
       <div className="min-h-screen bg-cream flex items-center justify-center">
         <div className="text-center px-6">
@@ -887,8 +665,7 @@ function DienstDetailPage() {
     )
   }
 
-  const useCases = USE_CASES.filter(uc => theme.useCaseIds.includes(uc.id))
-  const { Icon } = theme
+  const { Icon } = categorie
 
   return (
     <div className="min-h-screen bg-cream">
@@ -912,43 +689,70 @@ function DienstDetailPage() {
               <Icon size={22} />
             </div>
             <div>
-              <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">AI Toepassingen</span>
+              <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">AI Automatisering</span>
               <h1
                 className="font-heading font-bold text-cream mt-2 leading-tight"
                 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}
               >
-                {theme.title}
+                {categorie.title}
               </h1>
             </div>
           </div>
 
-          <p className="font-body text-cream/55 text-lg md:text-xl leading-relaxed max-w-2xl">
-            {theme.description}
+          <p className="font-body text-cream/55 text-lg md:text-xl leading-relaxed max-w-2xl mb-12">
+            {categorie.beschrijving}
           </p>
+
+          {/* Hero probleem + resultaten */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-cream/10">
+            <div>
+              <span className="font-mono-brand text-xs text-cream/30 tracking-widest uppercase">Herkent u dit?</span>
+              <p className="font-body text-cream/55 text-base leading-relaxed mt-3">
+                {categorie.hero.probleem}
+              </p>
+            </div>
+            <div>
+              <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">Mogelijke resultaten</span>
+              <ul className="mt-3 flex flex-col gap-2">
+                {categorie.hero.resultaten.map(r => (
+                  <li key={r} className="flex items-start gap-2.5">
+                    <Check size={13} className="text-clay flex-shrink-0 mt-0.5" />
+                    <span className="font-body text-cream/60 text-sm">{r}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Use cases */}
-      <section className="py-24 md:py-32 bg-cream px-6 md:px-12">
+      {/* Subdiensten */}
+      <section className="py-20 md:py-28 px-6 md:px-12 bg-cream">
         <div className="max-w-5xl mx-auto">
-          {useCases.length > 0 ? (
-            <div className="flex flex-col gap-24">
-              {useCases.map((uc, i) => (
-                <UseCaseDetail key={uc.id} useCase={uc} index={i} />
-              ))}
-            </div>
-          ) : (
-            <WebdesignContent />
-          )}
+          <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">Specifieke toepassingen</span>
+          <h2 className="font-heading font-bold text-charcoal text-2xl md:text-4xl mt-3 mb-2 leading-tight">
+            Wat zit er precies in?
+          </h2>
+          <p className="font-body text-charcoal/50 text-base mb-10">
+            Klik op een toepassing voor alle details — inclusief scope, aanpak en integraties.
+          </p>
+          <div className="border-t border-charcoal/10">
+            {categorie.subdiensten.map((subdienst, i) => (
+              <SubdienstCard key={subdienst.id} subdienst={subdienst} index={i} />
+            ))}
+          </div>
         </div>
       </section>
+
+      <WerkwijzeBlok werkwijze={categorie.werkwijze} />
+      <ScopeBlok scope={categorie.scope} />
 
       {/* CTA */}
-      <section className="py-20 md:py-28 px-6 md:px-12 border-t border-charcoal/8 bg-cream">
+      <section className="py-20 md:py-28 px-6 md:px-12 bg-cream border-t border-charcoal/8">
         <div className="max-w-2xl mx-auto text-center">
           <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">Interesse?</span>
           <h2 className="font-heading font-bold text-charcoal text-2xl md:text-4xl mt-4 mb-8 leading-tight">
-            Ontdek wat {theme.title} voor uw bedrijf kan betekenen.
+            Ontdek wat {categorie.title} voor uw bedrijf kan betekenen.
           </h2>
           <a
             href="/#contact"
@@ -1019,82 +823,86 @@ function ToolsCloud() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   ABOUT ME
+   OVER MIJ PAGE — Volledige pagina
 ───────────────────────────────────────────────────────────────────────── */
-function AboutMe() {
-  const sectionRef = useRef(null)
-  const photoWrapRef = useRef(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.about-elem',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.12,
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 72%' } }
-      )
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
-
+function OverMijPage() {
   return (
-    <section ref={sectionRef} id="over-mij" className="py-24 md:py-32 bg-cream px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div className="min-h-screen bg-cream">
+      <Navbar />
 
-          {/* Photo + naam */}
-          <div ref={photoWrapRef} className="flex flex-col max-w-sm mx-auto lg:mx-0">
-            <img
-              src={tristanPhoto}
-              alt="Tristan Distelmans — Aivanta"
-              className="w-full rounded-sm"
-              style={{
-                filter: 'contrast(1.08) brightness(0.96) saturate(0.68)',
-              }}
-            />
-            <div className="mt-4 pl-1">
-              <p className="font-drama text-5xl md:text-6xl text-charcoal leading-none italic">
-                Tristan Distelmans
-              </p>
+      {/* Hero */}
+      <section
+        className="pt-36 pb-20 md:pt-44 md:pb-28 px-6 md:px-12"
+        style={{ background: 'linear-gradient(135deg, #1e2b24 0%, #1A1A1A 100%)' }}
+      >
+        <div className="max-w-5xl mx-auto">
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 font-mono-brand text-cream/35 text-[10px] tracking-widest uppercase hover:text-cream/65 transition-colors mb-10"
+          >
+            <ArrowRight size={10} className="rotate-180" /> Terug naar overzicht
+          </a>
+          <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">Over ons</span>
+          <h1
+            className="font-drama italic text-cream mt-2 leading-none"
+            style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)' }}
+          >
+            Tristan Distelmans
+          </h1>
+        </div>
+      </section>
+
+      {/* Inhoud */}
+      <section className="py-24 md:py-32 px-6 md:px-12 bg-cream">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+            {/* Foto */}
+            <div className="max-w-xs mx-auto lg:mx-0">
+              <img
+                src={tristanPhoto}
+                alt="Tristan Distelmans — Aivanta"
+                className="w-full rounded-sm"
+                style={{ filter: 'contrast(1.08) brightness(0.96) saturate(0.68)' }}
+              />
             </div>
-          </div>
 
-          {/* Text */}
-          <div className="flex flex-col gap-8">
-            <div className="about-elem opacity-0">
-              <span className="font-mono-brand text-xs text-clay tracking-widest uppercase">Over mij</span>
-              <h2 className="font-heading font-bold text-charcoal text-3xl md:text-4xl mt-3 leading-tight">
+            {/* Tekst */}
+            <div className="flex flex-col gap-6">
+              <h2 className="font-heading font-bold text-charcoal text-2xl md:text-3xl leading-tight">
                 Aangenaam: ik ben Tristan.
               </h2>
+              <div className="flex flex-col gap-4">
+                <p className="font-body text-charcoal/70 text-base md:text-lg leading-relaxed">
+                  Ik doe dit omdat ik er oprecht in geloof dat AI een enorme impact kan hebben voor de gewone ondernemer — niet alleen voor grote bedrijven met grote IT-afdelingen. Mijn uitgangspunt is altijd hetzelfde: hoe kunt u AI inzetten om uw werk makkelijker te maken, uw bedrijf efficiënter te laten draaien en uw tijd te besteden aan{' '}
+                  <em className="text-charcoal not-italic font-semibold">wat er echt toe doet</em>?
+                </p>
+                <p className="font-body text-charcoal/70 text-base md:text-lg leading-relaxed">
+                  Ik heb geen grote technische achtergrond — en dat is precies mijn sterkste troef. Ik denk niet in systemen, ik denk in problemen en oplossingen. Ik stel de vragen die er echt toe doen: waar verliest u tijd, wat blokkeert u dagelijks, en wat verandert er als dat wegvalt?
+                </p>
+                <p className="font-body text-charcoal/70 text-base md:text-lg leading-relaxed">
+                  Vandaaruit bouw ik iets dat werkt. Geen leuk idee op papier, maar een{' '}
+                  <em className="text-charcoal not-italic font-semibold">concrete oplossing die morgen al impact maakt</em>{' '}
+                  op uw dagelijkse werk.
+                </p>
+              </div>
+              <div className="pt-2">
+                <a
+                  href="/#contact"
+                  className="btn-magnetic inline-flex items-center gap-3 bg-clay text-cream px-7 py-3.5 rounded-full font-heading font-semibold text-sm"
+                >
+                  <span className="btn-bg bg-moss rounded-full" />
+                  <span className="btn-label flex items-center gap-3">Neem contact op <ArrowRight size={15} /></span>
+                </a>
+              </div>
             </div>
 
-            <div className="about-elem opacity-0 flex flex-col gap-4">
-              <p className="font-body text-charcoal/70 text-base md:text-lg leading-relaxed">
-                Ik doe dit omdat ik er oprecht in geloof dat AI een enorme impact kan hebben voor de gewone ondernemer — niet alleen voor grote bedrijven met grote IT-afdelingen. Mijn uitgangspunt is altijd hetzelfde: hoe kunt u AI inzetten om uw werk makkelijker te maken, uw bedrijf efficiënter te laten draaien en uw tijd te besteden aan{' '}
-                <em className="text-charcoal not-italic font-semibold">wat er echt toe doet</em>?
-              </p>
-              <p className="font-body text-charcoal/70 text-base md:text-lg leading-relaxed">
-                Ik heb geen grote technische achtergrond — en dat is precies mijn sterkste troef. Ik denk niet in systemen, ik denk in problemen en oplossingen. Ik stel de vragen die er echt toe doen: waar verliest u tijd, wat blokkeert u dagelijks, en wat verandert er als dat wegvalt?
-              </p>
-              <p className="font-body text-charcoal/70 text-base md:text-lg leading-relaxed">
-                Vandaaruit bouw ik iets dat werkt. Geen leuk idee op papier, maar een{' '}
-                <em className="text-charcoal not-italic font-semibold">concrete oplossing die morgen al impact maakt</em>{' '}
-                op uw dagelijkse werk.
-              </p>
-            </div>
-
-            <div className="about-elem opacity-0">
-              <a
-                href="#contact"
-                className="btn-magnetic inline-flex items-center gap-3 bg-moss text-cream px-7 py-3.5 rounded-full font-heading font-semibold text-sm"
-              >
-                <span className="btn-bg bg-moss-dark rounded-full" />
-                <span className="btn-label flex items-center gap-3">Maak kennis <ArrowRight size={15} /></span>
-              </a>
-            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <Footer />
+    </div>
   )
 }
 
@@ -1393,7 +1201,7 @@ function Footer() {
         <nav className="flex items-center gap-6">
           {[
             { label: 'Werkwijze', href: `${base}#werkwijze` },
-            { label: 'Over mij',  href: `${base}#over-mij` },
+            { label: 'Over ons',  href: '/over-ons' },
             { label: 'Contact',   href: `${base}#contact` },
             { label: 'tristan.distelmans@gmail.com', href: 'mailto:tristan.distelmans@gmail.com' },
           ].map(({ label, href }) => (
@@ -1422,7 +1230,6 @@ function HomePage() {
       <ServiceThemes />
       <Features />
       <ToolsCloud />
-      <AboutMe />
       <FAQ />
       <ContactCTA />
       <Footer />
@@ -1439,7 +1246,8 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/diensten/:slug" element={<DienstDetailPage />} />
+        <Route path="/over-ons" element={<OverMijPage />} />
+        <Route path="/diensten/:slug" element={<CategorieDetailPage />} />
       </Routes>
     </>
   )
