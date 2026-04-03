@@ -231,6 +231,58 @@ body {
   -webkit-mask-image: radial-gradient(ellipse at 80% 0%, black 20%, transparent 75%);
 }
 
+/* ─── Aurora Light (cream base, brand colors) ───────────────────── */
+.aurora-layer-light {
+  --light-gradient: repeating-linear-gradient(
+    100deg,
+    #F2F0E9 0%, #F2F0E9 7%, transparent 10%, transparent 12%, #F2F0E9 16%
+  );
+  --aurora-light: repeating-linear-gradient(
+    100deg,
+    #2E4036 10%, #CC5833 15%, #3d5449 20%, #d4a574 25%, #a8461f 30%
+  );
+
+  background-image: var(--light-gradient), var(--aurora-light);
+  background-size: 300%, 200%;
+  background-position: 50% 50%, 50% 50%;
+  filter: blur(30px);
+
+  position: absolute;
+  inset: -20px;
+  opacity: 0.15;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.aurora-layer-light::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--light-gradient), var(--aurora-light);
+  background-size: 200%, 100%;
+  animation: aurora 60s linear infinite;
+  background-attachment: fixed;
+  mix-blend-mode: soft-light;
+}
+
+/* ─── Section Transitions (removed, using SVG dividers) ─────── */
+
+/* ─── Chat glow effect ──────────────────────────────────────────── */
+.chat-container {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 10px 30px -5px rgba(46, 64, 54, 0.08),
+    0 0 0 1px rgba(46, 64, 54, 0.05);
+}
+
+.chat-container:hover {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 15px 40px -5px rgba(46, 64, 54, 0.12),
+    0 0 0 1px rgba(46, 64, 54, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
 /* ─── Cybernetic Bento Grid ──────────────────────────────────────── */
 .bento-grid {
   display: grid;
