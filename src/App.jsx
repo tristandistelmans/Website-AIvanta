@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowRight, Menu, X, ChevronRight } from 'lucide-react'
+import useEmblaCarousel from 'embla-carousel-react'
 
 import tristanPhoto from './assets/0267e3e3-c7ba-4952-a327-10ed2614011d.jpg'
 gsap.registerPlugin(ScrollTrigger)
@@ -133,10 +134,7 @@ function Hero() {
               className="btn-magnetic inline-flex items-center gap-3 bg-clay text-cream px-8 py-4 rounded-full font-heading font-semibold text-base"
             >
               <span className="btn-bg bg-clay-dark rounded-full" />
-              <span className="btn-label flex items-center gap-3">Plan een gratis gesprek <ArrowRight size={16} /></span>
-            </a>
-            <a href="#werkwijze" className="link-lift font-body text-charcoal/50 hover:text-charcoal text-sm flex items-center gap-2 transition-colors">
-              Bekijk mijn aanpak <ChevronRight size={14} />
+              <span className="btn-label flex items-center gap-3">Neem contact op <ArrowRight size={16} /></span>
             </a>
           </div>
 
@@ -151,6 +149,23 @@ function Hero() {
 ───────────────────────────────────────────────────────────────────────── */
 function UseCases() {
   const sectionRef = useRef(null)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1, dragFree: true })
+  const [canPrev, setCanPrev] = useState(false)
+  const [canNext, setCanNext] = useState(true)
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    const onSelect = () => {
+      setCanPrev(emblaApi.canScrollPrev())
+      setCanNext(emblaApi.canScrollNext())
+    }
+    emblaApi.on('select', onSelect)
+    onSelect()
+    return () => emblaApi.off('select', onSelect)
+  }, [emblaApi])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -159,41 +174,159 @@ function UseCases() {
         { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' } }
       )
-      gsap.fromTo('.uc-tag',
-        { y: 14, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.45, ease: 'power3.out', stagger: 0.04,
+      gsap.fromTo('.uc-carousel',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 65%' } }
       )
     }, sectionRef)
     return () => ctx.revert()
   }, [])
 
-  const tags = [
-    'Leadopvolging', 'AI-Chatbots', 'CRM-automatisering', 'E-mailmarketing',
-    'Contentcreatie', 'Documentgeneratie', 'Onboarding', 'Rapportage',
-    'Offertegeneratie', 'Website bouwen', 'Custom GPT', 'Dashboards',
-    'Social media', 'Workflow automatisering', 'Data-analyse',
+  const services = [
+    {
+      title: 'Leadopvolging',
+      desc: 'Automatisch leads opvolgen zodat geen enkele prospect verloren gaat.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      ),
+    },
+    {
+      title: 'AI-Chatbots',
+      desc: 'Slimme chatbots die klanten 24/7 te woord staan en kwalificeren.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      ),
+    },
+    {
+      title: 'CRM-automatisering',
+      desc: 'Uw CRM draait op automatische piloot — van invoer tot opvolging.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+      ),
+    },
+    {
+      title: 'E-mailmarketing',
+      desc: 'Geautomatiseerde campagnes die op het juiste moment de juiste boodschap sturen.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Contentcreatie',
+      desc: 'AI-gestuurde content die past bij uw merk en doelgroep.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Documentgeneratie',
+      desc: 'Offertes, contracten en rapporten automatisch laten genereren.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Onboarding',
+      desc: 'Nieuwe klanten of medewerkers soepel en gestructureerd aan boord.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><line x1="20" y1="8" x2="20" y2="14" /><line x1="23" y1="11" x2="17" y2="11" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Rapportage',
+      desc: 'Automatische rapportages zodat u altijd de juiste cijfers bij de hand hebt.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Workflow automatisering',
+      desc: 'Repetitieve taken elimineren en processen stroomlijnen.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <polyline points="16 3 21 3 21 8" /><line x1="4" y1="20" x2="21" y2="3" /><polyline points="21 16 21 21 16 21" /><line x1="15" y1="15" x2="21" y2="21" /><line x1="4" y1="4" x2="9" y2="9" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Custom GPT',
+      desc: 'Een AI-assistent op maat, getraind op uw bedrijfsdata.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" /><path d="M6 10v1a6 6 0 0 0 12 0v-1" /><line x1="12" y1="17" x2="12" y2="22" /><line x1="8" y1="22" x2="16" y2="22" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Dashboards',
+      desc: 'Realtime overzicht van uw KPI\'s in één helder dashboard.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Data-analyse',
+      desc: 'Inzichten uit uw data halen die u direct kunt toepassen.',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M21.21 15.89A10 10 0 1 1 8 2.83" /><path d="M22 12A10 10 0 0 0 12 2v10z" />
+        </svg>
+      ),
+    },
   ]
 
   return (
-    <section ref={sectionRef} id="diensten" className="py-24 md:py-32 px-6 md:px-12 bg-cream">
-      <div className="max-w-5xl mx-auto">
-        <div className="uc-header opacity-0 mb-12">
+    <section ref={sectionRef} id="diensten" className="py-24 md:py-32 bg-cream overflow-hidden">
+      <div className="px-6 md:px-12">
+        <div className="uc-header opacity-0 flex items-end justify-between mb-10 max-w-7xl mx-auto">
           <h2 className="font-heading font-bold text-charcoal text-3xl md:text-5xl leading-tight">
             Enkele{' '}
             <span className="font-drama text-moss" style={{ fontSize: '1.1em' }}>mogelijkheden.</span>
           </h2>
+          <div className="hidden md:flex gap-2">
+            <button onClick={scrollPrev} className={`w-10 h-10 rounded-full border border-charcoal/15 flex items-center justify-center transition-colors ${canPrev ? 'hover:border-clay hover:text-clay' : 'opacity-30 cursor-default'}`} aria-label="Vorige">
+              <ChevronRight className="w-4 h-4 rotate-180" />
+            </button>
+            <button onClick={scrollNext} className={`w-10 h-10 rounded-full border border-charcoal/15 flex items-center justify-center transition-colors ${canNext ? 'hover:border-clay hover:text-clay' : 'opacity-30 cursor-default'}`} aria-label="Volgende">
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
+      </div>
 
-        <div className="flex flex-wrap gap-3">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className="uc-tag opacity-0 font-heading font-medium text-charcoal/60 text-sm md:text-base border border-charcoal/12 rounded-full px-5 py-2.5 hover:border-clay/30 hover:text-clay transition-colors duration-200"
-            >
-              {tag}
-            </span>
-          ))}
+      <div className="uc-carousel opacity-0 pl-6 md:pl-12">
+        <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
+          <div className="flex gap-5 md:gap-6">
+            {services.map((s) => (
+              <div
+                key={s.title}
+                className="flex-none w-[420px] md:w-[520px] flex flex-col gap-5 p-10 md:p-12 rounded-2xl border border-charcoal/8 hover:border-clay/25 transition-colors duration-200 select-none"
+              >
+                <span className="w-14 h-14 rounded-xl bg-clay/10 flex items-center justify-center text-clay [&>svg]:w-7 [&>svg]:h-7">{s.icon}</span>
+                <span className="font-heading font-semibold text-charcoal text-xl md:text-2xl leading-tight">{s.title}</span>
+                <span className="font-body text-charcoal/55 text-base md:text-lg leading-relaxed">{s.desc}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -299,7 +432,7 @@ function OverMij() {
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-          <div className="about-elem opacity-0 max-w-xs mx-auto lg:mx-0">
+          <div className="about-elem opacity-0 max-w-[200px] md:max-w-xs mx-auto lg:mx-0">
             <img
               src={tristanPhoto}
               alt="Tristan Distelmans — Ainova"
