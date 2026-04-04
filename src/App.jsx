@@ -319,7 +319,7 @@ function UseCases() {
             {services.map((s) => (
               <div
                 key={s.title}
-                className="flex-none w-[420px] md:w-[520px] flex flex-col gap-5 p-10 md:p-12 rounded-2xl border border-charcoal/8 hover:border-clay/25 transition-colors duration-200 select-none"
+                className="flex-none w-[210px] md:w-[520px] flex flex-col gap-3 md:gap-5 p-5 md:p-12 rounded-xl md:rounded-2xl border border-charcoal/8 hover:border-clay/25 transition-colors duration-200 select-none"
               >
                 <span className="w-14 h-14 rounded-xl bg-clay/10 flex items-center justify-center text-clay [&>svg]:w-7 [&>svg]:h-7">{s.icon}</span>
                 <span className="font-heading font-semibold text-charcoal text-xl md:text-2xl leading-tight">{s.title}</span>
@@ -433,6 +433,7 @@ function OverMij() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           <div className="about-elem opacity-0 max-w-[200px] md:max-w-xs mx-auto lg:mx-0">
+            <h3 className="font-drama text-clay text-2xl md:text-4xl whitespace-nowrap mb-4 ml-2 md:ml-0">Tristan Distelmans</h3>
             <img
               src={tristanPhoto}
               alt="Tristan Distelmans — Ainova"
