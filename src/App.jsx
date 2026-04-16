@@ -1,11 +1,22 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowRight, Menu, X, ChevronRight } from 'lucide-react'
 import useEmblaCarousel from 'embla-carousel-react'
 
 import tristanPhoto from './assets/0267e3e3-c7ba-4952-a327-10ed2614011d.jpg'
+import DemoHubPage from './pages/DemoHubPage'
 gsap.registerPlugin(ScrollTrigger)
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SCROLL TO TOP — reset scroll bij route change
+───────────────────────────────────────────────────────────────────────── */
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 
 /* ─────────────────────────────────────────────────────────────────────────
    NAVBAR
@@ -628,9 +639,9 @@ function Footer() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   APP
+   HOMEPAGE — samenstelling van alle hoofdpagina-secties
 ───────────────────────────────────────────────────────────────────────── */
-export default function App() {
+function HomePage() {
   return (
     <div className="min-h-screen bg-cream">
       <Navbar />
@@ -641,5 +652,20 @@ export default function App() {
       <ContactCTA />
       <Footer />
     </div>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   APP — router shell
+───────────────────────────────────────────────────────────────────────── */
+export default function App() {
+  return (
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/demo-hub" element={<DemoHubPage />} />
+      </Routes>
+    </>
   )
 }
