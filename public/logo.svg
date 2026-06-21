@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Ainova">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&amp;display=swap');
+    </style>
+  </defs>
+  <!-- Achtergrond -->
+  <rect width="512" height="512" fill="#2E4036"/>
+  <!-- Wordmark gecentreerd -->
+  <text
+    x="256"
+    y="296"
+    text-anchor="middle"
+    font-family="'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif"
+    font-weight="700"
+    font-size="88"
+    letter-spacing="-2"
+  >
+    <tspan fill="#CC5833">Ai</tspan><tspan fill="#F2F0E9">nova</tspan>
+  </text>
+</svg>
