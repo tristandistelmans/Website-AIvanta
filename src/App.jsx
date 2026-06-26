@@ -7,6 +7,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 
 import tristanPhoto from './assets/0267e3e3-c7ba-4952-a327-10ed2614011d.jpg'
 import DemoHubPage from './pages/DemoHubPage'
+import { SplineScene } from '@/components/ui/splite'
 gsap.registerPlugin(ScrollTrigger)
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -107,39 +108,43 @@ function Hero() {
   }, [])
 
   return (
-    <section ref={heroRef} className="relative w-full overflow-hidden bg-cream">
+    <section ref={heroRef} className="relative w-full min-h-screen flex items-center overflow-hidden bg-cream">
       <div className="absolute inset-0 overflow-hidden bg-cream">
-        <div className="aurora-layer-light" />
+        {/* 3D robot — groot, rechts, op de cream achtergrond */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 w-full md:w-[72%] lg:w-[62%]">
+          <div className="pointer-events-auto h-full w-full">
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="h-full w-full"
+            />
+          </div>
+          {/* cream sluier zodat de centrale tekst leesbaar blijft */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-cream via-cream/60 to-transparent" />
+        </div>
       </div>
 
-      <div className="relative z-10 pt-32 md:pt-40 pb-20 md:pb-28">
-        <div className="w-full max-w-6xl mx-auto px-6 md:px-12">
+      <div className="relative z-10 w-full pt-28 pb-20 md:py-24 pointer-events-none">
+        <div className="w-full max-w-6xl mx-auto px-6 md:px-12 text-center [&_a]:pointer-events-auto">
 
-          <div ref={quoteRef} className="opacity-0 mb-10 md:mb-14">
+          <div ref={quoteRef} className="opacity-0 mb-8 md:mb-12">
             <h1
-              className="font-heading font-bold text-charcoal leading-[1.1]"
-              style={{ fontSize: 'clamp(2.2rem, 5.5vw, 4.5rem)' }}
+              className="font-heading font-bold text-charcoal leading-[0.98] tracking-tight"
+              style={{ fontSize: 'clamp(3rem, 9.5vw, 7.5rem)' }}
             >
-              Ik analyseer uw marketing, sales en andere bedrijfsprocessen, identificeer knelpunten en los die op met AI en automatiseringen.
+              AI-automatisering in HR en recruitment.
             </h1>
           </div>
 
-          <div ref={subRef} className="opacity-0 max-w-3xl mb-10">
+          <div ref={subRef} className="opacity-0 max-w-2xl mx-auto mb-10">
             <p
-              className="font-drama italic text-charcoal/50 leading-[1.15]"
-              style={{ fontSize: 'clamp(1.3rem, 3vw, 2rem)' }}
+              className="font-body text-charcoal/50 leading-relaxed"
+              style={{ fontSize: 'clamp(1.1rem, 2.2vw, 1.5rem)' }}
             >
-              "AI will not replace people.{' '}
-              <span className="text-clay/70">But people who use AI will replace those who don't."</span>
+              Ik analyseer uw HR- en recruitmentprocessen, identificeer knelpunten en los die op met AI en automatiseringen.
             </p>
-            <footer className="flex items-center gap-3 mt-4">
-              <div className="w-8 h-px bg-charcoal/15" />
-              <cite className="not-italic font-heading font-semibold text-charcoal/35 text-xs">Sundar Pichai</cite>
-              <span className="font-body text-charcoal/20 text-xs">— CEO Google</span>
-            </footer>
           </div>
 
-          <div ref={ctaRef} className="opacity-0 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div ref={ctaRef} className="opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#contact"
               className="btn-magnetic inline-flex items-center gap-3 bg-clay text-cream px-8 py-4 rounded-full font-heading font-semibold text-base"
