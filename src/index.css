@@ -175,6 +175,16 @@ body {
   transform-origin: center;
 }
 
+/* ─── Logo marquee (Integraties) ────────────────────────────────── */
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scroll-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
 /* ─── Features canvas animations ────────────────────────────────── */
 @keyframes scan-h {
   0%   { top: -5%; }
