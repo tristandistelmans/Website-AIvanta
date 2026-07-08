@@ -2,9 +2,12 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+import { SplineScene } from '@/components/ui/splite'
 import tristanPhoto from './assets/0267e3e3-c7ba-4952-a327-10ed2614011d.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const SPLINE_SCENE = 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode'
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/tristan-distelmans-423398238'
 const EMAIL = 'tristan@ainova.be'
@@ -32,9 +35,23 @@ function ComingSoon() {
       className="relative min-h-screen flex flex-col overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #1e2b24 0%, #1A1A1A 100%)' }}
     >
+      {/* 3D robot — ambient achtergrond */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.55] md:opacity-70">
+        <SplineScene scene={SPLINE_SCENE} className="w-full h-full" />
+      </div>
+
+      {/* donkere sluiers zodat de tekst leesbaar blijft boven de robot */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 55% at 50% 45%, rgba(20,26,22,0.88) 0%, rgba(20,26,22,0.55) 45%, rgba(20,26,22,0.15) 75%, transparent 100%)',
+        }}
+      />
+
       {/* soft ambient glow */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-60"
+        className="pointer-events-none absolute inset-0 z-[1] opacity-60"
         style={{
           background:
             'radial-gradient(circle at 50% 25%, rgba(204,88,51,0.14) 0%, rgba(204,88,51,0) 55%)',
