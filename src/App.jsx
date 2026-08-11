@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+import OrbitingCirclesGlobe from '@/components/ui/orbiting-circles-02'
 import tristanPhoto from './assets/0267e3e3-c7ba-4952-a327-10ed2614011d.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -161,6 +162,32 @@ function Werk() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   KOPPELINGEN — visuele uitwerking van punt 05 uit de lijst hierboven
+───────────────────────────────────────────────────────────────────────── */
+function Koppelingen() {
+  const ref = useRef(null)
+  useReveal(ref)
+
+  return (
+    <section ref={ref} className="overflow-hidden border-t border-charcoal/10">
+      <div className="mx-auto max-w-4xl px-6 pt-20 md:px-8 md:pt-28">
+        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 opacity-0">
+          Koppelingen
+        </h2>
+        <p className="reveal mt-8 max-w-xl font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
+          Uw mailbox, CRM, agenda en de rest hoeven niet in één pakket te zitten. Ik laat ze
+          met elkaar praten, zodat gegevens maar één keer ingevoerd worden.
+        </p>
+      </div>
+
+      <div className="reveal mt-14 opacity-0 md:mt-16">
+        <OrbitingCirclesGlobe />
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
    CONTACT — geen formulier, gewoon hoe u mij bereikt
 ───────────────────────────────────────────────────────────────────────── */
 function Contact() {
@@ -227,6 +254,7 @@ export default function App() {
       <Header />
       <Intro />
       <Werk />
+      <Koppelingen />
       <Contact />
       <Footer />
     </div>
