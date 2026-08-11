@@ -2,130 +2,233 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import { SplineScene } from '@/components/ui/splite'
 import tristanPhoto from './assets/0267e3e3-c7ba-4952-a327-10ed2614011d.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const SPLINE_SCENE = 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode'
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/tristan-distelmans-423398238'
 const EMAIL = 'tristan@ainova.be'
 const GSM = '0474 50 74 78'
 const GSM_HREF = 'tel:+32474507478'
 const BTW = 'BE 1009.167.610'
+const ADRES = 'Prinsenstraat 47, 3500 Hasselt'
 
-function ComingSoon() {
-  const rootRef = useRef(null)
-
+/* Zachte fade-in, gescoped op een sectie. Bewust ingetogen: kleine
+   verplaatsing, korte duur — beweging mag niet opvallen. */
+function useReveal(ref, selector = '.reveal') {
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.cs-elem',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.12 }
+      gsap.fromTo(selector,
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', stagger: 0.07,
+          scrollTrigger: { trigger: ref.current, start: 'top 85%' } }
       )
-    }, rootRef)
+    }, ref)
     return () => ctx.revert()
-  }, [])
+  }, [ref, selector])
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   HEADER — naam links, contact rechts. Geen zwevende navigatie.
+───────────────────────────────────────────────────────────────────────── */
+function Header() {
+  return (
+    <header className="border-b border-charcoal/10">
+      <div className="mx-auto flex max-w-4xl items-baseline justify-between px-6 py-6 md:px-8">
+        <a href="/" className="font-heading text-base font-semibold tracking-tight text-charcoal">
+          Ainova
+        </a>
+        <a
+          href={`mailto:${EMAIL}`}
+          className="font-mono-brand text-xs text-charcoal/50 transition-colors hover:text-clay md:text-sm"
+        >
+          {EMAIL}
+        </a>
+      </div>
+    </header>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   INTRO — wie ik ben en wat ik doe, in gewone taal
+───────────────────────────────────────────────────────────────────────── */
+function Intro() {
+  const ref = useRef(null)
+  useReveal(ref)
 
   return (
-    <div
-      ref={rootRef}
-      className="relative min-h-screen flex flex-col overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #1e2b24 0%, #1A1A1A 100%)' }}
-    >
-      {/* 3D robot — interactieve achtergrond (volgt de cursor) */}
-      <div className="absolute inset-0 z-0 opacity-[0.6] md:opacity-80">
-        <SplineScene scene={SPLINE_SCENE} className="w-full h-full" />
-      </div>
+    <section ref={ref} className="mx-auto max-w-4xl px-6 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
+      <p className="reveal opacity-0 font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40">
+        Tristan Distelmans — Hasselt
+      </p>
 
-      {/* donkere sluiers zodat de tekst leesbaar blijft boven de robot */}
-      <div
-        className="pointer-events-none absolute inset-0 z-[1]"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 55% at 50% 45%, rgba(20,26,22,0.88) 0%, rgba(20,26,22,0.55) 45%, rgba(20,26,22,0.15) 75%, transparent 100%)',
-        }}
-      />
+      <h1
+        className="reveal mt-6 max-w-3xl font-heading font-semibold leading-[1.14] tracking-tight text-charcoal opacity-0"
+        style={{ fontSize: 'clamp(1.85rem, 4vw, 2.9rem)' }}
+      >
+        Ik doe digitale marketing en automatisering voor kleine bedrijven.
+      </h1>
 
-      {/* soft ambient glow */}
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] opacity-60"
-        style={{
-          background:
-            'radial-gradient(circle at 50% 25%, rgba(204,88,51,0.14) 0%, rgba(204,88,51,0) 55%)',
-        }}
-      />
-
-      {/* main content — laag klikt door naar de robot, enkel de knoppen zijn interactief */}
-      <main className="pointer-events-none relative z-10 flex-1 flex items-center justify-center px-6 py-20">
-        <div className="w-full max-w-xl mx-auto flex flex-col items-center text-center">
-          {/* titel */}
-          <h1 className="cs-elem opacity-0 font-drama text-cream text-5xl md:text-6xl leading-none mb-8">
-            Ainova
-          </h1>
-
-          {/* intro text */}
-          <p className="cs-elem opacity-0 font-body text-cream/75 text-base md:text-lg leading-relaxed">
-            <span className="text-cream font-medium">Ik ben Tristan, oprichter van Ainova.</span>{' '}
-            Ik help bedrijven groeien met behulp van AI-automatiseringen. Dit doe ik door uw
-            huidige processen te analyseren en kansen te spotten waar technologie het werk van u
-            en/of uw werknemers kan overnemen. U hoeft zelf geen kennis van deze technologie te
-            hebben om ze te gebruiken, en u moet uw huidige manier van werken niet aanpassen.
+      <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:gap-14">
+        <div className="flex max-w-xl flex-col gap-5">
+          <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
+            Concreet: ik zet uitgaande e-mailcampagnes op, schrijf mailings naar uw bestaande
+            klanten, zorg dat nieuwe aanvragen binnen enkele minuten antwoord krijgen, en koppel
+            uw mailbox, CRM en agenda aan elkaar zodat u niets twee keer moet invoeren. Daarnaast
+            maak ik beeld en video voor advertenties.
           </p>
-          <p className="cs-elem opacity-0 font-body text-cream/75 text-base md:text-lg leading-relaxed mt-4">
-            Omdat de vraag naar AI-implementatie in bedrijven hoog is en ik kwalitatief werk wil
-            afleveren, kan ik met slechts een beperkt en selectief aantal mensen samenwerken. Neem
-            vrijblijvend contact met mij op via LinkedIn of e-mail. Hopelijk tot snel.
+          <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
+            Ik werk alleen, en ik werk in de programma&apos;s die u al gebruikt — er komt geen
+            nieuw platform bij dat u moet leren. Als iets in uw geval niet de moeite loont, zeg
+            ik dat ook.
           </p>
-
-          {/* photo — onder de tekst, boven de knoppen */}
-          <div className="cs-elem opacity-0 w-36 md:w-44 mt-10">
-            <img
-              src={tristanPhoto}
-              alt="Tristan Distelmans — Ainova"
-              className="w-full rounded-sm"
-              style={{ filter: 'contrast(1.08) brightness(0.96) saturate(0.68)' }}
-            />
-          </div>
-
-          {/* call to action */}
-          <div className="cs-elem opacity-0 mt-8 flex flex-col sm:flex-row items-center gap-4">
-            <a
-              href={`mailto:${EMAIL}`}
-              className="pointer-events-auto inline-flex items-center justify-center gap-2 bg-clay text-cream font-heading font-semibold px-7 py-3.5 rounded-full text-sm md:text-base transition-transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-clay/25"
-            >
-              Mail mij direct
-            </a>
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="pointer-events-auto inline-flex items-center justify-center gap-2 border border-cream/25 text-cream font-heading font-semibold px-7 py-3.5 rounded-full text-sm md:text-base transition-colors hover:border-clay hover:text-clay"
-            >
-              Volg mij op LinkedIn
-            </a>
-          </div>
         </div>
-      </main>
 
-      {/* footer — wettelijke info & contact */}
-      <footer className="pointer-events-none relative z-10 px-6 py-8 border-t border-cream/10">
-        <div className="max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-2 text-center font-mono-brand text-xs md:text-sm text-cream/45">
-          <span>Ainova · BTW {BTW}</span>
-          <a href={`mailto:${EMAIL}`} className="pointer-events-auto hover:text-clay transition-colors">
+        <div className="reveal w-40 shrink-0 opacity-0 md:w-44">
+          <img
+            src={tristanPhoto}
+            alt="Tristan Distelmans"
+            className="w-full rounded-sm"
+          />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   WERK — de zes dingen die ik doe, elk in gewone woorden
+───────────────────────────────────────────────────────────────────────── */
+const WERK = [
+  {
+    titel: 'Uitgaande e-mailcampagnes',
+    tekst: 'Mails naar bedrijven die uw klant kunnen worden. Ik zet aparte domeinen en mailboxen op, warm ze op in Instantly, schrijf de mails en pas ze aan op basis van wat antwoord krijgt.',
+  },
+  {
+    titel: 'Mailings naar wie u al kent',
+    tekst: 'Bestaande klanten, oude offertes, mensen die ooit een vraag stelden. Wie krijgt welk bericht, en wanneer.',
+  },
+  {
+    titel: 'Snel reageren op aanvragen',
+    tekst: 'Een aanvraag via uw website of Facebook krijgt binnen enkele minuten antwoord, ook ’s avonds en in het weekend. Met een link om meteen een afspraak vast te leggen, en een melding naar u.',
+  },
+  {
+    titel: 'Uw CRM bruikbaar maken',
+    tekst: 'Vaste fases, opvolgtaken die vanzelf verschijnen, velden die automatisch ingevuld raken. Zodat het systeem bijhoudt waar een klant staat, in plaats van u.',
+  },
+  {
+    titel: 'Programma’s aan elkaar koppelen',
+    tekst: 'Website, mailbox, CRM, agenda, facturatie. Wat u nu met de hand van het ene naar het andere systeem overtypt, laat ik automatisch gebeuren.',
+  },
+  {
+    titel: 'Beeld en video',
+    tekst: 'Foto’s en video’s voor advertenties en social media, gemaakt met AI in plaats van met een fotoshoot. Handig wanneer u tien varianten van dezelfde advertentie wil uittesten.',
+  },
+]
+
+function Werk() {
+  const ref = useRef(null)
+  useReveal(ref)
+
+  return (
+    <section ref={ref} id="werk" className="border-t border-charcoal/10">
+      <div className="mx-auto max-w-4xl px-6 py-20 md:px-8 md:py-28">
+        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 opacity-0">
+          Wat dat in de praktijk betekent
+        </h2>
+
+        <dl className="mt-12 flex flex-col">
+          {WERK.map((w, i) => (
+            <div
+              key={w.titel}
+              className="reveal grid grid-cols-1 gap-x-10 gap-y-2 border-t border-charcoal/10 py-7 opacity-0 md:grid-cols-[2.5rem_1fr_1.4fr] md:py-8"
+            >
+              <span className="font-mono-brand text-xs text-charcoal/30">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <dt className="font-heading text-lg font-semibold tracking-tight text-charcoal md:text-xl">
+                {w.titel}
+              </dt>
+              <dd className="font-body text-base leading-[1.7] text-charcoal/65">
+                {w.tekst}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   CONTACT — geen formulier, gewoon hoe u mij bereikt
+───────────────────────────────────────────────────────────────────────── */
+function Contact() {
+  const ref = useRef(null)
+  useReveal(ref)
+
+  return (
+    <section ref={ref} id="contact" className="border-t border-charcoal/10">
+      <div className="mx-auto max-w-4xl px-6 py-20 md:px-8 md:py-28">
+        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 opacity-0">
+          Contact
+        </h2>
+
+        <p className="reveal mt-8 max-w-xl font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
+          Heeft u iets concreets in gedachten, of wilt u eerst weten of dit bij u iets oplevert?
+          Stuur gerust een mail of bel. Een eerste gesprek is vrijblijvend.
+        </p>
+
+        <div className="reveal mt-10 flex flex-col gap-3 opacity-0">
+          <a
+            href={`mailto:${EMAIL}`}
+            className="font-heading font-semibold tracking-tight text-charcoal underline decoration-clay decoration-2 underline-offset-[6px] transition-colors hover:text-clay"
+            style={{ fontSize: 'clamp(1.35rem, 3vw, 2rem)' }}
+          >
             {EMAIL}
           </a>
-          <a href={GSM_HREF} className="pointer-events-auto hover:text-clay transition-colors">
+          <a
+            href={GSM_HREF}
+            className="font-body text-lg text-charcoal/70 transition-colors hover:text-clay"
+          >
             {GSM}
           </a>
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body text-lg text-charcoal/70 transition-colors hover:text-clay"
+          >
+            LinkedIn
+          </a>
         </div>
-      </footer>
-    </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FOOTER — wettelijk verplichte ondernemersinformatie
+───────────────────────────────────────────────────────────────────────── */
+function Footer() {
+  return (
+    <footer className="border-t border-charcoal/10">
+      <div className="mx-auto flex max-w-4xl flex-col gap-1 px-6 py-8 font-mono-brand text-xs text-charcoal/40 md:flex-row md:justify-between md:px-8">
+        <span>Ainova — {ADRES}</span>
+        <span>Ondernemingsnummer {BTW}</span>
+      </div>
+    </footer>
   )
 }
 
 export default function App() {
-  return <ComingSoon />
+  return (
+    <div className="min-h-screen bg-cream">
+      <Header />
+      <Intro />
+      <Werk />
+      <Contact />
+      <Footer />
+    </div>
+  )
 }
