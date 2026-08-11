@@ -64,20 +64,24 @@ function Intro() {
       </p>
 
       <h1
-        className="reveal mt-6 max-w-3xl font-heading font-semibold leading-[1.14] tracking-tight text-charcoal opacity-0"
-        style={{ fontSize: 'clamp(1.85rem, 4vw, 2.9rem)' }}
+        className="reveal mt-6 font-heading font-semibold leading-[1.08] tracking-tight text-charcoal opacity-0"
+        style={{ fontSize: 'clamp(2.2rem, 5.4vw, 3.6rem)' }}
       >
-        Ik automatiseer marketing en verkoop bij kleine bedrijven — met AI waar dat
-        iets oplevert.
+        A.I. &amp; automations voor bedrijven
       </h1>
+
+      <p className="reveal mt-6 max-w-2xl font-body text-lg leading-[1.6] text-charcoal/70 opacity-0 md:text-xl">
+        Ik bouw AI-systemen die leads genereren, deals sluiten en de dagelijkse werking
+        opschalen.
+      </p>
 
       <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:gap-14">
         <div className="flex max-w-xl flex-col gap-5">
           <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
-            Concreet: ik bouw AI-workflows die terugkerend werk overnemen, zet e-mailmarketing
-            en uw verkooppijplijn op, richt uw CRM in zodat het bijhoudt waar elke klant staat,
-            en maak dashboards waarin u ziet wat er binnenkomt. Voor advertenties en social
-            media genereer ik beeld, video en teksten met AI.
+            Concreet: ik bouw AI-workflows die terugkerend werk overnemen, zorg dat er nieuwe
+            leads binnenkomen en opgevolgd worden, richt uw CRM en verkoopproces in als één
+            geheel, en maak dashboards waarin u ziet wat het oplevert. Voor advertenties en
+            social media genereer ik beeld, video en teksten met AI.
           </p>
           <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
             Ik werk alleen, en ik werk in de programma&apos;s die u al gebruikt — er komt geen
@@ -107,16 +111,16 @@ const WERK = [
     tekst: 'Terugkerend werk dat niet door een mens gedaan hoeft te worden: binnenkomende berichten sorteren en beantwoorden, documenten uitlezen, gegevens overzetten, offertes voorbereiden. Ik bouw de workflow en laat hem op de achtergrond draaien.',
   },
   {
+    titel: 'AI-leadgeneratie',
+    tekst: 'Bedrijven zoeken die uw klant kunnen worden, en ze benaderen met berichten die op hun situatie slaan in plaats van op iedereen. De lijst, de teksten en de opvolging, tot er een gesprek uit komt.',
+  },
+  {
     titel: 'E-mailmarketing',
     tekst: 'Campagnes naar nieuwe contacten en naar wie u al kent. Wie krijgt welk bericht, op welk moment, en wat er gebeurt zodra iemand antwoordt.',
   },
   {
-    titel: 'Sales pipeline',
-    tekst: 'Van eerste contact tot getekende offerte in vaste stappen. Elke lead krijgt opvolging op het juiste moment, ook wanneer u er zelf even niet aan denkt.',
-  },
-  {
-    titel: 'CRM-optimalisatie en automatisering',
-    tekst: 'Uw CRM zo inrichten dat het werk uit handen neemt in plaats van er werk bij te geven. Vaste fases, opvolgtaken die vanzelf verschijnen, velden die automatisch ingevuld raken.',
+    titel: 'CRM- en salesautomatisering',
+    tekst: 'Van eerste contact tot getekende offerte in vaste stappen, met een CRM dat werk uit handen neemt in plaats van er werk bij te geven. Opvolgtaken die vanzelf verschijnen, velden die automatisch ingevuld raken, en geen lead die blijft liggen.',
   },
   {
     titel: 'Dashboards',
