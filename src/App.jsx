@@ -3,7 +3,9 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import OrbitingCirclesGlobe from '@/components/ui/orbiting-circles-02'
-import tristanPhoto from './assets/0267e3e3-c7ba-4952-a327-10ed2614011d.jpg'
+import HeroLines from '@/components/ui/hero-lines'
+import MagneticLink from '@/components/ui/magnetic'
+import tristanPhoto from './assets/tristan-distelmans.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -55,10 +57,36 @@ function Header() {
 ───────────────────────────────────────────────────────────────────────── */
 function Intro() {
   const ref = useRef(null)
+  const linesRef = useRef(null)
   useReveal(ref)
 
+  // Parallax: de lijnen schuiven trager weg dan de tekst erboven.
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(linesRef.current, {
+        yPercent: 14,
+        ease: 'none',
+        scrollTrigger: { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: 0.6 },
+      })
+    }, ref)
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section ref={ref} className="mx-auto max-w-4xl px-6 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
+    <section ref={ref} className="relative overflow-hidden">
+      {/* Lijnenpatroon — uitgemaskerd naar links toe zodat de tekst rustig blijft */}
+      <div
+        ref={linesRef}
+        className="pointer-events-none absolute inset-x-0 -top-[10%] h-[125%]"
+        style={{
+          maskImage: 'linear-gradient(100deg, transparent 4%, rgba(0,0,0,0.5) 36%, #000 70%)',
+          WebkitMaskImage: 'linear-gradient(100deg, transparent 4%, rgba(0,0,0,0.5) 36%, #000 70%)',
+        }}
+      >
+        <HeroLines />
+      </div>
+
+      <div className="relative mx-auto max-w-4xl px-6 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
       <p className="reveal opacity-0 font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40">
         Tristan Distelmans — Hasselt
       </p>
@@ -94,9 +122,12 @@ function Intro() {
           <img
             src={tristanPhoto}
             alt="Tristan Distelmans"
+            width={800}
+            height={1075}
             className="w-full rounded-sm"
           />
         </div>
+      </div>
       </div>
     </section>
   )
@@ -136,6 +167,19 @@ function Werk() {
   const ref = useRef(null)
   useReveal(ref)
 
+  // Regels schuiven één voor één van links binnen, iets uitgesprokener
+  // dan de fade die de rest van de pagina gebruikt.
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.werk-regel',
+        { x: -32, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out', stagger: 0.1,
+          scrollTrigger: { trigger: '.werk-lijst', start: 'top 82%' } }
+      )
+    }, ref)
+    return () => ctx.revert()
+  }, [])
+
   return (
     <section ref={ref} id="werk" className="border-t border-charcoal/10">
       <div className="mx-auto max-w-4xl px-6 py-20 md:px-8 md:py-28">
@@ -143,19 +187,19 @@ function Werk() {
           Wat dat in de praktijk betekent
         </h2>
 
-        <dl className="mt-12 flex flex-col">
+        <dl className="werk-lijst mt-12 flex flex-col">
           {WERK.map((w, i) => (
             <div
               key={w.titel}
-              className="reveal grid grid-cols-1 gap-x-10 gap-y-2 border-t border-charcoal/10 py-7 opacity-0 md:grid-cols-[2.5rem_1fr_1.4fr] md:py-8"
+              className="werk-regel group grid grid-cols-1 gap-x-10 gap-y-2 border-t border-charcoal/10 py-7 opacity-0 transition-colors duration-300 hover:border-charcoal/25 md:grid-cols-[2.5rem_1fr_1.4fr] md:py-8"
             >
-              <span className="font-mono-brand text-xs text-charcoal/30">
+              <span className="font-mono-brand text-xs text-charcoal/30 transition-colors duration-300 group-hover:text-clay">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <dt className="font-heading text-lg font-semibold tracking-tight text-charcoal md:text-xl">
+              <dt className="font-heading text-lg font-semibold tracking-tight text-charcoal transition-transform duration-300 group-hover:translate-x-1.5 md:text-xl">
                 {w.titel}
               </dt>
-              <dd className="font-body text-base leading-[1.7] text-charcoal/65">
+              <dd className="font-body text-base leading-[1.7] text-charcoal/65 transition-colors duration-300 group-hover:text-charcoal/85">
                 {w.tekst}
               </dd>
             </div>
@@ -212,14 +256,15 @@ function Contact() {
           Stuur gerust een mail of bel. Een eerste gesprek is vrijblijvend.
         </p>
 
-        <div className="reveal mt-10 flex flex-col gap-3 opacity-0">
-          <a
+        <div className="reveal mt-10 flex flex-col items-start gap-3 opacity-0">
+          <MagneticLink
             href={`mailto:${EMAIL}`}
-            className="font-heading font-semibold tracking-tight text-charcoal underline decoration-clay decoration-2 underline-offset-[6px] transition-colors hover:text-clay"
+            strength={0.28}
+            className="inline-block font-heading font-semibold tracking-tight text-charcoal underline decoration-clay decoration-2 underline-offset-[6px] transition-colors hover:text-clay"
             style={{ fontSize: 'clamp(1.35rem, 3vw, 2rem)' }}
           >
             {EMAIL}
-          </a>
+          </MagneticLink>
           <a
             href={GSM_HREF}
             className="font-body text-lg text-charcoal/70 transition-colors hover:text-clay"
