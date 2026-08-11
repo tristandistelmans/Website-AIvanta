@@ -67,21 +67,22 @@ function Intro() {
         className="reveal mt-6 max-w-3xl font-heading font-semibold leading-[1.14] tracking-tight text-charcoal opacity-0"
         style={{ fontSize: 'clamp(1.85rem, 4vw, 2.9rem)' }}
       >
-        Ik doe digitale marketing en automatisering voor kleine bedrijven.
+        Ik automatiseer marketing en verkoop bij kleine bedrijven — met AI waar dat
+        iets oplevert.
       </h1>
 
       <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:gap-14">
         <div className="flex max-w-xl flex-col gap-5">
           <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
-            Concreet: ik zet uitgaande e-mailcampagnes op, schrijf mailings naar uw bestaande
-            klanten, zorg dat nieuwe aanvragen binnen enkele minuten antwoord krijgen, en koppel
-            uw mailbox, CRM en agenda aan elkaar zodat u niets twee keer moet invoeren. Daarnaast
-            maak ik beeld en video voor advertenties.
+            Concreet: ik bouw AI-workflows die terugkerend werk overnemen, zet e-mailmarketing
+            en uw verkooppijplijn op, richt uw CRM in zodat het bijhoudt waar elke klant staat,
+            en maak dashboards waarin u ziet wat er binnenkomt. Voor advertenties en social
+            media genereer ik beeld, video en teksten met AI.
           </p>
           <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
             Ik werk alleen, en ik werk in de programma&apos;s die u al gebruikt — er komt geen
-            nieuw platform bij dat u moet leren. Als iets in uw geval niet de moeite loont, zeg
-            ik dat ook.
+            nieuw platform bij dat u moet leren. AI is daarbij een middel en geen doel: als
+            iets in uw geval sneller of goedkoper zonder kan, zeg ik dat ook.
           </p>
         </div>
 
@@ -102,28 +103,28 @@ function Intro() {
 ───────────────────────────────────────────────────────────────────────── */
 const WERK = [
   {
-    titel: 'Uitgaande e-mailcampagnes',
-    tekst: 'Mails naar bedrijven die uw klant kunnen worden. Ik zet aparte domeinen en mailboxen op, warm ze op in Instantly, schrijf de mails en pas ze aan op basis van wat antwoord krijgt.',
+    titel: 'AI-workflows',
+    tekst: 'Terugkerend werk dat niet door een mens gedaan hoeft te worden: binnenkomende berichten sorteren en beantwoorden, documenten uitlezen, gegevens overzetten, offertes voorbereiden. Ik bouw de workflow en laat hem op de achtergrond draaien.',
   },
   {
-    titel: 'Mailings naar wie u al kent',
-    tekst: 'Bestaande klanten, oude offertes, mensen die ooit een vraag stelden. Wie krijgt welk bericht, en wanneer.',
+    titel: 'E-mailmarketing',
+    tekst: 'Campagnes naar nieuwe contacten en naar wie u al kent. Wie krijgt welk bericht, op welk moment, en wat er gebeurt zodra iemand antwoordt.',
   },
   {
-    titel: 'Snel reageren op aanvragen',
-    tekst: 'Een aanvraag via uw website of Facebook krijgt binnen enkele minuten antwoord, ook ’s avonds en in het weekend. Met een link om meteen een afspraak vast te leggen, en een melding naar u.',
+    titel: 'Sales pipeline',
+    tekst: 'Van eerste contact tot getekende offerte in vaste stappen. Elke lead krijgt opvolging op het juiste moment, ook wanneer u er zelf even niet aan denkt.',
   },
   {
-    titel: 'Uw CRM bruikbaar maken',
-    tekst: 'Vaste fases, opvolgtaken die vanzelf verschijnen, velden die automatisch ingevuld raken. Zodat het systeem bijhoudt waar een klant staat, in plaats van u.',
+    titel: 'CRM-optimalisatie en automatisering',
+    tekst: 'Uw CRM zo inrichten dat het werk uit handen neemt in plaats van er werk bij te geven. Vaste fases, opvolgtaken die vanzelf verschijnen, velden die automatisch ingevuld raken.',
   },
   {
-    titel: 'Programma’s aan elkaar koppelen',
-    tekst: 'Website, mailbox, CRM, agenda, facturatie. Wat u nu met de hand van het ene naar het andere systeem overtypt, laat ik automatisch gebeuren.',
+    titel: 'Dashboards',
+    tekst: 'Eén scherm met wat er werkelijk gebeurt: hoeveel aanvragen er binnenkomen, waar ze vandaan komen en wat ervan verkocht raakt. Zodat u beslist op cijfers in plaats van op gevoel.',
   },
   {
-    titel: 'Beeld en video',
-    tekst: 'Foto’s en video’s voor advertenties en social media, gemaakt met AI in plaats van met een fotoshoot. Handig wanneer u tien varianten van dezelfde advertentie wil uittesten.',
+    titel: 'AI-contentgeneratie',
+    tekst: 'Beeld, video en teksten voor advertenties en social media, gegenereerd in plaats van geproduceerd. Handig wanneer u tien varianten van dezelfde advertentie wil uittesten.',
   },
 ]
 
@@ -175,8 +176,9 @@ function Koppelingen() {
           Koppelingen
         </h2>
         <p className="reveal mt-8 max-w-xl font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
-          Uw mailbox, CRM, agenda en de rest hoeven niet in één pakket te zitten. Ik laat ze
-          met elkaar praten, zodat gegevens maar één keer ingevoerd worden.
+          Uw mailbox, CRM, agenda en facturatie hoeven niet in één pakket te zitten. Ik laat ze
+          met elkaar praten, zodat gegevens maar één keer ingevoerd worden en er een workflow
+          bovenop kan draaien.
         </p>
       </div>
 
