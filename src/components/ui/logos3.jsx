@@ -19,10 +19,13 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
    `autoScroll` staat daarom standaard uit en toont een stilstaande rij.
    Zet hem aan zodra er meer logo's zijn.                              */
 
+// Hoogtes per logo, zodat ze optisch even zwaar wegen: een vierkant
+// beeldmerk heeft meer hoogte nodig dan een breed woordmerk om even
+// groot te ogen.
 const STANDAARD_LOGOS = [
-  { id: 'paddle', description: 'paddle.be', image: '/logos/klanten/paddle.svg', className: 'h-7 w-auto' },
-  { id: 'mediatales', description: 'MediaTales', image: '/logos/klanten/mediatales.png', className: 'h-11 w-auto' },
-  { id: 'vinkmans', description: 'Vinkmans', image: '/logos/klanten/vinkmans.svg', className: 'h-6 w-auto' },
+  { id: 'paddle', description: 'paddle.be', image: '/logos/klanten/paddle.png', className: 'h-7 w-auto md:h-8' },
+  { id: 'mediatales', description: 'MediaTales', image: '/logos/klanten/mediatales.png', className: 'h-16 w-auto md:h-20' },
+  { id: 'vinkmans', description: 'Vinkmans', image: '/logos/klanten/vinkmans.png', className: 'h-4 w-auto md:h-5' },
 ]
 
 function LogoBeeld({ logo }) {
@@ -36,7 +39,7 @@ function LogoBeeld({ logo }) {
       onError={(e) => {
         e.currentTarget.style.display = 'none'
       }}
-      className={`${logo.className} opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0`}
+      className={logo.className}
     />
   )
 }
