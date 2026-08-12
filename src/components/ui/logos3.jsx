@@ -15,9 +15,10 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
      de rest van de pagina gebruikt
    - `container` vervangen door dezelfde max-w-4xl als de andere secties
 
-   Met een handvol logo's oogt een oneindig scrollende carrousel schraal;
-   `autoScroll` staat daarom standaard uit en toont een stilstaande rij.
-   Zet hem aan zodra er meer logo's zijn.                              */
+   De rij draait doorlopend, ook op mobiel — daar wordt niets onder
+   elkaar gezet. Met maar drie logo's zijn er te weinig slides om de
+   lus van embla vloeiend te laten sluiten, dus de reeks wordt een
+   aantal keer herhaald (zie HERHALINGEN).                             */
 
 // Hoogtes per logo, zodat ze optisch even zwaar wegen: een vierkant
 // beeldmerk heeft meer hoogte nodig dan een breed woordmerk om even
@@ -44,41 +45,55 @@ function LogoBeeld({ logo }) {
   )
 }
 
-const Logos3 = ({ heading = 'Zij werken met mij', logos = STANDAARD_LOGOS, autoScroll = false }) => {
+// Embla sluit de lus alleen vloeiend als er meer slides zijn dan er in
+// beeld passen. Drie logo's is te weinig, dus de reeks wordt herhaald.
+const HERHALINGEN = 5
+
+const Logos3 = ({ heading = 'Klanten', logos = STANDAARD_LOGOS }) => {
+  const reeks = Array.from({ length: HERHALINGEN }).flatMap((_, ronde) =>
+    logos.map((logo) => ({ ...logo, sleutel: `${logo.id}-${ronde}` }))
+  )
+
   return (
     <section className="border-t border-charcoal/10 bg-cream">
-      <div className="mx-auto max-w-4xl px-6 py-16 md:px-8 md:py-20">
-        <h2 className="font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40">
+      <div className="py-16 md:py-20">
+        <h2 className="mx-auto max-w-4xl px-6 font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 md:px-8">
           {heading}
         </h2>
 
-        {autoScroll ? (
-          <div className="relative mt-12 flex items-center justify-center">
-            <Carousel opts={{ loop: true }} plugins={[AutoScroll({ playOnInit: true })]}>
-              <CarouselContent className="ml-0">
-                {logos.map((logo) => (
-                  <CarouselItem
-                    key={logo.id}
-                    className="flex basis-1/3 justify-center pl-0 sm:basis-1/4 md:basis-1/5"
-                  >
-                    <div className="mx-10 flex shrink-0 items-center justify-center">
-                      <LogoBeeld logo={logo} />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
-            {/* cream-fade aan de randen */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-cream to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-cream to-transparent" />
-          </div>
-        ) : (
-          <div className="mt-12 flex flex-wrap items-center gap-x-14 gap-y-10 sm:gap-x-20">
-            {logos.map((logo) => (
-              <LogoBeeld key={logo.id} logo={logo} />
-            ))}
-          </div>
-        )}
+        <div className="relative mt-12 flex items-center justify-center">
+          <Carousel
+            className="w-full"
+            opts={{ loop: true, dragFree: true, align: 'start', containScroll: false }}
+            plugins={[
+              AutoScroll({
+                playOnInit: true,
+                speed: 0.9,
+                startDelay: 0,
+                stopOnInteraction: false,
+                stopOnMouseEnter: false,
+                stopOnFocusIn: false,
+              }),
+            ]}
+          >
+            <CarouselContent className="ml-0">
+              {reeks.map((logo) => (
+                <CarouselItem
+                  key={logo.sleutel}
+                  className="flex basis-1/2 justify-center pl-0 sm:basis-1/3 md:basis-1/4"
+                >
+                  <div className="mx-6 flex h-20 shrink-0 items-center justify-center md:mx-10">
+                    <LogoBeeld logo={logo} />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+
+          {/* cream-fade aan de randen */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-cream to-transparent md:w-24" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-cream to-transparent md:w-24" />
+        </div>
       </div>
     </section>
   )
