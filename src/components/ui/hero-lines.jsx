@@ -16,7 +16,7 @@ const LINE_COUNT = 30
 const SAMPLE_STEP = 6 // px tussen punten; lager = vloeiender, duurder
 const SPEED = 0.15 // radialen per seconde
 
-export default function HeroLines({ className = '' }) {
+export default function HeroLines({ className = '', color = '26, 26, 26' }) {
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function HeroLines({ className = '' }) {
         }
 
         const alpha = (0.06 + 0.09 * Math.sin(p * Math.PI)) * contrast
-        ctx.strokeStyle = `rgba(26, 26, 26, ${alpha.toFixed(3)})`
+        ctx.strokeStyle = `rgba(${color}, ${alpha.toFixed(3)})`
         ctx.stroke()
       }
     }
@@ -101,7 +101,7 @@ export default function HeroLines({ className = '' }) {
       cancelAnimationFrame(frame)
       observer.disconnect()
     }
-  }, [])
+  }, [color])
 
   return <canvas ref={canvasRef} className={`h-full w-full ${className}`} aria-hidden="true" />
 }

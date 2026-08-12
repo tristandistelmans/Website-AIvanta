@@ -395,3 +395,29 @@ input[type="range"].roi-slider::-moz-range-track {
   background: rgba(26, 26, 26, 0.1);
   border-radius: 3px;
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   HERO — traag drijvende gloeivlekken achter het kleurverloop.
+   Bewust radial-gradient i.p.v. filter: blur(); een blur van honderden
+   pixels over een groot vlak is duur, een radiaal verloop kost niets
+   en geeft hetzelfde zachte resultaat.
+───────────────────────────────────────────────────────────────────── */
+@keyframes hero-glow-drift-a {
+  0%   { transform: translate3d(-6%, -4%, 0) scale(1); }
+  50%  { transform: translate3d(9%, 7%, 0) scale(1.18); }
+  100% { transform: translate3d(-6%, -4%, 0) scale(1); }
+}
+
+@keyframes hero-glow-drift-b {
+  0%   { transform: translate3d(5%, 8%, 0) scale(1.12); }
+  50%  { transform: translate3d(-9%, -7%, 0) scale(0.9); }
+  100% { transform: translate3d(5%, 8%, 0) scale(1.12); }
+}
+
+.hero-glow-a { animation: hero-glow-drift-a 26s ease-in-out infinite; will-change: transform; }
+.hero-glow-b { animation: hero-glow-drift-b 34s ease-in-out infinite; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow-a,
+  .hero-glow-b { animation: none; }
+}

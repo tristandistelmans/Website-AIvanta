@@ -73,8 +73,33 @@ function Intro() {
   }, [])
 
   return (
-    <section ref={ref} className="relative overflow-hidden">
-      {/* Lijnenpatroon — uitgemaskerd naar links toe zodat de tekst rustig blijft */}
+    <section
+      ref={ref}
+      className="relative overflow-hidden"
+      // Zelfde opzet als de referentie: licht bovenaan, snel naar donker.
+      // Cream en charcoal i.p.v. #fff en #000, anders ontstaat er een naad
+      // met de header erboven en botst het met de rest van de pagina.
+      style={{ background: 'linear-gradient(to bottom, #F2F0E9 0%, #1A1A1A 26%, #1A1A1A 100%)' }}
+    >
+      {/* Traag drijvende gloeivlekken */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className="hero-glow-a absolute left-[-12%] top-[8%] h-[78%] w-[72%] rounded-full"
+          style={{
+            background:
+              'radial-gradient(ellipse closest-side, rgba(54,157,253,0.34) 0%, rgba(54,157,253,0.12) 48%, transparent 100%)',
+          }}
+        />
+        <div
+          className="hero-glow-b absolute right-[-16%] top-[26%] h-[68%] w-[60%] rounded-full"
+          style={{
+            background:
+              'radial-gradient(ellipse closest-side, rgba(46,64,54,0.68) 0%, rgba(46,64,54,0.24) 48%, transparent 100%)',
+          }}
+        />
+      </div>
+
+      {/* Lijnenpatroon — nu licht, want het ligt op een donkere ondergrond */}
       <div
         ref={linesRef}
         className="pointer-events-none absolute inset-x-0 -top-[10%] h-[125%]"
@@ -83,35 +108,35 @@ function Intro() {
           WebkitMaskImage: 'linear-gradient(100deg, transparent 4%, rgba(0,0,0,0.5) 36%, #000 70%)',
         }}
       >
-        <HeroLines />
+        <HeroLines color="242, 240, 233" />
       </div>
 
-      <div className="relative mx-auto max-w-4xl px-6 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
-      <p className="reveal opacity-0 font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40">
+      <div className="relative mx-auto max-w-4xl px-6 pb-20 pt-28 md:px-8 md:pb-28 md:pt-40">
+      <p className="reveal opacity-0 font-mono-brand text-xs uppercase tracking-[0.18em] text-cream/45">
         Tristan Distelmans — Hasselt
       </p>
 
       <h1
-        className="reveal mt-6 font-heading font-semibold leading-[1.08] tracking-tight text-charcoal opacity-0"
+        className="reveal mt-6 font-heading font-semibold leading-[1.08] tracking-tight text-cream opacity-0"
         style={{ fontSize: 'clamp(2.2rem, 5.4vw, 3.6rem)' }}
       >
         A.I. &amp; automations voor bedrijven
       </h1>
 
-      <p className="reveal mt-6 max-w-2xl font-body text-lg leading-[1.6] text-charcoal/70 opacity-0 md:text-xl">
+      <p className="reveal mt-6 max-w-2xl font-body text-lg leading-[1.6] text-cream/75 opacity-0 md:text-xl">
         Ik bouw AI-systemen die leads genereren, deals sluiten en de dagelijkse werking
         opschalen.
       </p>
 
       <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:gap-14">
         <div className="flex max-w-xl flex-col gap-5">
-          <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
+          <p className="reveal font-body text-base leading-[1.75] text-cream/70 opacity-0 md:text-lg">
             Concreet: ik bouw AI-workflows die terugkerend werk overnemen, zorg dat er nieuwe
             leads binnenkomen en opgevolgd worden, richt uw CRM en verkoopproces in als één
             geheel, en maak dashboards waarin u ziet wat het oplevert. Voor advertenties en
             social media genereer ik beeld, video en teksten met AI.
           </p>
-          <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
+          <p className="reveal font-body text-base leading-[1.75] text-cream/70 opacity-0 md:text-lg">
             Ik werk alleen, en ik werk in de programma&apos;s die u al gebruikt — er komt geen
             nieuw platform bij dat u moet leren. AI is daarbij een middel en geen doel: als
             iets in uw geval sneller of goedkoper zonder kan, zeg ik dat ook.
