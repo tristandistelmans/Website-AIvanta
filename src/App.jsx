@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import OrbitingCirclesGlobe from '@/components/ui/orbiting-circles-02'
 import HeroLines from '@/components/ui/hero-lines'
 import MagneticLink from '@/components/ui/magnetic'
+import { Logos3 } from '@/components/ui/logos3'
 import tristanPhoto from './assets/tristan-distelmans.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -329,6 +330,7 @@ export default function App() {
     <div className="min-h-screen bg-cream">
       <Header />
       <Intro />
+      <Logos3 />
       <Werk />
       <Koppelingen />
       <Contact />
