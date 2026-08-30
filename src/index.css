@@ -421,3 +421,16 @@ input[type="range"].roi-slider::-moz-range-track {
   .hero-glow-a,
   .hero-glow-b { animation: none; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   REVEAL — zichtbaar tenzij JavaScript draait.
+   De pagina wordt geprerenderd, dus de HTML bevat alle tekst. Die tekst
+   mag niet afhangen van JavaScript om zichtbaar te worden: zonder JS
+   zou een bezoeker een blanco scherm zien, en een crawler zou het als
+   verborgen tekst kunnen lezen. De .js-klasse wordt in index.html gezet
+   voor de bundel laadt; alleen dan verbergen we vooraf.
+───────────────────────────────────────────────────────────────────── */
+.js .reveal,
+.js .werk-regel {
+  opacity: 0;
+}

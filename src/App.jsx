@@ -6,6 +6,7 @@ import OrbitingCirclesGlobe from '@/components/ui/orbiting-circles-02'
 import HeroLines from '@/components/ui/hero-lines'
 import MagneticLink from '@/components/ui/magnetic'
 import { Logos3 } from '@/components/ui/logos3'
+import { meldConversie } from '@/lib/gtag'
 import tristanPhoto from './assets/tristan-distelmans.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -44,6 +45,7 @@ function Header() {
         </a>
         <a
           href={`mailto:${EMAIL}`}
+          onClick={() => meldConversie('e-mail header')}
           className="font-mono-brand text-xs text-charcoal/50 transition-colors hover:text-clay md:text-sm"
         >
           {EMAIL}
@@ -113,38 +115,38 @@ function Intro() {
       </div>
 
       <div className="relative mx-auto max-w-4xl px-6 pb-20 pt-28 md:px-8 md:pb-28 md:pt-40">
-      <p className="reveal opacity-0 font-mono-brand text-xs uppercase tracking-[0.18em] text-cream/45">
+      <p className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-cream/45">
         Tristan Distelmans — Hasselt
       </p>
 
       <h1
-        className="reveal mt-6 font-heading font-semibold leading-[1.08] tracking-tight text-cream opacity-0"
+        className="reveal mt-6 font-heading font-semibold leading-[1.08] tracking-tight text-cream"
         style={{ fontSize: 'clamp(2.2rem, 5.4vw, 3.6rem)' }}
       >
         A.I. &amp; automations voor bedrijven
       </h1>
 
-      <p className="reveal mt-6 max-w-2xl font-body text-lg leading-[1.6] text-cream/75 opacity-0 md:text-xl">
+      <p className="reveal mt-6 max-w-2xl font-body text-lg leading-[1.6] text-cream/75 md:text-xl">
         Ik bouw AI-systemen die leads genereren, deals sluiten en de dagelijkse werking
         opschalen.
       </p>
 
       <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:gap-14">
         <div className="flex max-w-xl flex-col gap-5">
-          <p className="reveal font-body text-base leading-[1.75] text-cream/70 opacity-0 md:text-lg">
+          <p className="reveal font-body text-base leading-[1.75] text-cream/70 md:text-lg">
             Concreet: ik bouw AI-workflows die terugkerend werk overnemen, zorg dat er nieuwe
             leads binnenkomen en opgevolgd worden, richt uw CRM en verkoopproces in als één
             geheel, en maak dashboards waarin u ziet wat het oplevert. Voor advertenties en
             social media genereer ik beeld, video en teksten met AI.
           </p>
-          <p className="reveal font-body text-base leading-[1.75] text-cream/70 opacity-0 md:text-lg">
+          <p className="reveal font-body text-base leading-[1.75] text-cream/70 md:text-lg">
             Ik werk alleen, en ik werk in de programma&apos;s die u al gebruikt — er komt geen
             nieuw platform bij dat u moet leren. AI is daarbij een middel en geen doel: als
             iets in uw geval sneller of goedkoper zonder kan, zeg ik dat ook.
           </p>
         </div>
 
-        <div className="reveal w-40 shrink-0 opacity-0 md:w-44">
+        <div className="reveal w-40 shrink-0 md:w-44">
           <img
             src={tristanPhoto}
             alt="Tristan Distelmans"
@@ -209,7 +211,7 @@ function Werk() {
   return (
     <section ref={ref} id="werk" className="border-t border-charcoal/10">
       <div className="mx-auto max-w-4xl px-6 py-20 md:px-8 md:py-28">
-        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 opacity-0">
+        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40">
           Wat dat in de praktijk betekent
         </h2>
 
@@ -217,7 +219,7 @@ function Werk() {
           {WERK.map((w, i) => (
             <div
               key={w.titel}
-              className="werk-regel group grid grid-cols-1 gap-x-10 gap-y-2 border-t border-charcoal/10 py-7 opacity-0 transition-colors duration-300 hover:border-charcoal/25 md:grid-cols-[2.5rem_1fr_1.4fr] md:py-8"
+              className="werk-regel group grid grid-cols-1 gap-x-10 gap-y-2 border-t border-charcoal/10 py-7 transition-colors duration-300 hover:border-charcoal/25 md:grid-cols-[2.5rem_1fr_1.4fr] md:py-8"
             >
               <span className="font-mono-brand text-xs text-charcoal/30 transition-colors duration-300 group-hover:text-clay">
                 {String(i + 1).padStart(2, '0')}
@@ -246,17 +248,17 @@ function Koppelingen() {
   return (
     <section ref={ref} className="overflow-hidden border-t border-charcoal/10">
       <div className="mx-auto max-w-4xl px-6 pt-20 md:px-8 md:pt-28">
-        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 opacity-0">
+        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40">
           Koppelingen
         </h2>
-        <p className="reveal mt-8 max-w-xl font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
+        <p className="reveal mt-8 max-w-xl font-body text-base leading-[1.75] text-charcoal/75 md:text-lg">
           Uw mailbox, CRM, agenda en facturatie hoeven niet in één pakket te zitten. Ik laat ze
           met elkaar praten, zodat gegevens maar één keer ingevoerd worden en er een workflow
           bovenop kan draaien.
         </p>
       </div>
 
-      <div className="reveal mt-14 opacity-0 md:mt-16">
+      <div className="reveal mt-14 md:mt-16">
         <OrbitingCirclesGlobe />
       </div>
     </section>
@@ -273,18 +275,19 @@ function Contact() {
   return (
     <section ref={ref} id="contact" className="border-t border-charcoal/10">
       <div className="mx-auto max-w-4xl px-6 py-20 md:px-8 md:py-28">
-        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 opacity-0">
+        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40">
           Contact
         </h2>
 
-        <p className="reveal mt-8 max-w-xl font-body text-base leading-[1.75] text-charcoal/75 opacity-0 md:text-lg">
+        <p className="reveal mt-8 max-w-xl font-body text-base leading-[1.75] text-charcoal/75 md:text-lg">
           Heeft u iets concreets in gedachten, of wilt u eerst weten of dit bij u iets oplevert?
           Stuur gerust een mail of bel. Een eerste gesprek is vrijblijvend.
         </p>
 
-        <div className="reveal mt-10 flex flex-col items-start gap-3 opacity-0">
+        <div className="reveal mt-10 flex flex-col items-start gap-3">
           <MagneticLink
             href={`mailto:${EMAIL}`}
+            onClick={() => meldConversie('e-mail contact')}
             strength={0.28}
             className="inline-block font-heading font-semibold tracking-tight text-charcoal underline decoration-clay decoration-2 underline-offset-[6px] transition-colors hover:text-clay"
             style={{ fontSize: 'clamp(1.35rem, 3vw, 2rem)' }}
@@ -293,6 +296,7 @@ function Contact() {
           </MagneticLink>
           <a
             href={GSM_HREF}
+            onClick={() => meldConversie('telefoon contact')}
             className="font-body text-lg text-charcoal/70 transition-colors hover:text-clay"
           >
             {GSM}

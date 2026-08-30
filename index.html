@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="nl">
   <head>
+    <!-- Zet een js-klasse op <html> voor de rest laadt. De reveal-animaties
+         verbergen zich alleen wanneer JavaScript daadwerkelijk draait; zonder
+         JS blijft alle tekst gewoon zichtbaar, ook voor crawlers. -->
+    <script>document.documentElement.classList.add('js')</script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,6 +65,20 @@
         "AI-contentgeneratie"
       ]
     }
+    </script>
+
+
+    <!-- Google Ads (AW-18418462659) — basis-tag.
+         Deze moet aanwezig zijn voordat er ook maar een conversie gemeld
+         kan worden; zonder deze tag bestaat de functie gtag() niet. Het
+         doorgeven van de conversie zelf gebeurt in src/lib/gtag.js, op het
+         moment dat iemand contact opneemt. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18418462659"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18418462659');
     </script>
 
     <!-- Organic Tech Fonts -->
