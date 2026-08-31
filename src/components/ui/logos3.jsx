@@ -25,7 +25,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 // groot te ogen.
 const STANDAARD_LOGOS = [
   { id: 'paddle', description: 'paddle.be', image: '/logos/klanten/paddle.png', className: 'h-7 w-auto md:h-8' },
-  { id: 'mediatales', description: 'MediaTales', image: '/logos/klanten/mediatales.png', className: 'h-16 w-auto md:h-20' },
+  { id: 'mediatales', description: 'MediaTales', image: '/logos/klanten/mediatales.png', className: 'h-12 w-auto md:h-14' },
   { id: 'vinkmans', description: 'Vinkmans', image: '/logos/klanten/vinkmans.png', className: 'h-4 w-auto md:h-5' },
 ]
 
@@ -83,7 +83,7 @@ const Logos3 = ({ logos = STANDAARD_LOGOS }) => {
                   key={logo.sleutel}
                   className="flex basis-1/2 justify-center pl-0 md:basis-1/3"
                 >
-                  <div className="mx-4 flex h-16 shrink-0 items-center justify-center md:mx-6">
+                  <div className="mx-4 flex h-16 shrink-0 items-center justify-center md:mx-6 md:h-20">
                     <LogoBeeld logo={logo} />
                   </div>
                 </CarouselItem>
