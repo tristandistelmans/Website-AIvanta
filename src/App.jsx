@@ -5,6 +5,7 @@ import { ArrowUpRight } from 'lucide-react'
 
 import HeroPastel from '@/components/ui/hero-pastel'
 import { FlowerMark } from '@/components/ui/flower'
+import { Logos3 } from '@/components/ui/logos3'
 import { meldConversie } from '@/lib/gtag'
 import tristanPhoto from './assets/tristan-distelmans.jpg'
 
@@ -63,11 +64,6 @@ function ComingSoon() {
             The full site is on its way
           </h2>
 
-          <p className="reveal mx-auto mt-6 max-w-xl font-body text-base leading-[1.7] text-[#0A0A0A]/55 md:text-lg">
-            Cases, services and pricing are being written. In the meantime, the fastest
-            route is a direct message — I answer personally.
-          </p>
-
           <div className="reveal mt-10 flex flex-wrap items-center justify-center gap-3">
             <a
               href={`mailto:${EMAIL}`}
@@ -122,18 +118,9 @@ function Footer() {
               height={1075}
               className="h-28 w-24 shrink-0 rounded-2xl object-cover object-top grayscale md:h-32 md:w-28"
             />
-            <div>
-              <div className="flex items-center gap-2.5">
-                <FlowerMark className="h-5 w-5 text-white" />
-                <span className="font-body text-lg font-semibold tracking-tight text-white">
-                  Ainova
-                </span>
-              </div>
-              <p className="mt-3 font-body text-sm leading-relaxed text-white/55">
-                Tristan Distelmans — I build AI systems that generate leads, close deals
-                and scale operations for B2B companies.
-              </p>
-            </div>
+            <span className="self-center font-body text-lg font-semibold tracking-tight text-white md:text-xl">
+              Tristan Distelmans
+            </span>
           </div>
 
           {/* contact */}
@@ -182,6 +169,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white">
       <HeroPastel />
+      <Logos3 />
       <ComingSoon />
       <Footer />
     </div>

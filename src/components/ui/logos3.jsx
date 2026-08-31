@@ -49,19 +49,20 @@ function LogoBeeld({ logo }) {
 // beeld passen. Drie logo's is te weinig, dus de reeks wordt herhaald.
 const HERHALINGEN = 5
 
-const Logos3 = ({ heading = 'Klanten', logos = STANDAARD_LOGOS }) => {
+const Logos3 = ({ logos = STANDAARD_LOGOS }) => {
   const reeks = Array.from({ length: HERHALINGEN }).flatMap((_, ronde) =>
     logos.map((logo) => ({ ...logo, sleutel: `${logo.id}-${ronde}` }))
   )
 
   return (
-    <section id="klanten" className="border-t border-charcoal/10 bg-cream">
-      <div className="py-16 md:py-20">
-        <h2 className="mx-auto max-w-4xl px-6 font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 md:px-8">
-          {heading}
-        </h2>
+    <section id="klanten" className="bg-white px-6 md:px-10">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 rounded-[2rem] border border-black/5 bg-white px-8 py-10 shadow-[0_1px_2px_rgba(16,24,40,0.04)] md:flex-row md:items-center md:gap-12 md:px-12">
+        <p className="shrink-0 font-body text-sm leading-snug text-[#0A0A0A]/55 md:max-w-[9rem]">
+          <span className="font-semibold text-[#0A0A0A]">Trusted by</span> companies
+          across Belgium
+        </p>
 
-        <div className="relative mt-12 flex items-center justify-center">
+        <div className="relative min-w-0 flex-1">
           <Carousel
             className="w-full"
             opts={{ loop: true, dragFree: true, align: 'start', containScroll: false }}
@@ -80,9 +81,9 @@ const Logos3 = ({ heading = 'Klanten', logos = STANDAARD_LOGOS }) => {
               {reeks.map((logo) => (
                 <CarouselItem
                   key={logo.sleutel}
-                  className="flex basis-1/2 justify-center pl-0 sm:basis-1/3 md:basis-1/4"
+                  className="flex basis-1/2 justify-center pl-0 md:basis-1/3"
                 >
-                  <div className="mx-6 flex h-20 shrink-0 items-center justify-center md:mx-10">
+                  <div className="mx-4 flex h-16 shrink-0 items-center justify-center md:mx-6">
                     <LogoBeeld logo={logo} />
                   </div>
                 </CarouselItem>
@@ -90,9 +91,9 @@ const Logos3 = ({ heading = 'Klanten', logos = STANDAARD_LOGOS }) => {
             </CarouselContent>
           </Carousel>
 
-          {/* cream-fade aan de randen */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-cream to-transparent md:w-24" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-cream to-transparent md:w-24" />
+          {/* witte fade aan de randen */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
         </div>
       </div>
     </section>
