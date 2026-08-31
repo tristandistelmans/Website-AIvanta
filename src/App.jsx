@@ -3,7 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import OrbitingCirclesGlobe from '@/components/ui/orbiting-circles-02'
-import HeroLines from '@/components/ui/hero-lines'
+import HeroPastel from '@/components/ui/hero-pastel'
 import MagneticLink from '@/components/ui/magnetic'
 import { Logos3 } from '@/components/ui/logos3'
 import { meldConversie } from '@/lib/gtag'
@@ -34,128 +34,44 @@ function useReveal(ref, selector = '.reveal') {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   HEADER — naam links, contact rechts. Geen zwevende navigatie.
-───────────────────────────────────────────────────────────────────────── */
-function Header() {
-  return (
-    <header className="border-b border-charcoal/10">
-      <div className="mx-auto flex max-w-4xl items-baseline justify-between px-6 py-6 md:px-8">
-        <a href="/" className="font-heading text-base font-semibold tracking-tight text-charcoal">
-          Ainova
-        </a>
-        <a
-          href={`mailto:${EMAIL}`}
-          onClick={() => meldConversie('e-mail header')}
-          className="font-mono-brand text-xs text-charcoal/50 transition-colors hover:text-clay md:text-sm"
-        >
-          {EMAIL}
-        </a>
-      </div>
-    </header>
-  )
-}
-
-/* ─────────────────────────────────────────────────────────────────────────
-   INTRO — wie ik ben en wat ik doe, in gewone taal
+   OVER MIJ — de inhoudelijke toelichting, onder de hero
 ───────────────────────────────────────────────────────────────────────── */
 function Intro() {
   const ref = useRef(null)
-  const linesRef = useRef(null)
   useReveal(ref)
 
-  // Parallax: de lijnen schuiven trager weg dan de tekst erboven.
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.to(linesRef.current, {
-        yPercent: 14,
-        ease: 'none',
-        scrollTrigger: { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: 0.6 },
-      })
-    }, ref)
-    return () => ctx.revert()
-  }, [])
-
   return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden"
-      // Zelfde opzet als de referentie: licht bovenaan, snel naar donker.
-      // Cream en charcoal i.p.v. #fff en #000, anders ontstaat er een naad
-      // met de header erboven en botst het met de rest van de pagina.
-      style={{ background: 'linear-gradient(to bottom, #F2F0E9 0%, #1A1A1A 26%, #1A1A1A 100%)' }}
-    >
-      {/* Traag drijvende gloeivlekken */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div
-          className="hero-glow-a absolute left-[-12%] top-[8%] h-[78%] w-[72%] rounded-full"
-          style={{
-            background:
-              'radial-gradient(ellipse closest-side, rgba(54,157,253,0.34) 0%, rgba(54,157,253,0.12) 48%, transparent 100%)',
-          }}
-        />
-        <div
-          className="hero-glow-b absolute right-[-16%] top-[26%] h-[68%] w-[60%] rounded-full"
-          style={{
-            background:
-              'radial-gradient(ellipse closest-side, rgba(46,64,54,0.68) 0%, rgba(46,64,54,0.24) 48%, transparent 100%)',
-          }}
-        />
-      </div>
+    <section ref={ref} id="over" className="bg-cream">
+      <div className="mx-auto max-w-4xl px-6 py-20 md:px-8 md:py-28">
+        <h2 className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40">
+          Over mij
+        </h2>
 
-      {/* Lijnenpatroon — nu licht, want het ligt op een donkere ondergrond */}
-      <div
-        ref={linesRef}
-        className="pointer-events-none absolute inset-x-0 -top-[10%] h-[125%]"
-        style={{
-          maskImage: 'linear-gradient(100deg, transparent 4%, rgba(0,0,0,0.5) 36%, #000 70%)',
-          WebkitMaskImage: 'linear-gradient(100deg, transparent 4%, rgba(0,0,0,0.5) 36%, #000 70%)',
-        }}
-      >
-        <HeroLines color="242, 240, 233" />
-      </div>
+        <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:gap-14">
+          <div className="flex max-w-xl flex-col gap-5">
+            <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 md:text-lg">
+              Concreet: ik bouw AI-workflows die terugkerend werk overnemen, zorg dat er nieuwe
+              leads binnenkomen en opgevolgd worden, richt uw CRM en verkoopproces in als één
+              geheel, en maak dashboards waarin u ziet wat het oplevert. Voor advertenties en
+              social media genereer ik beeld, video en teksten met AI.
+            </p>
+            <p className="reveal font-body text-base leading-[1.75] text-charcoal/75 md:text-lg">
+              Ik werk alleen, en ik werk in de programma&apos;s die u al gebruikt — er komt geen
+              nieuw platform bij dat u moet leren. AI is daarbij een middel en geen doel: als
+              iets in uw geval sneller of goedkoper zonder kan, zeg ik dat ook.
+            </p>
+          </div>
 
-      <div className="relative mx-auto max-w-4xl px-6 pb-20 pt-28 md:px-8 md:pb-28 md:pt-40">
-      <p className="reveal font-mono-brand text-xs uppercase tracking-[0.18em] text-cream/45">
-        Tristan Distelmans — Hasselt
-      </p>
-
-      <h1
-        className="reveal mt-6 font-heading font-semibold leading-[1.08] tracking-tight text-cream"
-        style={{ fontSize: 'clamp(2.2rem, 5.4vw, 3.6rem)' }}
-      >
-        A.I. &amp; automations voor bedrijven
-      </h1>
-
-      <p className="reveal mt-6 max-w-2xl font-body text-lg leading-[1.6] text-cream/75 md:text-xl">
-        Ik bouw AI-systemen die leads genereren, deals sluiten en de dagelijkse werking
-        opschalen.
-      </p>
-
-      <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:gap-14">
-        <div className="flex max-w-xl flex-col gap-5">
-          <p className="reveal font-body text-base leading-[1.75] text-cream/70 md:text-lg">
-            Concreet: ik bouw AI-workflows die terugkerend werk overnemen, zorg dat er nieuwe
-            leads binnenkomen en opgevolgd worden, richt uw CRM en verkoopproces in als één
-            geheel, en maak dashboards waarin u ziet wat het oplevert. Voor advertenties en
-            social media genereer ik beeld, video en teksten met AI.
-          </p>
-          <p className="reveal font-body text-base leading-[1.75] text-cream/70 md:text-lg">
-            Ik werk alleen, en ik werk in de programma&apos;s die u al gebruikt — er komt geen
-            nieuw platform bij dat u moet leren. AI is daarbij een middel en geen doel: als
-            iets in uw geval sneller of goedkoper zonder kan, zeg ik dat ook.
-          </p>
+          <div className="reveal w-40 shrink-0 md:w-44">
+            <img
+              src={tristanPhoto}
+              alt="Tristan Distelmans"
+              width={800}
+              height={1075}
+              className="w-full rounded-sm"
+            />
+          </div>
         </div>
-
-        <div className="reveal w-40 shrink-0 md:w-44">
-          <img
-            src={tristanPhoto}
-            alt="Tristan Distelmans"
-            width={800}
-            height={1075}
-            className="w-full rounded-sm"
-          />
-        </div>
-      </div>
       </div>
     </section>
   )
@@ -332,7 +248,7 @@ function Footer() {
 export default function App() {
   return (
     <div className="min-h-screen bg-cream">
-      <Header />
+      <HeroPastel />
       <Intro />
       <Logos3 />
       <Werk />

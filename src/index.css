@@ -434,3 +434,16 @@ input[type="range"].roi-slider::-moz-range-track {
 .js .werk-regel {
   opacity: 0;
 }
+
+/* Traag zwevend object in de hero. */
+@keyframes slow-float {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50%  { transform: translate3d(0, -18px, 0) rotate(4deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+}
+
+.slow-float { animation: slow-float 14s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slow-float { animation: none; }
+}

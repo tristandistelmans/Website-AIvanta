@@ -55,7 +55,7 @@ const Logos3 = ({ heading = 'Klanten', logos = STANDAARD_LOGOS }) => {
   )
 
   return (
-    <section className="border-t border-charcoal/10 bg-cream">
+    <section id="klanten" className="border-t border-charcoal/10 bg-cream">
       <div className="py-16 md:py-20">
         <h2 className="mx-auto max-w-4xl px-6 font-mono-brand text-xs uppercase tracking-[0.18em] text-charcoal/40 md:px-8">
           {heading}
