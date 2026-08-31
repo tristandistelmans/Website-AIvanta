@@ -29,8 +29,8 @@ const POINTS = Array.from({ length: PARTICLE_COUNT }, (_, i) => {
 })
 
 export default function ParticleSphereAnimation({
-  color = '26, 26, 26',      // charcoal
-  accentColor = '204, 88, 51', // clay
+  color = '58, 70, 92',       // gedempt blauwgrijs, past bij de pastelhero
+  accentColor = '128, 186, 226', // zacht blauw accent
   speed = 0.12,
 }) {
   const canvasRef = useRef(null)

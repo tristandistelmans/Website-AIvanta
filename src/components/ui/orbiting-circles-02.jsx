@@ -23,6 +23,7 @@ const DEFAULT_ORBITS = [
     // anders is de buitenste ring 720px breed op een scherm van 375px en staan
     // de iconen vrijwel altijd half buiten beeld.
     size: 'w-[20rem] h-[20rem] md:w-[45rem] md:h-[45rem]',
+    maatMidden: 'w-[46%] h-[46%]',
     duration: 18,
     icons: [
       { src: '/logos/gmail.svg', alt: 'Gmail', angle: -60 },
@@ -32,6 +33,7 @@ const DEFAULT_ORBITS = [
   },
   {
     size: 'w-[26rem] h-[26rem] md:w-[55rem] md:h-[55rem]',
+    maatMidden: 'w-[70%] h-[70%]',
     duration: 24,
     icons: [
       { src: '/logos/slack.svg', alt: 'Slack', angle: 0 },
@@ -40,6 +42,7 @@ const DEFAULT_ORBITS = [
   },
   {
     size: 'w-[32rem] h-[32rem] md:w-[66.25rem] md:h-[66.25rem]',
+    maatMidden: 'w-[94%] h-[94%]',
     duration: 30,
     icons: [
       { src: '/logos/linkedin.svg', alt: 'LinkedIn', angle: -60 },
@@ -49,9 +52,17 @@ const DEFAULT_ORBITS = [
   },
 ]
 
-export default function OrbitingCirclesGlobe({ orbits = DEFAULT_ORBITS }) {
+/* anker 'bottom' zet de bol op de onderrand (de opzet van het origineel);
+   'center' zet hem in het midden, wat nodig is wanneer het geheel als los
+   object naast tekst staat in plaats van als sectie onderaan. */
+export default function OrbitingCirclesGlobe({ orbits = DEFAULT_ORBITS, anker = 'bottom' }) {
+  const midden = anker === 'center'
+  const plaatsing = midden
+    ? 'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'
+    : 'bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2'
+
   return (
-    <div className="relative flex h-[22rem] w-full justify-center overflow-hidden md:h-[40rem]">
+    <div className={`relative flex w-full justify-center overflow-hidden ${midden ? 'h-full' : 'h-[22rem] md:h-[40rem]'}`}>
       <style>{`
         @keyframes orbit-cw {
           from { transform: rotate(var(--start-angle)) }
@@ -75,7 +86,7 @@ export default function OrbitingCirclesGlobe({ orbits = DEFAULT_ORBITS }) {
       `}</style>
 
       {/* Bol met deeltjes in het midden */}
-      <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 aspect-square w-[14rem] -translate-x-1/2 translate-y-1/2 md:w-[36.25rem]">
+      <div className={`pointer-events-none absolute z-10 aspect-square ${plaatsing} ${midden ? 'w-[38%]' : 'w-[14rem] md:w-[36.25rem]'}`}>
         <ParticleSphereAnimation />
       </div>
 
@@ -98,7 +109,7 @@ export default function OrbitingCirclesGlobe({ orbits = DEFAULT_ORBITS }) {
         return (
           <div
             key={index}
-            className={`orbit-ring absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-full border border-charcoal/15 ${orbit.size}`}
+            className={`orbit-ring absolute rounded-full border border-black/10 ${plaatsing} ${midden ? orbit.maatMidden : orbit.size}`}
           >
             {allIcons.map((iconData, iconIndex) => (
               <div
@@ -111,7 +122,7 @@ export default function OrbitingCirclesGlobe({ orbits = DEFAULT_ORBITS }) {
               >
                 {/* Tegenrotatie houdt het icoon rechtop terwijl de ring draait */}
                 <div
-                  className="relative z-10 -mt-6 rounded-full border border-charcoal/15 bg-cream p-3 md:-mt-8 md:p-4"
+                  className="relative z-10 -mt-6 rounded-full border border-black/10 bg-white p-3 shadow-[0_1px_2px_rgba(16,24,40,0.05)] md:-mt-8 md:p-4"
                   style={{
                     '--counter-offset': `${-iconData.angle}deg`,
                     animation: `${counterAnim} ${orbit.duration}s linear infinite`,
