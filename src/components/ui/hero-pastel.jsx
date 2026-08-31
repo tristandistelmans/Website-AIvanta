@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ArrowUpRight } from 'lucide-react'
 
 import IridescentObject from '@/components/ui/iridescent-object'
+import { FlowerMark } from '@/components/ui/flower'
 import { meldConversie } from '@/lib/gtag'
 
 /* HeroPastel
@@ -14,24 +15,7 @@ import { meldConversie } from '@/lib/gtag'
    De vormgeving is nagebouwd, niet gekopieerd: het object is eigen SVG
    en de kleuren zijn opnieuw opgebouwd.                               */
 
-const NAV = [
-  { label: 'Services', href: '#werk' },
-  { label: 'Clients', href: '#klanten' },
-  { label: 'Contact', href: '#contact' },
-]
-
 const EMAIL = 'tristan@ainova.be'
-
-function Sparkle({ className = '' }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <path
-        d="M12 0c.9 6.3 4.8 10.2 11.1 11.1C16.8 12 12.9 15.9 12 22.2 11.1 15.9 7.2 12 .9 11.1 7.2 10.2 11.1 6.3 12 0Z"
-        fill="currentColor"
-      />
-    </svg>
-  )
-}
 
 export default function HeroPastel() {
   const ref = useRef(null)
@@ -73,25 +57,13 @@ export default function HeroPastel() {
         {/* navigatie */}
         <nav className="hero-op flex items-center justify-between gap-4 pt-7">
           <a href="/" className="flex items-center gap-2.5">
-            <Sparkle className="h-6 w-6 text-[#0A0A0A]" />
+            <FlowerMark className="h-6 w-6 text-[#0A0A0A]" />
             <span className="font-body text-xl font-semibold tracking-tight text-[#0A0A0A]">
               Ainova
             </span>
           </a>
 
           <div className="flex items-center gap-2">
-            <div className="hidden items-center gap-1 rounded-full border border-black/5 bg-white/70 px-2 py-2 shadow-[0_1px_2px_rgba(16,24,40,0.04)] backdrop-blur-md md:flex">
-              {NAV.map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  className="rounded-full px-4 py-2 font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A]/70 transition-colors hover:bg-black/[0.04] hover:text-[#0A0A0A]"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </div>
-
             <a
               href={`mailto:${EMAIL}`}
               onClick={() => meldConversie('e-mail hero-nav')}
@@ -105,7 +77,7 @@ export default function HeroPastel() {
         {/* inhoud */}
         <div className="max-w-2xl pb-28 pt-24 md:pb-40 md:pt-32">
           <p className="hero-op flex items-center gap-2.5 font-mono-brand text-xs uppercase tracking-[0.18em] text-[#0A0A0A]/80">
-            <Sparkle className="h-3.5 w-3.5 text-[#0A0A0A]" />
+            <FlowerMark className="h-3.5 w-3.5 text-[#0A0A0A]" />
             AI growth systems for B2B
           </p>
 
@@ -118,8 +90,7 @@ export default function HeroPastel() {
           </h1>
 
           <p className="hero-op mt-7 max-w-xl font-body text-base leading-[1.7] text-[#0A0A0A]/55 md:text-lg">
-            I build the systems that generate leads, close deals and scale day-to-day
-            operations — inside the tools your team already uses.
+            AI systems that generate leads, close deals and scale operations.
           </p>
 
           <div className="hero-op mt-12 flex flex-wrap items-center gap-3">
@@ -142,17 +113,17 @@ export default function HeroPastel() {
             </a>
 
             <a
-              href="#werk"
+              href="#contact"
               className="inline-flex items-center rounded-full border border-[#0A0A0A]/20 bg-white/50 px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A] backdrop-blur-sm transition-colors hover:border-[#0A0A0A]/45"
             >
-              See the work
+              Contact
             </a>
           </div>
         </div>
       </div>
 
       {/* zachte overgang naar de cream sectie eronder */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-cream" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-white" />
     </section>
   )
 }

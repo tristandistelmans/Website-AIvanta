@@ -1,25 +1,22 @@
+import { BLAD, HOEKEN } from '@/lib/flower-shape'
+
 /* IridescentObject
    ------------------------------------------------------------------
-   Het glanzende viertandige object rechts in de hero, opgebouwd uit
-   SVG-verlopen in plaats van een afbeelding: schaalt scherp op elk
-   scherm, weegt niets, en is eigen werk in plaats van het bestand van
-   de referentiesite.
+   Dezelfde bloem als het merkteken, maar groot en in glanzend glas:
+   een vervaagde kopie voor de gloed, het lichaam met een iriserend
+   verloop, een glansvlek en randlichting.
 
-   Opbouw van achter naar voor: een zwaar vervaagde kopie voor de gloed,
-   het lichaam met een iriserend verloop, een witte glans linksboven en
-   een zachte randlichting.                                            */
-
-const STER =
-  'M300 12 C 316 168 432 284 588 300 C 432 316 316 432 300 588 C 284 432 168 316 12 300 C 168 284 284 168 300 12 Z'
+   Opgebouwd uit SVG-verlopen in plaats van een afbeelding, dus scherp
+   op elk scherm en zonder laadtijd.                                   */
 
 export default function IridescentObject({ className = '' }) {
+  const bladeren = (props) =>
+    HOEKEN.map((hoek) => (
+      <path key={hoek} d={BLAD} transform={`rotate(${hoek} 50 50)`} {...props} />
+    ))
+
   return (
-    <svg
-      viewBox="0 0 600 600"
-      className={`h-full w-full ${className}`}
-      aria-hidden="true"
-      role="presentation"
-    >
+    <svg viewBox="0 0 100 100" className={`h-full w-full ${className}`} aria-hidden="true">
       <defs>
         <linearGradient id="iri-lichaam" x1="8%" y1="4%" x2="92%" y2="96%">
           <stop offset="0%" stopColor="#A8F0DC" />
@@ -37,65 +34,61 @@ export default function IridescentObject({ className = '' }) {
 
         <radialGradient id="iri-glans" cx="34%" cy="26%" r="46%">
           <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.92" />
-          <stop offset="48%" stopColor="#FFFFFF" stopOpacity="0.38" />
+          <stop offset="48%" stopColor="#FFFFFF" stopOpacity="0.34" />
           <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
         </radialGradient>
 
         <radialGradient id="iri-diepte" cx="72%" cy="80%" r="55%">
-          <stop offset="0%" stopColor="#3B7FA8" stopOpacity="0.38" />
+          <stop offset="0%" stopColor="#3B7FA8" stopOpacity="0.34" />
           <stop offset="100%" stopColor="#3B7FA8" stopOpacity="0" />
         </radialGradient>
 
         <filter id="iri-blur" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="34" />
+          <feGaussianBlur stdDeviation="6" />
         </filter>
 
         <filter id="iri-zachterand" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="1.6" />
+          <feGaussianBlur stdDeviation="0.3" />
         </filter>
 
         <filter id="iri-glansblur" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="9" />
+          <feGaussianBlur stdDeviation="2.2" />
         </filter>
 
-        {/* Houdt de glansvlek binnen het lichaam; anders zweeft hij ernaast. */}
+        {/* Houdt de glansvlek binnen de bloem. */}
         <clipPath id="iri-binnen">
-          <path d={STER} />
+          {HOEKEN.map((hoek) => (
+            <path key={hoek} d={BLAD} transform={`rotate(${hoek} 50 50)`} />
+          ))}
         </clipPath>
       </defs>
 
-      {/* gloed achter het object */}
-      <path d={STER} fill="url(#iri-gloed)" opacity="0.55" filter="url(#iri-blur)" />
+      {/* gloed erachter */}
+      <g opacity="0.5" filter="url(#iri-blur)">{bladeren({ fill: 'url(#iri-gloed)' })}</g>
 
-      {/* lichaam */}
+      {/* lichaam met diepte en glans */}
       <g filter="url(#iri-zachterand)">
-        <path d={STER} fill="url(#iri-lichaam)" />
-        <path d={STER} fill="url(#iri-diepte)" />
-        <path d={STER} fill="url(#iri-glans)" />
+        {bladeren({ fill: 'url(#iri-lichaam)' })}
+        {bladeren({ fill: 'url(#iri-diepte)' })}
+        {bladeren({ fill: 'url(#iri-glans)' })}
       </g>
 
-      {/* felle glansvlek — geeft het glasgevoel, geklemd binnen de vorm */}
+      {/* felle glansvlek, geklemd binnen de vorm */}
       <g clipPath="url(#iri-binnen)">
         <ellipse
-          cx="252"
-          cy="236"
-          rx="60"
-          ry="26"
+          cx="36"
+          cy="30"
+          rx="15"
+          ry="7"
           fill="#FFFFFF"
-          opacity="0.75"
-          transform="rotate(-42 252 236)"
+          opacity="0.8"
+          transform="rotate(-42 36 30)"
           filter="url(#iri-glansblur)"
         />
       </g>
 
       {/* randlichting */}
-      <path
-        d={STER}
-        fill="none"
-        stroke="#FFFFFF"
-        strokeOpacity="0.55"
-        strokeWidth="1.5"
-      />
+      {bladeren({ fill: 'none', stroke: '#FFFFFF', strokeOpacity: 0.5, strokeWidth: 0.35 })}
     </svg>
   )
 }
