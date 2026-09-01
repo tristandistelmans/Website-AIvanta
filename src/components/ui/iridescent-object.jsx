@@ -19,11 +19,11 @@ export default function IridescentObject({ className = '' }) {
     <svg viewBox="0 0 100 100" className={`h-full w-full ${className}`} aria-hidden="true">
       <defs>
         <linearGradient id="iri-lichaam" x1="8%" y1="4%" x2="92%" y2="96%">
-          <stop offset="0%" stopColor="#A8F0DC" />
-          <stop offset="24%" stopColor="#5FD8EE" />
-          <stop offset="48%" stopColor="#8FB6F7" />
-          <stop offset="72%" stopColor="#C4A6F0" />
-          <stop offset="100%" stopColor="#F0A9D4" />
+          <stop offset="0%" stopColor="#DFF7EE" />
+          <stop offset="24%" stopColor="#C9F0F3" />
+          <stop offset="48%" stopColor="#DCE6FB" />
+          <stop offset="72%" stopColor="#DCD2F6" />
+          <stop offset="100%" stopColor="#EFDCF0" />
         </linearGradient>
 
         <linearGradient id="iri-gloed" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -39,7 +39,7 @@ export default function IridescentObject({ className = '' }) {
         </radialGradient>
 
         <radialGradient id="iri-diepte" cx="72%" cy="80%" r="55%">
-          <stop offset="0%" stopColor="#3B7FA8" stopOpacity="0.34" />
+          <stop offset="0%" stopColor="#7FA8C4" stopOpacity="0.26" />
           <stop offset="100%" stopColor="#3B7FA8" stopOpacity="0" />
         </radialGradient>
 
@@ -64,7 +64,7 @@ export default function IridescentObject({ className = '' }) {
       </defs>
 
       {/* gloed erachter */}
-      <g opacity="0.5" filter="url(#iri-blur)">{bladeren({ fill: 'url(#iri-gloed)' })}</g>
+      <g opacity="0.42" filter="url(#iri-blur)">{bladeren({ fill: 'url(#iri-gloed)' })}</g>
 
       {/* lichaam met diepte en glans */}
       <g filter="url(#iri-zachterand)">
@@ -88,7 +88,7 @@ export default function IridescentObject({ className = '' }) {
       </g>
 
       {/* randlichting */}
-      {bladeren({ fill: 'none', stroke: '#FFFFFF', strokeOpacity: 0.5, strokeWidth: 0.35 })}
+      {bladeren({ fill: 'none', stroke: '#FFFFFF', strokeOpacity: 0.75, strokeWidth: 0.5 })}
     </svg>
   )
 }
