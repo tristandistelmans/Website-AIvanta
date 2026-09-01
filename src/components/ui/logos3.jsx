@@ -20,13 +20,15 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
    lus van embla vloeiend te laten sluiten, dus de reeks wordt een
    aantal keer herhaald (zie HERHALINGEN).                             */
 
-// Hoogtes per logo, zodat ze optisch even zwaar wegen: een vierkant
-// beeldmerk heeft meer hoogte nodig dan een breed woordmerk om even
-// groot te ogen.
+// Maximale hoogte per logo, zodat ze optisch even zwaar wegen: een
+// vierkant beeldmerk heeft meer hoogte nodig dan een breed woordmerk.
+// Het zijn bewust max-hoogtes en geen vaste hoogtes: samen met de vaste
+// vakbreedte hieronder kan een breed woordmerk nooit buiten zijn vak
+// groeien en tegen het volgende logo aanlopen.
 const STANDAARD_LOGOS = [
-  { id: 'paddle', description: 'paddle.be', image: '/logos/klanten/paddle.png', className: 'h-7 w-auto md:h-8' },
-  { id: 'mediatales', description: 'MediaTales', image: '/logos/klanten/mediatales.png', className: 'h-12 w-auto md:h-14' },
-  { id: 'vinkmans', description: 'Vinkmans', image: '/logos/klanten/vinkmans.png', className: 'h-4 w-auto md:h-5' },
+  { id: 'paddle', description: 'paddle.be', image: '/logos/klanten/paddle.png', className: 'max-h-8 md:max-h-9' },
+  { id: 'mediatales', description: 'MediaTales', image: '/logos/klanten/mediatales.png', className: 'max-h-16 md:max-h-[4.5rem]' },
+  { id: 'vinkmans', description: 'Vinkmans', image: '/logos/klanten/vinkmans.png', className: 'max-h-5 md:max-h-6' },
 ]
 
 function LogoBeeld({ logo }) {
@@ -40,7 +42,7 @@ function LogoBeeld({ logo }) {
       onError={(e) => {
         e.currentTarget.style.display = 'none'
       }}
-      className={logo.className}
+      className={`max-w-full object-contain ${logo.className}`}
     />
   )
 }
@@ -83,7 +85,7 @@ const Logos3 = ({ logos = STANDAARD_LOGOS }) => {
                   key={logo.sleutel}
                   className="flex basis-1/2 justify-center pl-0 md:basis-1/3"
                 >
-                  <div className="mx-4 flex h-16 shrink-0 items-center justify-center md:mx-6 md:h-20">
+                  <div className="mx-auto flex h-20 w-[74%] items-center justify-center md:h-24">
                     <LogoBeeld logo={logo} />
                   </div>
                 </CarouselItem>
