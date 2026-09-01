@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react'
    Geen externe dependencies. Respecteert prefers-reduced-motion en
    ruimt de animation frame en observer netjes op.                     */
 
-const PARTICLE_COUNT = 900
+const PARTICLE_COUNT = 1700
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5))
 const TILT = 0.32 // lichte kanteling zodat het geen platte cirkel lijkt
 
@@ -87,8 +87,8 @@ export default function ParticleSphereAnimation({
         const px = cx + rx * radius * scale
         const py = cy + ry * radius * scale
 
-        const alpha = 0.12 + depth * 0.55
-        const size = 0.6 + depth * 1.1
+        const alpha = 0.16 + depth * 0.62
+        const size = 0.65 + depth * 1.15
 
         ctx.beginPath()
         ctx.arc(px, py, size, 0, Math.PI * 2)

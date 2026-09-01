@@ -1,94 +1,131 @@
-import { BLAD, HOEKEN } from '@/lib/flower-shape'
+import { BLAD_DIK, HOEKEN } from '@/lib/flower-shape'
 
-/* IridescentObject
+/* IridescentObject — de bloem als opgeblazen glas
    ------------------------------------------------------------------
-   Dezelfde bloem als het merkteken, maar groot en in glanzend glas:
-   een vervaagde kopie voor de gloed, het lichaam met een iriserend
-   verloop, een glansvlek en randlichting.
+   In de referentie is dit geen plat silhouet maar zes losse, opgeblazen
+   armen die elkaar zichtbaar overlappen. Elke arm heeft een eigen wand,
+   eigen lichtaccent en een eigen kleurzweem, en de arm die vooraan ligt
+   dekt de arm erachter af.
 
-   Opgebouwd uit SVG-verlopen in plaats van een afbeelding, dus scherp
-   op elk scherm en zonder laadtijd.                                   */
+   Dat wordt hier zo nagebouwd:
+   - Elke arm wordt afzonderlijk getekend, in volgorde van achter naar
+     voor. Doordat het lichaam dekkend is, dekt elke arm de vorige af en
+     ontstaat de overlap vanzelf. (Eerst alle vullingen en dan alle
+     randen tekenen levert een spirograaf op: dan zie je ook de randen
+     van de delen die eigenlijk verborgen zijn.)
+   - De randen komen uit feMorphology: de vorm krimpen en van zichzelf
+     aftrekken geeft een band langs de omtrek. Die filters leveren enkel
+     een zwart-wit masker, want feMorphology bewerkt ook de kleur-
+     kanalen en zou een gekleurde rand egaal maken.
+   - Elke arm heeft een eigen kleur uit het spectrum, zoals in de
+     referentie waar de ene arm mintgroen is en de andere lila.        */
+
+// Kleur per arm, rondgaand: mint -> cyaan -> blauw -> lila -> roze -> aqua
+const ARM_KLEUREN = ['#3FD3AE', '#5ACBE4', '#8FB6F0', '#B79FE8', '#E79ACF', '#6FDBD2']
+
+const BANDEN = [
+  { id: 'arm-schaduw', van: 0.8, tot: 7, vervaging: 1.9 },
+  { id: 'arm-wand', van: 0, tot: 3.0, vervaging: 0.9 },
+  { id: 'arm-licht', van: 2.2, tot: 4.6, vervaging: 0.7 },
+  { id: 'arm-lijn', van: 0, tot: 0.7, vervaging: 0.2 },
+]
+
+function BandFilter({ id, van, tot, vervaging }) {
+  return (
+    <filter id={`${id}-f`} x="-30%" y="-30%" width="160%" height="160%">
+      {van > 0 ? (
+        <feMorphology operator="erode" radius={van} in="SourceGraphic" result="binnen" />
+      ) : (
+        <feOffset in="SourceGraphic" result="binnen" />
+      )}
+      <feMorphology operator="erode" radius={tot} in="SourceGraphic" result="dieper" />
+      <feComposite in="binnen" in2="dieper" operator="out" />
+      <feGaussianBlur stdDeviation={vervaging} />
+    </filter>
+  )
+}
+
+function BandMasker({ id }) {
+  return (
+    <mask id={id} maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+      <g filter={`url(#${id}-f)`}>
+        <path d={BLAD_DIK} fill="#FFFFFF" />
+      </g>
+    </mask>
+  )
+}
+
+function Arm({ kleur }) {
+  return (
+    <g>
+      {/* dekkend lichaam: dekt de armen erachter af */}
+      <path d={BLAD_DIK} fill="url(#arm-kern)" />
+
+      {/* schaduw binnenin geeft de bolling volume */}
+      <rect x="-10" y="-10" width="120" height="120" fill="url(#arm-schaduw-verloop)" mask="url(#arm-schaduw)" opacity="0.5" />
+
+      {/* gekleurde wand langs de omtrek van deze arm */}
+      <rect x="-10" y="-10" width="120" height="120" fill={kleur} mask="url(#arm-wand)" opacity="0.85" />
+
+      {/* lichtaccent net binnen de wand */}
+      <rect x="-10" y="-10" width="120" height="120" fill="#FFFFFF" mask="url(#arm-licht)" opacity="0.9" />
+
+      {/* haarlijn op de omtrek */}
+      <rect x="-10" y="-10" width="120" height="120" fill="#FFFFFF" mask="url(#arm-lijn)" opacity="0.95" />
+    </g>
+  )
+}
 
 export default function IridescentObject({ className = '' }) {
-  const bladeren = (props) =>
-    HOEKEN.map((hoek) => (
-      <path key={hoek} d={BLAD} transform={`rotate(${hoek} 50 50)`} {...props} />
-    ))
+  // Van achter naar voor: de laatste arm ligt bovenop.
+  const volgorde = [3, 2, 4, 1, 5, 0]
 
   return (
     <svg viewBox="0 0 100 100" className={`h-full w-full ${className}`} aria-hidden="true">
       <defs>
-        <linearGradient id="iri-lichaam" x1="8%" y1="4%" x2="92%" y2="96%">
-          <stop offset="0%" stopColor="#DFF7EE" />
-          <stop offset="24%" stopColor="#C9F0F3" />
-          <stop offset="48%" stopColor="#DCE6FB" />
-          <stop offset="72%" stopColor="#DCD2F6" />
-          <stop offset="100%" stopColor="#EFDCF0" />
+        <linearGradient id="arm-kern" gradientUnits="userSpaceOnUse" x1="35" y1="0" x2="65" y2="55">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="55%" stopColor="#FAFDFF" />
+          <stop offset="100%" stopColor="#EFF5FB" />
         </linearGradient>
 
-        <linearGradient id="iri-gloed" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#8FE9D6" />
-          <stop offset="50%" stopColor="#8FC7F5" />
-          <stop offset="100%" stopColor="#E7A9E0" />
+        <linearGradient id="arm-schaduw-verloop" gradientUnits="userSpaceOnUse" x1="38" y1="6" x2="66" y2="52">
+          <stop offset="0%" stopColor="#5F8AAE" stopOpacity="0" />
+          <stop offset="100%" stopColor="#5F8AAE" stopOpacity="0.55" />
         </linearGradient>
 
-        <radialGradient id="iri-glans" cx="34%" cy="26%" r="46%">
-          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.92" />
-          <stop offset="48%" stopColor="#FFFFFF" stopOpacity="0.34" />
-          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
-        </radialGradient>
+        <linearGradient id="hof" gradientUnits="userSpaceOnUse" x1="6" y1="2" x2="94" y2="98">
+          <stop offset="0%" stopColor="#4FD8B4" />
+          <stop offset="35%" stopColor="#7CC6EC" />
+          <stop offset="70%" stopColor="#B8A6EE" />
+          <stop offset="100%" stopColor="#F2A9C8" />
+        </linearGradient>
 
-        <radialGradient id="iri-diepte" cx="72%" cy="80%" r="55%">
-          <stop offset="0%" stopColor="#7FA8C4" stopOpacity="0.26" />
-          <stop offset="100%" stopColor="#3B7FA8" stopOpacity="0" />
-        </radialGradient>
+        {BANDEN.map((b) => (
+          <BandFilter key={b.id} {...b} />
+        ))}
+        {BANDEN.map((b) => (
+          <BandMasker key={b.id} id={b.id} />
+        ))}
 
-        <filter id="iri-blur" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="6" />
+        <filter id="hof-blur" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="4.5" />
         </filter>
-
-        <filter id="iri-zachterand" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="0.3" />
-        </filter>
-
-        <filter id="iri-glansblur" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="2.2" />
-        </filter>
-
-        {/* Houdt de glansvlek binnen de bloem. */}
-        <clipPath id="iri-binnen">
-          {HOEKEN.map((hoek) => (
-            <path key={hoek} d={BLAD} transform={`rotate(${hoek} 50 50)`} />
-          ))}
-        </clipPath>
       </defs>
 
-      {/* gloed erachter */}
-      <g opacity="0.42" filter="url(#iri-blur)">{bladeren({ fill: 'url(#iri-gloed)' })}</g>
-
-      {/* lichaam met diepte en glans */}
-      <g filter="url(#iri-zachterand)">
-        {bladeren({ fill: 'url(#iri-lichaam)' })}
-        {bladeren({ fill: 'url(#iri-diepte)' })}
-        {bladeren({ fill: 'url(#iri-glans)' })}
+      {/* zachte gloed rondom het geheel */}
+      <g filter="url(#hof-blur)" opacity="0.28">
+        {HOEKEN.map((hoek) => (
+          <path key={hoek} d={BLAD_DIK} transform={`rotate(${hoek} 50 50)`} fill="url(#hof)" />
+        ))}
       </g>
 
-      {/* felle glansvlek, geklemd binnen de vorm */}
-      <g clipPath="url(#iri-binnen)">
-        <ellipse
-          cx="36"
-          cy="30"
-          rx="15"
-          ry="7"
-          fill="#FFFFFF"
-          opacity="0.8"
-          transform="rotate(-42 36 30)"
-          filter="url(#iri-glansblur)"
-        />
-      </g>
-
-      {/* randlichting */}
-      {bladeren({ fill: 'none', stroke: '#FFFFFF', strokeOpacity: 0.75, strokeWidth: 0.5 })}
+      {/* de armen, van achter naar voor */}
+      {volgorde.map((i) => (
+        <g key={i} transform={`rotate(${HOEKEN[i]} 50 50)`}>
+          <Arm kleur={ARM_KLEUREN[i]} />
+        </g>
+      ))}
     </svg>
   )
 }

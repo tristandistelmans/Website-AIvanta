@@ -11,3 +11,11 @@ export const BLAD =
   'M50 3 C56.2 3 60.8 11 60.8 22 C60.8 33 55.8 43 50 50 C44.2 43 39.2 33 39.2 22 C39.2 11 43.8 3 50 3 Z'
 
 export const HOEKEN = [0, 60, 120, 180, 240, 300]
+
+// Dikkere variant voor het grote glazen object. In de referentie zijn de
+// armen van het 3D-object veel voller dan die van het merkteken: halve
+// breedte 12,5 op straal 26. Breder laat de armen in elkaar lopen tot
+// een blob; zo blijven de inkepingen tussen de armen diep genoeg om elke
+// arm als eigen buis te laten lezen.
+export const BLAD_DIK =
+  'M50 4 C57 4 62.5 12 62.5 24 C62.5 36 56.5 45 50 50 C43.5 45 37.5 36 37.5 24 C37.5 12 43 4 50 4 Z'

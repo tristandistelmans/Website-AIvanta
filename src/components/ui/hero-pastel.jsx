@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ArrowUpRight } from 'lucide-react'
 
-import IridescentObject from '@/components/ui/iridescent-object'
+import ParticleSphereAnimation from '@/components/ui/orbiting-circles-02-utils/particalsphear'
 import { FlowerMark } from '@/components/ui/flower'
 import { meldConversie } from '@/lib/gtag'
 
@@ -50,7 +50,7 @@ export default function HeroPastel() {
 
       {/* glanzend object rechts */}
       <div className="hero-object pointer-events-none absolute aspect-square -right-[36%] bottom-0 w-[76%] sm:bottom-auto sm:-right-[12%] sm:top-1/2 sm:w-[58%] sm:-translate-y-1/2 lg:-right-[6%] lg:w-[52%]">
-        <IridescentObject className="slow-float" />
+        <ParticleSphereAnimation />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6 md:px-10">
