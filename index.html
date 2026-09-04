@@ -68,15 +68,43 @@
     </script>
 
 
-    <!-- Google Ads (AW-18418462659) — basis-tag.
-         Deze moet aanwezig zijn voordat er ook maar een conversie gemeld
-         kan worden; zonder deze tag bestaat de functie gtag() niet. Het
-         doorgeven van de conversie zelf gebeurt in src/lib/gtag.js, op het
-         moment dat iemand contact opneemt. -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18418462659"></script>
+    <!-- Google Ads (AW-18418462659) met Consent Mode v2.
+         Volgorde is hier bepalend: de standaardtoestemming moet gezet zijn
+         VOORDAT gtag.js laadt, anders plaatst Google al cookies voordat de
+         bezoeker iets gekozen heeft. Alles staat daarom op 'denied' tot de
+         keuze uit de banner binnenkomt; wat de bezoeker eerder koos, wordt
+         hier meteen hersteld.
+
+         wait_for_update geeft de banner een halve seconde om een bewaarde
+         keuze door te geven voordat Google metingen wegschrijft. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+      });
+
+      try {
+        if (localStorage.getItem('ainova-cookies') === 'granted') {
+          gtag('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+            analytics_storage: 'granted'
+          });
+        }
+      } catch (e) {
+        // localStorage kan geblokkeerd zijn; dan blijft alles geweigerd.
+      }
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18418462659"></script>
+    <script>
       gtag('js', new Date());
       gtag('config', 'AW-18418462659');
     </script>

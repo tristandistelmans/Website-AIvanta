@@ -8,6 +8,7 @@ import HeroPastel from '@/components/ui/hero-pastel'
 import { FlowerMark } from '@/components/ui/flower'
 import ContactForm from '@/components/ui/contact-form'
 import Bedankt from '@/pages/bedankt'
+import CookieBanner, { OPEN_EVENEMENT } from '@/components/ui/cookie-banner'
 import { Logos3 } from '@/components/ui/logos3'
 import tristanPhoto from './assets/tristan-distelmans.jpg'
 
@@ -189,7 +190,16 @@ function Footer() {
           <span>
             Ainova — {ADRES} · BTW {BTW}
           </span>
-          <span>© {JAAR} Ainova</span>
+          <div className="flex items-center gap-5">
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event(OPEN_EVENEMENT))}
+              className="font-mono-brand text-xs text-white/40 underline-offset-4 transition-colors hover:text-white/70 hover:underline"
+            >
+              Cookies
+            </button>
+            <span>© {JAAR} Ainova</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -210,9 +220,12 @@ function HomePage() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/bedankt" element={<Bedankt />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/bedankt" element={<Bedankt />} />
+      </Routes>
+      <CookieBanner />
+    </>
   )
 }
