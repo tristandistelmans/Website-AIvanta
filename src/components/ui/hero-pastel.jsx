@@ -4,7 +4,6 @@ import { ArrowUpRight } from 'lucide-react'
 
 import ParticleSphereAnimation from '@/components/ui/orbiting-circles-02-utils/particalsphear'
 import { FlowerMark } from '@/components/ui/flower'
-import { meldConversie } from '@/lib/gtag'
 
 /* HeroPastel
    ------------------------------------------------------------------
@@ -66,7 +65,6 @@ export default function HeroPastel() {
           <div className="flex items-center gap-2">
             <a
               href={`mailto:${EMAIL}`}
-              onClick={() => meldConversie('e-mail hero-nav')}
               className="rounded-full bg-[#0A0A0A] px-5 py-3 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
             >
               Get in touch
@@ -96,7 +94,6 @@ export default function HeroPastel() {
           <div className="hero-op mt-12 flex flex-wrap items-center gap-3">
             <a
               href={`mailto:${EMAIL}`}
-              onClick={() => meldConversie('e-mail hero')}
               className="group inline-flex items-center gap-2 rounded-full bg-[#0A0A0A] px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
             >
               Start now

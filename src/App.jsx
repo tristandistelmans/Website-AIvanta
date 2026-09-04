@@ -9,7 +9,6 @@ import { FlowerMark } from '@/components/ui/flower'
 import ContactForm from '@/components/ui/contact-form'
 import Bedankt from '@/pages/bedankt'
 import { Logos3 } from '@/components/ui/logos3'
-import { meldConversie } from '@/lib/gtag'
 import tristanPhoto from './assets/tristan-distelmans.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -70,7 +69,6 @@ function ComingSoon() {
           <div className="reveal mt-10 flex flex-wrap items-center justify-center gap-3">
             <a
               href={`mailto:${EMAIL}`}
-              onClick={() => meldConversie('e-mail coming soon')}
               className="group inline-flex items-center gap-2 rounded-full bg-[#0A0A0A] px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
             >
               Email me
@@ -123,11 +121,6 @@ function Contact() {
           >
             Tell me what you are trying to fix
           </h2>
-
-          <p className="mt-5 max-w-sm font-body text-base leading-[1.7] text-[#0A0A0A]/55">
-            I answer every message myself, usually within 24 hours. Prefer to talk
-            straight away? Call {GSM}.
-          </p>
         </div>
 
         <div className="reveal">
@@ -170,14 +163,12 @@ function Footer() {
             </span>
             <a
               href={`mailto:${EMAIL}`}
-              onClick={() => meldConversie('e-mail footer')}
               className="font-body text-base text-white transition-colors hover:text-white/60"
             >
               {EMAIL}
             </a>
             <a
               href={GSM_HREF}
-              onClick={() => meldConversie('telefoon footer')}
               className="font-body text-base text-white/70 transition-colors hover:text-white"
             >
               {GSM}
