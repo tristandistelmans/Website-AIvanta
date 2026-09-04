@@ -1,10 +1,13 @@
 import { useEffect, useRef } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowUpRight } from 'lucide-react'
 
 import HeroPastel from '@/components/ui/hero-pastel'
 import { FlowerMark } from '@/components/ui/flower'
+import ContactForm from '@/components/ui/contact-form'
+import Bedankt from '@/pages/bedankt'
 import { Logos3 } from '@/components/ui/logos3'
 import { meldConversie } from '@/lib/gtag'
 import tristanPhoto from './assets/tristan-distelmans.jpg'
@@ -99,6 +102,43 @@ function ComingSoon() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   CONTACT — het formulier; verstuurt via Web3Forms naar /bedankt
+───────────────────────────────────────────────────────────────────────── */
+function Contact() {
+  const ref = useRef(null)
+  useReveal(ref)
+
+  return (
+    <section ref={ref} id="contact" className="bg-white px-6 py-16 md:px-10 md:py-24">
+      <div className="mx-auto grid max-w-6xl gap-10 rounded-[2rem] border border-black/5 bg-white px-8 py-12 shadow-[0_1px_2px_rgba(16,24,40,0.04)] md:grid-cols-[0.85fr_1.15fr] md:gap-16 md:px-12 md:py-14">
+        <div className="reveal">
+          <p className="flex items-center gap-2.5 font-mono-brand text-xs uppercase tracking-[0.18em] text-[#0A0A0A]/70">
+            <FlowerMark className="h-3.5 w-3.5 text-[#0A0A0A]" />
+            Contact
+          </p>
+
+          <h2
+            className="mt-6 font-body font-normal leading-[1.1] tracking-[-0.02em] text-[#0A0A0A]"
+            style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.4rem)' }}
+          >
+            Tell me what you are trying to fix
+          </h2>
+
+          <p className="mt-5 max-w-sm font-body text-base leading-[1.7] text-[#0A0A0A]/55">
+            I answer every message myself, usually within 24 hours. Prefer to talk
+            straight away? Call {GSM}.
+          </p>
+        </div>
+
+        <div className="reveal">
+          <ContactForm />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
    FOOTER — foto, contact en de wettelijk verplichte ondernemersgegevens
 ───────────────────────────────────────────────────────────────────────── */
 function Footer() {
@@ -106,7 +146,7 @@ function Footer() {
   useReveal(ref)
 
   return (
-    <footer ref={ref} id="contact" className="bg-white px-6 pb-8 md:px-10">
+    <footer ref={ref} className="bg-white px-6 pb-8 md:px-10">
       <div className="mx-auto max-w-6xl rounded-[2rem] bg-[#0A0A0A] px-8 py-14 md:px-14 md:py-16">
         <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between md:gap-16">
           {/* wie */}
@@ -165,13 +205,23 @@ function Footer() {
   )
 }
 
-export default function App() {
+function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <HeroPastel />
       <Logos3 />
       <ComingSoon />
+      <Contact />
       <Footer />
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/bedankt" element={<Bedankt />} />
+    </Routes>
   )
 }
