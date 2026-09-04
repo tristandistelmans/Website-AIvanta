@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 import { FlowerMark } from '@/components/ui/flower'
-import { meldConversie } from '@/lib/gtag'
+import { meldFormulierVerstuurd } from '@/lib/datalayer'
 
 /* Bedankpagina — waar Web3Forms de bezoeker na het versturen heen stuurt.
    Wordt apart geprerenderd naar dist/bedankt.html, met een eigen titel en
@@ -10,16 +10,16 @@ import { meldConversie } from '@/lib/gtag'
 export default function Bedankt() {
   const gemeld = useRef(false)
 
-  /* De conversie hoort hier en nergens anders: wie deze pagina ziet,
-     heeft het formulier daadwerkelijk verstuurd. Een klik op een
-     e-mailadres telt niet mee — die zegt niet dat er iets verzonden is.
+  /* De melding hoort hier en nergens anders: wie deze pagina ziet, heeft
+     het formulier daadwerkelijk verstuurd. Een klik op een e-mailadres
+     telt niet mee — die zegt niet dat er iets verzonden is.
 
      De ref voorkomt dubbel melden wanneer React het component in
      ontwikkelmodus twee keer koppelt. */
   useEffect(() => {
     if (gemeld.current) return
     gemeld.current = true
-    meldConversie('formulier verstuurd')
+    meldFormulierVerstuurd()
   }, [])
 
   return (
