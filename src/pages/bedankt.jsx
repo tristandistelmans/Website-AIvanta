@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 
 import { FlowerMark } from '@/components/ui/flower'
 import { meldFormulierVerstuurd } from '@/lib/datalayer'
+import { useTaal } from '@/lib/taal'
 
 /* Bedankpagina — waar Web3Forms de bezoeker na het versturen heen stuurt.
    Wordt apart geprerenderd naar dist/bedankt.html, met een eigen titel en
@@ -9,6 +10,7 @@ import { meldFormulierVerstuurd } from '@/lib/datalayer'
 
 export default function Bedankt() {
   const gemeld = useRef(false)
+  const { t } = useTaal()
 
   /* De melding hoort hier en nergens anders: wie deze pagina ziet, heeft
      het formulier daadwerkelijk verstuurd. Een klik op een e-mailadres
@@ -36,25 +38,25 @@ export default function Bedankt() {
       <div className="relative w-full max-w-xl text-center">
         <p className="flex items-center justify-center gap-2.5 font-mono-brand text-xs uppercase tracking-[0.18em] text-[#0A0A0A]/70">
           <FlowerMark className="h-3.5 w-3.5 text-[#0A0A0A]" />
-          Message received
+          {t('bedankt.label')}
         </p>
 
         <h1
           className="mt-7 font-body font-normal leading-[1.08] tracking-[-0.02em] text-[#0A0A0A]"
           style={{ fontSize: 'clamp(2rem, 4.6vw, 3rem)' }}
         >
-          Thanks for reaching out
+          {t('bedankt.titel')}
         </h1>
 
         <p className="mx-auto mt-6 max-w-md font-body text-base leading-[1.7] text-[#0A0A0A]/55 md:text-lg">
-          I read every message myself and will get back to you within 24 hours.
+          {t('bedankt.tekst')}
         </p>
 
         <a
           href="/"
           className="mt-10 inline-flex items-center rounded-full border border-[#0A0A0A]/20 bg-white/60 px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A] backdrop-blur-sm transition-colors hover:border-[#0A0A0A]/45"
         >
-          Back to homepage
+          {t('bedankt.terug')}
         </a>
       </div>
     </main>

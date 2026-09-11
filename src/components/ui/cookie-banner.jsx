@@ -1,5 +1,7 @@
 import { useSyncExternalStore } from 'react'
 
+import { useTaal } from '@/lib/taal'
+
 /* CookieBanner
    ------------------------------------------------------------------
    Werkt samen met Consent Mode v2, dat in index.html alles standaard op
@@ -72,6 +74,7 @@ function kies(keuze) {
 
 export default function CookieBanner() {
   const zichtbaar = useSyncExternalStore(abonneer, momentopname, serverMomentopname)
+  const { t } = useTaal()
 
   if (!zichtbaar) return null
 
@@ -83,12 +86,11 @@ export default function CookieBanner() {
     >
       <div className="rounded-[1.5rem] border border-black/10 bg-white/95 p-6 shadow-[0_8px_30px_rgba(16,24,40,0.12)] backdrop-blur-md">
         <p className="font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A]/55">
-          Cookies
+          {t('cookies.label')}
         </p>
 
         <p className="mt-3 font-body text-sm leading-[1.65] text-[#0A0A0A]/70">
-          I use Google Ads cookies to see which ads lead to a contact request.
-          Nothing is stored until you agree, and the site works either way.
+          {t('cookies.tekst')}
         </p>
 
         <div className="mt-5 flex flex-wrap gap-2.5">
@@ -97,14 +99,14 @@ export default function CookieBanner() {
             onClick={() => kies('granted')}
             className="rounded-full bg-[#0A0A0A] px-5 py-2.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
           >
-            Accept
+            {t('cookies.accepteer')}
           </button>
           <button
             type="button"
             onClick={() => kies('denied')}
             className="rounded-full border border-[#0A0A0A]/20 px-5 py-2.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A] transition-colors hover:border-[#0A0A0A]/45"
           >
-            Decline
+            {t('cookies.weiger')}
           </button>
         </div>
       </div>

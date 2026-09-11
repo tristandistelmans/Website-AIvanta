@@ -4,6 +4,8 @@ import { ArrowUpRight } from 'lucide-react'
 
 import ParticleSphereAnimation from '@/components/ui/orbiting-circles-02-utils/particalsphear'
 import { FlowerMark } from '@/components/ui/flower'
+import TaalSchakelaar from '@/components/ui/taal-schakelaar'
+import { useTaal } from '@/lib/taal'
 
 /* HeroPastel
    ------------------------------------------------------------------
@@ -18,6 +20,7 @@ const EMAIL = 'tristan@ainova.be'
 
 export default function HeroPastel() {
   const ref = useRef(null)
+  const { t } = useTaal()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -63,11 +66,13 @@ export default function HeroPastel() {
           </a>
 
           <div className="flex items-center gap-2">
+            <TaalSchakelaar />
+
             <a
               href={`mailto:${EMAIL}`}
               className="rounded-full bg-[#0A0A0A] px-5 py-3 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
             >
-              Get in touch
+              {t('nav.cta')}
             </a>
           </div>
         </nav>
@@ -76,19 +81,19 @@ export default function HeroPastel() {
         <div className="max-w-2xl pb-28 pt-24 md:pb-40 md:pt-32">
           <p className="hero-op flex items-center gap-2.5 font-mono-brand text-xs uppercase tracking-[0.18em] text-[#0A0A0A]/80">
             <FlowerMark className="h-3.5 w-3.5 text-[#0A0A0A]" />
-            AI growth systems for B2B
+            {t('hero.label')}
           </p>
 
           <h1
             className="hero-op mt-7 font-body font-normal leading-[1.06] tracking-[-0.02em] text-[#0A0A0A]"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4.25rem)' }}
           >
-            Your AI growth partner
-            <br className="hidden sm:block" /> for B2B companies
+            {t('hero.titelA')}
+            <br className="hidden sm:block" /> {t('hero.titelB')}
           </h1>
 
           <p className="hero-op mt-7 max-w-xl font-body text-base leading-[1.7] text-[#0A0A0A]/55 md:text-lg">
-            AI systems that generate leads, close deals and scale operations.
+            {t('hero.sub')}
           </p>
 
           <div className="hero-op mt-12 flex flex-wrap items-center gap-3">
@@ -96,7 +101,7 @@ export default function HeroPastel() {
               href={`mailto:${EMAIL}`}
               className="group inline-flex items-center gap-2 rounded-full bg-[#0A0A0A] px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
             >
-              Start now
+              {t('hero.start')}
               <span className="relative flex h-4 w-4 items-center justify-center overflow-hidden">
                 <ArrowUpRight
                   size={16}
@@ -113,7 +118,7 @@ export default function HeroPastel() {
               href="#contact"
               className="inline-flex items-center rounded-full border border-[#0A0A0A]/20 bg-white/50 px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A] backdrop-blur-sm transition-colors hover:border-[#0A0A0A]/45"
             >
-              Contact
+              {t('hero.contact')}
             </a>
           </div>
         </div>

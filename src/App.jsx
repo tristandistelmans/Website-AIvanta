@@ -6,10 +6,11 @@ import { ArrowUpRight } from 'lucide-react'
 
 import HeroPastel from '@/components/ui/hero-pastel'
 import { FlowerMark } from '@/components/ui/flower'
+import TaalProvider from '@/components/ui/taal-provider'
+import { useTaal } from '@/lib/taal'
 import ContactForm from '@/components/ui/contact-form'
 import Bedankt from '@/pages/bedankt'
 import CookieBanner, { OPEN_EVENEMENT } from '@/components/ui/cookie-banner'
-import { Logos3 } from '@/components/ui/logos3'
 import tristanPhoto from './assets/tristan-distelmans.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -41,6 +42,7 @@ function useReveal(ref, selector = '.reveal') {
 ───────────────────────────────────────────────────────────────────────── */
 function ComingSoon() {
   const ref = useRef(null)
+  const { t } = useTaal()
   useReveal(ref)
 
   return (
@@ -57,14 +59,14 @@ function ComingSoon() {
         >
           <p className="reveal flex items-center justify-center gap-2.5 font-mono-brand text-xs uppercase tracking-[0.18em] text-[#0A0A0A]/70">
             <FlowerMark className="h-3.5 w-3.5 text-[#0A0A0A]" />
-            Coming soon
+            {t('komt.label')}
           </p>
 
           <h2
             className="reveal mx-auto mt-7 max-w-3xl font-body font-normal leading-[1.08] tracking-[-0.02em] text-[#0A0A0A]"
             style={{ fontSize: 'clamp(2rem, 4.6vw, 3.25rem)' }}
           >
-            The full site is on its way
+            {t('komt.titel')}
           </h2>
 
           <div className="reveal mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -72,7 +74,7 @@ function ComingSoon() {
               href={`mailto:${EMAIL}`}
               className="group inline-flex items-center gap-2 rounded-full bg-[#0A0A0A] px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
             >
-              Email me
+              {t('komt.mail')}
               <span className="relative flex h-4 w-4 items-center justify-center overflow-hidden">
                 <ArrowUpRight
                   size={16}
@@ -91,7 +93,7 @@ function ComingSoon() {
               rel="noopener noreferrer"
               className="inline-flex items-center rounded-full border border-[#0A0A0A]/20 bg-white/60 px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A] backdrop-blur-sm transition-colors hover:border-[#0A0A0A]/45"
             >
-              LinkedIn
+              {t('komt.linkedin')}
             </a>
           </div>
         </div>
@@ -105,6 +107,7 @@ function ComingSoon() {
 ───────────────────────────────────────────────────────────────────────── */
 function Contact() {
   const ref = useRef(null)
+  const { t } = useTaal()
   useReveal(ref)
 
   return (
@@ -113,14 +116,14 @@ function Contact() {
         <div className="reveal">
           <p className="flex items-center gap-2.5 font-mono-brand text-xs uppercase tracking-[0.18em] text-[#0A0A0A]/70">
             <FlowerMark className="h-3.5 w-3.5 text-[#0A0A0A]" />
-            Contact
+            {t('contact.label')}
           </p>
 
           <h2
             className="mt-6 font-body font-normal leading-[1.1] tracking-[-0.02em] text-[#0A0A0A]"
             style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.4rem)' }}
           >
-            Tell me what you are trying to fix
+            {t('contact.titel')}
           </h2>
         </div>
 
@@ -137,6 +140,7 @@ function Contact() {
 ───────────────────────────────────────────────────────────────────────── */
 function Footer() {
   const ref = useRef(null)
+  const { t } = useTaal()
   useReveal(ref)
 
   return (
@@ -160,7 +164,7 @@ function Footer() {
           {/* contact */}
           <div className="reveal flex flex-col gap-3">
             <span className="font-mono-brand text-xs uppercase tracking-[0.18em] text-white/40">
-              Contact
+              {t('footer.contact')}
             </span>
             <a
               href={`mailto:${EMAIL}`}
@@ -196,7 +200,7 @@ function Footer() {
               onClick={() => window.dispatchEvent(new Event(OPEN_EVENEMENT))}
               className="font-mono-brand text-xs text-white/40 underline-offset-4 transition-colors hover:text-white/70 hover:underline"
             >
-              Cookies
+              {t('footer.cookies')}
             </button>
             <span>© {JAAR} Ainova</span>
           </div>
@@ -210,7 +214,6 @@ function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <HeroPastel />
-      <Logos3 />
       <ComingSoon />
       <Contact />
       <Footer />
@@ -220,12 +223,12 @@ function HomePage() {
 
 export default function App() {
   return (
-    <>
+    <TaalProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/bedankt" element={<Bedankt />} />
       </Routes>
       <CookieBanner />
-    </>
+    </TaalProvider>
   )
 }

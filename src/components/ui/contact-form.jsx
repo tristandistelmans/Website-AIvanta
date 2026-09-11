@@ -1,5 +1,7 @@
 import { ArrowUpRight } from 'lucide-react'
 
+import { useTaal } from '@/lib/taal'
+
 /* ContactForm — Web3Forms
    ------------------------------------------------------------------
    Bewust een gewone HTML-POST zonder JavaScript: het formulier werkt
@@ -13,11 +15,13 @@ import { ArrowUpRight } from 'lucide-react'
 const ACCESS_KEY = '919ad771-f8a4-4eca-9e98-93cd9bbf438c'
 const BEDANKT_URL = 'https://ainova.be/bedankt'
 
+// De veldnamen blijven Engels: die komen in de mail terecht en moeten
+// niet meewisselen met de taal van de bezoeker.
 const VELDEN = [
-  { naam: 'name', label: 'Name', type: 'text', autoComplete: 'name', verplicht: true },
-  { naam: 'email', label: 'Email', type: 'email', autoComplete: 'email', verplicht: true },
-  { naam: 'phone', label: 'Phone', type: 'tel', autoComplete: 'tel', verplicht: true },
-  { naam: 'company', label: 'Company', type: 'text', autoComplete: 'organization', verplicht: false },
+  { naam: 'name', sleutel: 'formulier.naam', type: 'text', autoComplete: 'name', verplicht: true },
+  { naam: 'email', sleutel: 'formulier.email', type: 'email', autoComplete: 'email', verplicht: true },
+  { naam: 'phone', sleutel: 'formulier.telefoon', type: 'tel', autoComplete: 'tel', verplicht: true },
+  { naam: 'company', sleutel: 'formulier.bedrijf', type: 'text', autoComplete: 'organization', verplicht: false },
 ]
 
 const invoerStijl =
@@ -25,6 +29,8 @@ const invoerStijl =
   'placeholder-[#0A0A0A]/30 outline-none transition-colors focus:border-[#0A0A0A]/40'
 
 export default function ContactForm() {
+  const { t } = useTaal()
+
   return (
     <form
       action="https://api.web3forms.com/submit"
@@ -53,8 +59,8 @@ export default function ContactForm() {
               htmlFor={v.naam}
               className="mb-2 block font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A]/55"
             >
-              {v.label}
-              {!v.verplicht && <span className="ml-1.5 normal-case tracking-normal text-[#0A0A0A]/35">optional</span>}
+              {t(v.sleutel)}
+              {!v.verplicht && <span className="ml-1.5 normal-case tracking-normal text-[#0A0A0A]/35">{t('formulier.optioneel')}</span>}
             </label>
             <input
               id={v.naam}
@@ -73,7 +79,7 @@ export default function ContactForm() {
           htmlFor="message"
           className="mb-2 block font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A]/55"
         >
-          How can I help you?
+          {t('formulier.bericht')}
         </label>
         <textarea
           id="message"
@@ -88,7 +94,7 @@ export default function ContactForm() {
         type="submit"
         className="group mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-[#0A0A0A] px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
       >
-        Send
+        {t('formulier.verstuur')}
         <span className="relative flex h-4 w-4 items-center justify-center overflow-hidden">
           <ArrowUpRight
             size={16}
