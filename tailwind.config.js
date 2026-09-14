@@ -19,7 +19,7 @@ export default {
       },
       fontFamily: {
         heading: ['"Plus Jakarta Sans"', 'sans-serif'],
-        body:    ['"Outfit"', 'sans-serif'],
+        body:    ['"Inter"', 'system-ui', 'sans-serif'],
         drama:   ['"Cormorant Garamond"', 'serif'],
         mono:    ['"IBM Plex Mono"', 'monospace'],
       },

@@ -1,21 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Ainova">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
   <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&amp;display=swap');
-    </style>
+    <linearGradient id="grond" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#344234"/>
+      <stop offset="1" stop-color="#161d18"/>
+    </linearGradient>
+    <path id="blad" d="M50 3 C56.2 3 60.8 11 60.8 22 C60.8 33 55.8 43 50 50 C44.2 43 39.2 33 39.2 22 C39.2 11 43.8 3 50 3 Z"/>
   </defs>
-  <!-- Achtergrond -->
-  <rect width="512" height="512" fill="#2E4036"/>
-  <!-- Wordmark gecentreerd -->
-  <text
-    x="256"
-    y="296"
-    text-anchor="middle"
-    font-family="'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif"
-    font-weight="700"
-    font-size="88"
-    letter-spacing="-2"
-  >
-    <tspan fill="#CC5833">Ai</tspan><tspan fill="#F2F0E9">nova</tspan>
-  </text>
+  <rect width="100" height="100" rx="22.5" fill="url(#grond)"/>
+  <g fill="#fff" transform="translate(19 19) scale(0.62)">
+    <use href="#blad"/>
+    <use href="#blad" transform="rotate(60 50 50)"/>
+    <use href="#blad" transform="rotate(120 50 50)"/>
+    <use href="#blad" transform="rotate(180 50 50)"/>
+    <use href="#blad" transform="rotate(240 50 50)"/>
+    <use href="#blad" transform="rotate(300 50 50)"/>
+  </g>
 </svg>

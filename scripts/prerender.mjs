@@ -29,11 +29,14 @@ const ROUTES = [
       'og:url': 'https://ainova.be/bedankt',
       'twitter:title': 'Bedankt | Ainova',
       'twitter:description': 'Bedankt voor uw bericht. Ik neem binnen 24 uur contact op.',
+      // Een bedankpagina hoort niet in de zoekresultaten: hij is alleen
+      // zinvol na het versturen van het formulier.
+      robots: 'noindex, nofollow',
     },
     canonical: 'https://ainova.be/bedankt',
-    // Een bedankpagina hoort niet in de zoekresultaten: hij is alleen
-    // zinvol na het versturen van het formulier.
-    extraHead: '<meta name="robots" content="noindex, nofollow" />',
+    // De hero-foto staat niet op de bedankpagina; voorladen kost dan
+    // alleen bandbreedte.
+    verwijder: [/\s*<!-- De hero-foto is het grootste element[^>]*-->/, /\s*<link rel="preload" as="image"[^>]*\/>/g],
   },
 ]
 
@@ -65,6 +68,10 @@ for (const route of ROUTES) {
 
   if (route.canonical) {
     html = html.replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${route.canonical}" />`)
+  }
+
+  for (const patroon of route.verwijder ?? []) {
+    html = html.replace(patroon, '')
   }
 
   if (route.extraHead) {

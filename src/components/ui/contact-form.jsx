@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 import { useTaal } from '@/lib/taal'
 
@@ -10,7 +10,12 @@ import { useTaal } from '@/lib/taal'
    bezoeker daarna naar de bedankpagina.
 
    Het veld botcheck is een honeypot. Mensen zien het niet en laten het
-   leeg; bots vullen alles in en worden daarop geweigerd.              */
+   leeg; bots vullen alles in en worden daarop geweigerd.
+
+   Vormgeving: een glazen kaart zoals de voorbeeldschermen bij de use
+   cases. De labels zweven: ze staan in het veld zolang dat leeg is en
+   schuiven omhoog bij focus of invoer. Dat is pure CSS (peer +
+   placeholder-shown), dus ook dat werkt zonder JavaScript.            */
 
 const ACCESS_KEY = '919ad771-f8a4-4eca-9e98-93cd9bbf438c'
 const BEDANKT_URL = 'https://ainova.be/bedankt'
@@ -24,9 +29,15 @@ const VELDEN = [
   { naam: 'company', sleutel: 'formulier.bedrijf', type: 'text', autoComplete: 'organization', verplicht: false },
 ]
 
-const invoerStijl =
-  'w-full rounded-xl border border-black/10 bg-white px-4 py-3 font-body text-[#0A0A0A] ' +
-  'placeholder-[#0A0A0A]/30 outline-none transition-colors focus:border-[#0A0A0A]/40'
+const veldStijl =
+  'peer block w-full rounded-xl bg-white px-4 pb-2.5 pt-6 font-hero-sans text-[0.95rem] text-[#0A0A0A] ' +
+  'placeholder-transparent outline-none ring-1 ring-black/[0.08] transition-shadow duration-200 ' +
+  'hover:ring-black/20 focus:ring-2 focus:ring-[#0A0A0A]'
+
+const zweefLabel =
+  'pointer-events-none absolute left-4 top-2 font-hero-sans text-[0.7rem] font-medium text-[#0A0A0A]/50 transition-all duration-200 ' +
+  'peer-placeholder-shown:top-4 peer-placeholder-shown:text-[0.95rem] peer-placeholder-shown:font-normal ' +
+  'peer-focus:top-2 peer-focus:text-[0.7rem] peer-focus:font-medium peer-focus:text-[#0A0A0A]'
 
 export default function ContactForm() {
   const { t } = useTaal()
@@ -35,7 +46,7 @@ export default function ContactForm() {
     <form
       action="https://api.web3forms.com/submit"
       method="POST"
-      className="flex flex-col gap-5"
+      className="rounded-[1.5rem] bg-white/[0.9] p-5 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)] ring-1 ring-white/70 backdrop-blur-xl sm:p-7 md:p-8"
     >
       <input type="hidden" name="access_key" value={ACCESS_KEY} />
       <input type="hidden" name="redirect" value={BEDANKT_URL} />
@@ -52,59 +63,39 @@ export default function ContactForm() {
         aria-hidden="true"
       />
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {VELDEN.map((v) => (
-          <div key={v.naam} className={v.naam === 'company' ? 'sm:col-span-1' : ''}>
-            <label
-              htmlFor={v.naam}
-              className="mb-2 block font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A]/55"
-            >
-              {t(v.sleutel)}
-              {!v.verplicht && <span className="ml-1.5 normal-case tracking-normal text-[#0A0A0A]/35">{t('formulier.optioneel')}</span>}
-            </label>
+          <div key={v.naam} className="relative">
             <input
               id={v.naam}
               name={v.naam}
               type={v.type}
               autoComplete={v.autoComplete}
               required={v.verplicht}
-              className={invoerStijl}
+              placeholder=" "
+              className={veldStijl}
             />
+            <label htmlFor={v.naam} className={zweefLabel}>
+              {t(v.sleutel)}
+              {!v.verplicht && <span className="ml-1 font-normal text-[#0A0A0A]/35">· {t('formulier.optioneel')}</span>}
+            </label>
           </div>
         ))}
       </div>
 
-      <div>
-        <label
-          htmlFor="message"
-          className="mb-2 block font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A]/55"
-        >
+      <div className="relative mt-3">
+        <textarea id="message" name="message" rows={4} required placeholder=" " className={`${veldStijl} resize-none`} />
+        <label htmlFor="message" className={zweefLabel}>
           {t('formulier.bericht')}
         </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          required
-          className={`${invoerStijl} resize-none`}
-        />
       </div>
 
       <button
         type="submit"
-        className="group mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-[#0A0A0A] px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-white transition-transform hover:-translate-y-0.5"
+        className="group mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0A0A0A] px-6 py-4 font-hero-sans text-[0.95rem] font-medium text-white shadow-[0_12px_30px_-12px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-14px_rgba(0,0,0,0.7)]"
       >
         {t('formulier.verstuur')}
-        <span className="relative flex h-4 w-4 items-center justify-center overflow-hidden">
-          <ArrowUpRight
-            size={16}
-            className="absolute transition-transform duration-500 group-hover:-translate-y-5 group-hover:translate-x-4"
-          />
-          <ArrowUpRight
-            size={16}
-            className="absolute -translate-x-4 translate-y-5 transition-transform duration-500 group-hover:translate-x-0 group-hover:translate-y-0"
-          />
-        </span>
+        <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
       </button>
     </form>
   )

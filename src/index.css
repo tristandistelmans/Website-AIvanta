@@ -26,9 +26,9 @@ html {
 
 body {
   margin: 0;
-  background-color: #F2F0E9;
-  color: #1A1A1A;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FFFFFF;
+  color: #0A0A0A;
+  font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
 }
 
@@ -47,7 +47,34 @@ body {
 }
 
 .font-body {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Hero: scherpe display-serif voor de kop, neutrale grotesk eronder */
+.font-hero-serif {
+  font-family: 'Newsreader', 'Times New Roman', serif;
+  font-optical-sizing: auto;
+}
+
+.font-hero-sans {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Hero-foto: kleine WebP op mobiel, groot vanaf tablet. De gradiënt
+   staat eronder zolang de foto laadt. Het groot formaat wordt in
+   index.html voorgeladen, want dit is het grootste element in beeld. */
+.hero-foto-bron {
+  background-image:
+    url(/hero-boom-1200.webp),
+    linear-gradient(180deg, #8fa3b8 0%, #d9cfb4 45%, #6f7a45 75%, #3b4a2a 100%);
+}
+
+@media (min-width: 768px) {
+  .hero-foto-bron {
+    background-image:
+      url(/hero-boom.webp),
+      linear-gradient(180deg, #8fa3b8 0%, #d9cfb4 45%, #6f7a45 75%, #3b4a2a 100%);
+  }
 }
 
 /* ─── Magnetic Button ────────────────────────────────────────────── */
@@ -446,4 +473,81 @@ input[type="range"].roi-slider::-moz-range-track {
 
 @media (prefers-reduced-motion: reduce) {
   .slow-float { animation: none; }
+}
+
+/* ─── Logoband onderaan de hero ─────────────────────────────────── */
+@keyframes logostrip {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.logostrip-band {
+  animation: logostrip 55s linear infinite;
+}
+
+.logostrip-masker {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logostrip-band { animation: none; }
+}
+
+/* ─── Use cases: voorbeeldschermen ────────────────── */
+@keyframes usecase-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes usecase-groei {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes usecase-breed {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes usecase-verplaatst {
+  0%, 35% { transform: translateX(-110%); opacity: 0; }
+  70% { transform: translateX(0); opacity: 1; box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.35); }
+  100% { transform: none; box-shadow: none; }
+}
+
+.usecase-in {
+  animation: usecase-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.usecase-rij {
+  animation: usecase-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 180ms);
+}
+
+.usecase-staaf {
+  transform-origin: bottom;
+  animation: usecase-groei 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 60ms + 200ms);
+}
+
+.usecase-balk {
+  transform-origin: left;
+  animation: usecase-breed 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 350ms);
+}
+
+.usecase-rij.usecase-verplaatst {
+  animation: usecase-verplaatst 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .usecase-in,
+  .usecase-rij,
+  .usecase-staaf,
+  .usecase-balk,
+  .usecase-rij.usecase-verplaatst {
+    animation: none;
+  }
 }

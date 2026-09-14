@@ -6,67 +6,109 @@
          JS blijft alle tekst gewoon zichtbaar, ook voor crawlers. -->
     <script>document.documentElement.classList.add('js')</script>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary SEO -->
-    <title>Ainova — Uw AI-groeipartner voor B2B-bedrijven</title>
-    <meta name="description" content="AI-systemen die leads genereren, deals sluiten en de dagelijkse werking opschalen. Tristan Distelmans, Hasselt." />
-    <meta name="keywords" content="AI-groeipartner, AI-systemen, leadgeneratie, AI-automatisering, B2B, salesautomatisering, CRM-automatisering, Hasselt, Limburg, Ainova" />
-    <meta name="author" content="Tristan Distelmans" />
-    <link rel="canonical" href="https://ainova.be" />
+    <!-- Icoon in het browsertabblad, op het beginscherm en in zoekresultaten -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1b231d" />
 
-    <!-- Open Graph (sociale media previews) -->
+    <!-- Primary SEO -->
+    <title>Ainova | Uw AI-groeipartner voor meer omzet en efficiëntie</title>
+    <meta name="description" content="Ainova bouwt AI-systemen voor B2B-bedrijven: leadgeneratie, lead-opvolging, CRM-automatisering, orderverwerking en AI-agents. Uit Hasselt, voor heel België." />
+    <meta name="author" content="Tristan Distelmans" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://ainova.be/" />
+
+    <!-- Open Graph (voorbeeld bij delen op LinkedIn, WhatsApp, Slack, ...) -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ainova.be" />
-    <meta property="og:title" content="Ainova — Uw AI-groeipartner voor B2B-bedrijven" />
-    <meta property="og:description" content="AI-systemen die leads genereren, deals sluiten en de dagelijkse werking opschalen. Tristan Distelmans, Hasselt." />
+    <meta property="og:url" content="https://ainova.be/" />
+    <meta property="og:title" content="Ainova | Uw AI-groeipartner voor meer omzet en efficiëntie" />
+    <meta property="og:description" content="Ainova bouwt AI-systemen voor B2B-bedrijven: leadgeneratie, lead-opvolging, CRM-automatisering, orderverwerking en AI-agents. Uit Hasselt, voor heel België." />
+    <meta property="og:image" content="https://ainova.be/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ainova: uw AI-groeipartner voor meer omzet en efficiëntie" />
     <meta property="og:locale" content="nl_BE" />
+    <meta property="og:locale:alternate" content="en_GB" />
     <meta property="og:site_name" content="Ainova" />
 
-    <!-- Twitter Card -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ainova — Uw AI-groeipartner voor B2B-bedrijven" />
-    <meta name="twitter:description" content="AI-systemen die leads genereren, deals sluiten en de dagelijkse werking opschalen. Tristan Distelmans, Hasselt." />
+    <meta name="twitter:title" content="Ainova | Uw AI-groeipartner voor meer omzet en efficiëntie" />
+    <meta name="twitter:description" content="Ainova bouwt AI-systemen voor B2B-bedrijven: leadgeneratie, lead-opvolging, CRM-automatisering, orderverwerking en AI-agents. Uit Hasselt, voor heel België." />
+    <meta name="twitter:image" content="https://ainova.be/og-image.jpg" />
 
-    <!-- Structured Data — Local Business -->
+    <!-- De hero-foto is het grootste element bij het laden: voorladen -->
+    <link rel="preload" as="image" href="/hero-boom.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/hero-boom-1200.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high" />
+
+    <!-- Gestructureerde data: bedrijf, oprichter, website en diensten -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Ainova",
-      "description": "AI-systemen die leads genereren, deals sluiten en de dagelijkse werking opschalen, voor B2B-bedrijven in Belgie.",
-      "url": "https://ainova.be",
-      "email": "tristan@ainova.be",
-      "telephone": "+32474507478",
-      "vatID": "BE 1009.167.610",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Prinsenstraat 47",
-        "postalCode": "3500",
-        "addressLocality": "Hasselt",
-        "addressCountry": "BE"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "België"
-      },
-      "inLanguage": "nl",
-      "founder": {
-        "@type": "Person",
-        "name": "Tristan Distelmans"
-      },
-      "serviceType": [
-        "AI-workflows",
-        "AI-leadgeneratie",
-        "E-mailmarketing",
-        "CRM- en salesautomatisering",
-        "Dashboards",
-        "AI-contentgeneratie"
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://ainova.be/#bedrijf",
+          "name": "Ainova",
+          "url": "https://ainova.be/",
+          "logo": "https://ainova.be/icon-512.png",
+          "image": "https://ainova.be/og-image.jpg",
+          "description": "Ainova bouwt AI-systemen voor B2B-bedrijven die leads genereren, deals sluiten en de dagelijkse werking opschalen.",
+          "slogan": "Uw AI-groeipartner voor meer omzet en efficiëntie",
+          "email": "tristan@ainova.be",
+          "telephone": "+32474507478",
+          "vatID": "BE1009167610",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Prinsenstraat 47",
+            "postalCode": "3500",
+            "addressLocality": "Hasselt",
+            "addressRegion": "Limburg",
+            "addressCountry": "BE"
+          },
+          "areaServed": { "@type": "Country", "name": "België" },
+          "knowsLanguage": ["nl", "en"],
+          "founder": { "@id": "https://ainova.be/#tristan" },
+          "sameAs": ["https://www.linkedin.com/in/tristan-distelmans-423398238"],
+          "knowsAbout": ["Artificiële intelligentie", "AI-agents", "Salesautomatisering", "Leadgeneratie", "CRM-automatisering", "Procesautomatisering"],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "AI-oplossingen",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Leadgeneratie met AI" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatische lead-opvolging" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM- en salesautomatisering" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sales intelligence dashboard" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Verwerking van verkooporders" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Offertes op maat met AI" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom AI-agents" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Slimme inbox" } }
+            ]
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://ainova.be/#tristan",
+          "name": "Tristan Distelmans",
+          "jobTitle": "Oprichter",
+          "worksFor": { "@id": "https://ainova.be/#bedrijf" },
+          "sameAs": ["https://www.linkedin.com/in/tristan-distelmans-423398238"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ainova.be/#website",
+          "url": "https://ainova.be/",
+          "name": "Ainova",
+          "inLanguage": "nl-BE",
+          "publisher": { "@id": "https://ainova.be/#bedrijf" }
+        }
       ]
     }
     </script>
-
 
     <!-- Consent Mode v2 — moet staan VOORDAT Google Tag Manager laadt,
          anders kan GTM al tags vuren voordat de standaardtoestemming
@@ -112,10 +154,10 @@
     })(window,document,'script','dataLayer','GTM-5TVCMXDC');</script>
     <!-- End Google Tag Manager -->
 
-    <!-- Organic Tech Fonts -->
+    <!-- Fonts: alleen wat de site echt gebruikt -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
