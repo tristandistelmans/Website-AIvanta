@@ -26,14 +26,14 @@ const ROUTES = [
       description: 'Bedankt voor uw bericht. Ik neem binnen 24 uur contact op.',
       'og:title': 'Bedankt | Ainova',
       'og:description': 'Bedankt voor uw bericht. Ik neem binnen 24 uur contact op.',
-      'og:url': 'https://ainova.be/bedankt',
+      'og:url': 'https://www.ainova.be/bedankt',
       'twitter:title': 'Bedankt | Ainova',
       'twitter:description': 'Bedankt voor uw bericht. Ik neem binnen 24 uur contact op.',
       // Een bedankpagina hoort niet in de zoekresultaten: hij is alleen
       // zinvol na het versturen van het formulier.
       robots: 'noindex, nofollow',
     },
-    canonical: 'https://ainova.be/bedankt',
+    canonical: 'https://www.ainova.be/bedankt',
     // De hero-foto staat niet op de bedankpagina; voorladen kost dan
     // alleen bandbreedte.
     verwijder: [/\s*<!-- De hero-foto is het grootste element[^>]*-->/, /\s*<link rel="preload" as="image"[^>]*\/>/g],
