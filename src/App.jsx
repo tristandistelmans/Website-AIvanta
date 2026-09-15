@@ -47,8 +47,8 @@ function Contact() {
 
   return (
     <section ref={ref} id="contact" className="bg-[#2f3a2e]">
-      {/* schermvullend, zoals de hero: volle breedte en minstens de hoogte van het scherm */}
-      <div className="relative flex min-h-[100svh] items-center overflow-hidden">
+      {/* volle breedte zoals de hero, maar niet hoger dan de inhoud nodig heeft */}
+      <div className="relative overflow-hidden">
         {/* dezelfde foto als de hero, iets donkerder links voor de witte tekst */}
         <div
           className="absolute inset-0 bg-cover"
@@ -67,11 +67,11 @@ function Contact() {
           }}
         />
 
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-6 py-20 md:px-10 md:py-24 lg:grid-cols-[1fr_1fr] lg:gap-16">
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-6 py-12 md:px-10 md:py-14 lg:grid-cols-[1fr_1.15fr] lg:gap-12 xl:grid-cols-[0.75fr_1.25fr]">
           <div className="reveal flex items-center text-white">
             <h2
               className="font-hero-serif font-normal leading-[1.02] tracking-[-0.025em]"
-              style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', textShadow: '0 2px 24px rgba(0,0,0,0.3)' }}
+              style={{ fontSize: 'clamp(2.25rem, 3.8vw, 3.5rem)', textShadow: '0 2px 24px rgba(0,0,0,0.3)' }}
             >
               {t('contact.titel')}
             </h2>
