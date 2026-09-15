@@ -11,7 +11,6 @@ import TaalProvider from '@/components/ui/taal-provider'
 import { useTaal } from '@/lib/taal'
 import ContactForm from '@/components/ui/contact-form'
 import Bedankt from '@/pages/bedankt'
-import CookieBanner, { OPEN_EVENEMENT } from '@/components/ui/cookie-banner'
 import tristanPortret from './assets/tristan-portret.webp'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -47,8 +46,9 @@ function Contact() {
   useReveal(ref)
 
   return (
-    <section ref={ref} id="contact" className="scroll-mt-6 bg-white px-6 pb-16 md:px-10 md:pb-24">
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#2f3a2e]">
+    <section ref={ref} id="contact" className="bg-[#2f3a2e]">
+      {/* schermvullend, zoals de hero: volle breedte en minstens de hoogte van het scherm */}
+      <div className="relative flex min-h-[100svh] items-center overflow-hidden">
         {/* dezelfde foto als de hero, iets donkerder links voor de witte tekst */}
         <div
           className="absolute inset-0 bg-cover"
@@ -67,7 +67,7 @@ function Contact() {
           }}
         />
 
-        <div className="relative grid gap-12 px-5 py-12 sm:px-8 md:px-12 md:py-16 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:px-16 lg:py-20">
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-6 py-20 md:px-10 md:py-24 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <div className="reveal flex items-center text-white">
             <h2
               className="font-hero-serif font-normal leading-[1.02] tracking-[-0.025em]"
@@ -95,8 +95,8 @@ function Footer() {
   useReveal(ref)
 
   return (
-    <footer ref={ref} className="bg-white px-6 pb-8 md:px-10">
-      <div className="mx-auto max-w-7xl rounded-[2rem] bg-[#0A0A0A] px-6 py-10 sm:px-10 md:px-14 md:py-14">
+    <footer ref={ref} className="bg-[#0A0A0A]">
+      <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 md:px-10 md:pb-12 md:pt-20">
         <div className="flex flex-col gap-12 md:flex-row md:items-end md:justify-between md:gap-16">
           {/* wie: portret op een sfeerachtergrond, zoals de kaarten bij de use cases */}
           <div className="reveal flex flex-col gap-6 sm:flex-row sm:items-end">
@@ -153,16 +153,7 @@ function Footer() {
           <span>
             Ainova · {ADRES} · BTW {BTW}
           </span>
-          <div className="flex items-center gap-5">
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new Event(OPEN_EVENEMENT))}
-              className="text-xs text-white/40 underline-offset-4 transition-colors hover:text-white/70 hover:underline"
-            >
-              {t('footer.cookies')}
-            </button>
-            <span>© {JAAR} Ainova</span>
-          </div>
+          <span>© {JAAR} Ainova</span>
         </div>
       </div>
     </footer>
@@ -190,7 +181,6 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/bedankt" element={<Bedankt />} />
       </Routes>
-      <CookieBanner />
     </TaalProvider>
   )
 }

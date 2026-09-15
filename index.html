@@ -112,12 +112,9 @@
 
     <!-- Consent Mode v2 — moet staan VOORDAT Google Tag Manager laadt,
          anders kan GTM al tags vuren voordat de standaardtoestemming
-         gezet is. Alles staat daarom op 'denied' tot de keuze uit de
-         banner binnenkomt; wat de bezoeker eerder koos, wordt hier
-         meteen hersteld.
-
-         wait_for_update geeft de banner een halve seconde om een bewaarde
-         keuze door te geven voordat Google metingen wegschrijft. -->
+         gezet is. Er is geen cookiebanner: alle toestemming staat vast op
+         'denied'. Google Tag Manager laadt gewoon, maar tags erin zetten
+         geen advertentie- of analysecookies. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -126,27 +123,13 @@
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
-        analytics_storage: 'denied',
-        wait_for_update: 500
+        analytics_storage: 'denied'
       });
-
-      try {
-        if (localStorage.getItem('ainova-cookies') === 'granted') {
-          gtag('consent', 'update', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-            analytics_storage: 'granted'
-          });
-        }
-      } catch (e) {
-        // localStorage kan geblokkeerd zijn; dan blijft alles geweigerd.
-      }
     </script>
 
     <!-- Google Tag Manager — staat bewust NA de consent-code hierboven.
          Andersom zou GTM al kunnen vuren voordat de standaardtoestemming
-         gezet is, en dan werkt de cookietoestemming niet meer. -->
+         gezet is. -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=

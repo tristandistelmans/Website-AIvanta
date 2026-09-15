@@ -170,19 +170,12 @@ export const TEKSTEN = {
       bericht: 'Waar kan ik u mee helpen?',
       verstuur: 'Verstuur',
     },
-    footer: { contact: 'Contact', cookies: 'Cookies', rol: 'Oprichter van Ainova', volgen: 'Volg mij op LinkedIn' },
+    footer: { contact: 'Contact', rol: 'Oprichter van Ainova', volgen: 'Volg mij op LinkedIn' },
     bedankt: {
       label: 'Bericht ontvangen',
       titel: 'Bedankt voor uw bericht',
       tekst: 'Ik lees elk bericht zelf en neem binnen 24 uur contact met u op.',
       terug: 'Terug naar de homepage',
-    },
-    cookies: {
-      label: 'Cookies',
-      tekst:
-        'Ik gebruik cookies van Google Ads om te zien welke advertenties tot een aanvraag leiden. Er wordt niets bewaard tot u akkoord gaat, en de site werkt hoe dan ook.',
-      accepteer: 'Accepteren',
-      weiger: 'Weigeren',
     },
   },
 
@@ -346,19 +339,12 @@ export const TEKSTEN = {
       bericht: 'How can I help you?',
       verstuur: 'Send',
     },
-    footer: { contact: 'Contact', cookies: 'Cookies', rol: 'Founder of Ainova', volgen: 'Follow me on LinkedIn' },
+    footer: { contact: 'Contact', rol: 'Founder of Ainova', volgen: 'Follow me on LinkedIn' },
     bedankt: {
       label: 'Message received',
       titel: 'Thanks for reaching out',
       tekst: 'I read every message myself and will get back to you within 24 hours.',
       terug: 'Back to homepage',
-    },
-    cookies: {
-      label: 'Cookies',
-      tekst:
-        'I use Google Ads cookies to see which ads lead to a contact request. Nothing is stored until you agree, and the site works either way.',
-      accepteer: 'Accept',
-      weiger: 'Decline',
     },
   },
 }
