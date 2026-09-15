@@ -47,7 +47,7 @@ const SFEREN = ['dageraad', 'mist', 'schemer', 'mos']
 function Kaart({ children, className = '' }) {
   return (
     <div
-      className={`usecase-in w-[min(92%,26rem)] rounded-2xl bg-white/[0.88] p-5 font-hero-sans text-[#0A0A0A] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.55)] ring-1 ring-white/70 backdrop-blur-xl md:p-6 ${className}`}
+      className={`usecase-in w-[min(95%,26rem)] rounded-2xl bg-white/[0.88] p-4 font-hero-sans text-[#0A0A0A] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.55)] ring-1 ring-white/70 backdrop-blur-xl sm:p-5 md:p-6 ${className}`}
     >
       {children}
     </div>
@@ -95,7 +95,7 @@ function DemoLeads({ d }) {
       <p className="mt-4 text-[0.72rem] text-[#0A0A0A]/50">{d.filter}</p>
       <div className="mt-3 space-y-2">
         {d.rijen.map(([naam, info, score], i) => (
-          <Rij key={naam} i={i} className="flex items-center gap-3 rounded-xl bg-white px-3 py-2.5 ring-1 ring-black/[0.05]">
+          <Rij key={naam} i={i} className="flex items-center gap-2.5 rounded-xl bg-white px-2.5 py-2.5 ring-1 ring-black/[0.05] sm:gap-3 sm:px-3">
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0A0A0A]/[0.06] text-xs font-medium">
               {naam.charAt(0)}
             </span>
@@ -103,9 +103,10 @@ function DemoLeads({ d }) {
               <span className="block truncate text-sm font-medium">{naam}</span>
               <span className="block truncate text-[0.7rem] text-[#0A0A0A]/45">{info}</span>
             </span>
-            <span className="w-14 shrink-0">
+            {/* op smalle kaarten alleen het percentage, zodat de namen leesbaar blijven */}
+            <span className="shrink-0 sm:w-14">
               <span className="block text-right text-xs font-medium tabular-nums">{score}%</span>
-              <span className="mt-1 block h-1 overflow-hidden rounded-full bg-black/[0.06]">
+              <span className="mt-1 hidden h-1 overflow-hidden rounded-full bg-black/[0.06] sm:block">
                 <span className="usecase-balk block h-full rounded-full bg-[#0A0A0A]" style={{ width: `${score}%`, '--i': i }} />
               </span>
             </span>
@@ -370,7 +371,7 @@ function Voorbeeld({ sleutel, item, label, sfeer = 'dageraad' }) {
 
 function UseCaseKaart({ sleutel, item, label, sfeer }) {
   return (
-    <article className="flex flex-col rounded-[1.75rem] bg-[#F5F5F2] p-2 ring-1 ring-black/[0.04]">
+    <article className="flex w-full flex-col rounded-[1.75rem] bg-[#F5F5F2] p-2 ring-1 ring-black/[0.04]">
       <Voorbeeld sleutel={sleutel} item={item} label={label} sfeer={sfeer} />
 
       <div className="flex flex-1 flex-col px-4 pb-6 pt-6 md:px-6 md:pb-7">
@@ -492,15 +493,17 @@ export default function UseCases() {
             className="uc-op mt-6 md:mt-8"
           >
             {/* altijd in de HTML; een animatie start opnieuw zodra `hidden` wegvalt */}
-            <div className="usecase-in grid gap-5 md:grid-cols-2 md:gap-6">
+            {/* mobiel: kaarten naast elkaar om horizontaal door te swipen; vanaf md een raster */}
+            <div className="usecase-in -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden">
               {categorie.items.map((sleutel, i) => (
-                <UseCaseKaart
-                  key={sleutel}
-                  sleutel={sleutel}
-                  item={items[sleutel]}
-                  label={t('usecases.voorbeeld')}
-                  sfeer={SFEREN[(index * 2 + i) % SFEREN.length]}
-                />
+                <div key={sleutel} className="flex w-[86%] shrink-0 snap-start md:w-auto">
+                  <UseCaseKaart
+                    sleutel={sleutel}
+                    item={items[sleutel]}
+                    label={t('usecases.voorbeeld')}
+                    sfeer={SFEREN[(index * 2 + i) % SFEREN.length]}
+                  />
+                </div>
               ))}
             </div>
           </div>

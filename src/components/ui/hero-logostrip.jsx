@@ -27,8 +27,8 @@ const siMicrosoft = {
 
 const KLANTEN = [
   { naam: 'MediaTales', src: '/logos/klanten/mediatales.png', className: 'h-9' },
-  { naam: 'Vinkmans', src: '/logos/klanten/vinkmans.png', className: 'h-[1.05rem]' },
   { naam: 'paddle.be', src: '/logos/klanten/paddle.png', className: 'h-[1.35rem]' },
+  { naam: 'Billington Structures', src: '/logos/klanten/billington-structures.svg', className: 'h-7' },
 ]
 
 const TOOLS = [siClaude, siOpenai, siGooglegemini, siHubspot, siGooglecloud, siMicrosoft, siElevenlabs, siPerplexity, siN8n]

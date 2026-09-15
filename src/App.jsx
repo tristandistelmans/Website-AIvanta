@@ -101,7 +101,7 @@ function Footer() {
           {/* wie: portret op een sfeerachtergrond, zoals de kaarten bij de use cases */}
           <div className="reveal flex flex-col gap-6 sm:flex-row sm:items-end">
             <div className="relative h-56 w-44 shrink-0 overflow-hidden rounded-[1.25rem] bg-[#2f3a2e] ring-1 ring-white/10 md:h-64 md:w-52">
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/sfeer/dageraad.webp)' }} />
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/sfeer/schemer.webp)' }} />
               {/* h-[92%] + object-bottom: het volledige hoofd past, met wat lucht erboven */}
               <img
                 src={tristanPortret}
