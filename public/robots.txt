@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ainova.be/sitemap.xml
+Sitemap: https://ainova.be/sitemap.xml

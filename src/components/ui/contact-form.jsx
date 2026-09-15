@@ -18,7 +18,7 @@ import { useTaal } from '@/lib/taal'
    placeholder-shown), dus ook dat werkt zonder JavaScript.            */
 
 const ACCESS_KEY = '919ad771-f8a4-4eca-9e98-93cd9bbf438c'
-const BEDANKT_URL = 'https://www.ainova.be/bedankt'
+const BEDANKT_URL = 'https://ainova.be/bedankt'
 
 // De veldnamen blijven Engels: die komen in de mail terecht en moeten
 // niet meewisselen met de taal van de bezoeker.
