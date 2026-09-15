@@ -46,40 +46,38 @@ function Contact() {
   useReveal(ref)
 
   return (
-    <section ref={ref} id="contact" className="bg-[#2f3a2e]">
-      {/* volle breedte zoals de hero, maar niet hoger dan de inhoud nodig heeft */}
-      <div className="relative overflow-hidden">
-        {/* dezelfde foto als de hero, iets donkerder links voor de witte tekst */}
-        <div
-          className="absolute inset-0 bg-cover"
-          style={{
-            backgroundImage: 'url(/hero-boom-1200.webp)',
-            backgroundPosition: '40% 60%',
-            filter: 'brightness(1.05) contrast(0.85) saturate(0.85)',
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(180deg, rgba(120,138,178,0.30) 0%, rgba(10,14,10,0) 40%, rgba(10,14,10,0.35) 100%),' +
-              'linear-gradient(90deg, rgba(10,14,10,0.55) 0%, rgba(10,14,10,0.25) 55%, rgba(10,14,10,0.10) 100%)',
-          }}
-        />
+    <section ref={ref} id="contact" className="relative overflow-hidden bg-[#2f3a2e]">
+      {/* zelfde opbouw als de oorspronkelijke kaart, maar over de volle breedte */}
+      {/* dezelfde foto als de hero, iets donkerder links voor de witte tekst */}
+      <div
+        className="absolute inset-0 bg-cover"
+        style={{
+          backgroundImage: 'url(/hero-boom-1200.webp)',
+          backgroundPosition: '40% 60%',
+          filter: 'brightness(1.05) contrast(0.85) saturate(0.85)',
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(120,138,178,0.30) 0%, rgba(10,14,10,0) 40%, rgba(10,14,10,0.35) 100%),' +
+            'linear-gradient(90deg, rgba(10,14,10,0.55) 0%, rgba(10,14,10,0.25) 55%, rgba(10,14,10,0.10) 100%)',
+        }}
+      />
 
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-6 py-12 md:px-10 md:py-14 lg:grid-cols-[1fr_1.15fr] lg:gap-12 xl:grid-cols-[0.75fr_1.25fr]">
-          <div className="reveal flex items-center text-white">
-            <h2
-              className="font-hero-serif font-normal leading-[1.02] tracking-[-0.025em]"
-              style={{ fontSize: 'clamp(2.25rem, 3.8vw, 3.5rem)', textShadow: '0 2px 24px rgba(0,0,0,0.3)' }}
-            >
-              {t('contact.titel')}
-            </h2>
-          </div>
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-8 md:px-12 md:py-16 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:px-16 lg:py-20">
+        <div className="reveal flex items-center text-white">
+          <h2
+            className="font-hero-serif font-normal leading-[1.02] tracking-[-0.025em]"
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', textShadow: '0 2px 24px rgba(0,0,0,0.3)' }}
+          >
+            {t('contact.titel')}
+          </h2>
+        </div>
 
-          <div className="reveal">
-            <ContactForm />
-          </div>
+        <div className="reveal">
+          <ContactForm />
         </div>
       </div>
     </section>
