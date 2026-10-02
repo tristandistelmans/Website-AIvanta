@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import { FlowerMark } from '@/components/ui/flower'
+import { BoomMerk } from '@/components/ui/merk'
 import { meldFormulierVerstuurd } from '@/lib/datalayer'
 import { useTaal } from '@/lib/taal'
 
@@ -37,7 +37,7 @@ export default function Bedankt() {
 
       <div className="relative w-full max-w-xl text-center">
         <p className="flex items-center justify-center gap-2.5 font-mono-brand text-xs uppercase tracking-[0.18em] text-[#0A0A0A]/70">
-          <FlowerMark className="h-3.5 w-3.5 text-[#0A0A0A]" />
+          <BoomMerk className="h-4 w-4 text-[#0A0A0A]" />
           {t('bedankt.label')}
         </p>
 

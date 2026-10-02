@@ -15,7 +15,7 @@ import {
   TriangleAlert,
 } from 'lucide-react'
 
-import { FlowerMark } from '@/components/ui/flower'
+import { BoomMerk } from '@/components/ui/merk'
 import { useTaal } from '@/lib/taal'
 
 /* UseCases
@@ -284,7 +284,7 @@ function DemoOfferte({ d }) {
           <span className="block font-mono-brand text-[0.66rem] uppercase tracking-[0.12em] text-[#0A0A0A]/45">{d.kop}</span>
           <span className="mt-1 block font-hero-serif text-2xl tracking-tight">{d.klant}</span>
         </span>
-        <FlowerMark className="h-5 w-5 text-[#0A0A0A]" />
+        <BoomMerk className="h-5 w-5 text-[#0A0A0A]" />
       </div>
 
       <div className="mt-5 space-y-2.5 border-t border-black/[0.06] pt-4">
