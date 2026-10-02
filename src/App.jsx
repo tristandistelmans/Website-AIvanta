@@ -11,7 +11,7 @@ import TaalProvider from '@/components/ui/taal-provider'
 import { useTaal } from '@/lib/taal'
 import ContactForm from '@/components/ui/contact-form'
 import Bedankt from '@/pages/bedankt'
-import tristanPortret from './assets/tristan-portret.webp'
+import tristanPortret from './assets/tristan-portret-sfeer.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -20,7 +20,7 @@ const EMAIL = 'tristan@ainova.be'
 const GSM = '0474 50 74 78'
 const GSM_HREF = 'tel:+32474507478'
 const BTW = 'BE 1009.167.610'
-const ADRES = 'Prinsenstraat 47, 3500 Hasselt'
+const KANTOOR = 'Corda Incubator, Kempische Steenweg 303, 3500 Hasselt'
 const JAAR = 2026
 
 /* Zachte fade-in, gescoped op een sectie. */
@@ -87,6 +87,9 @@ function Contact() {
 /* ─────────────────────────────────────────────────────────────────────────
    FOOTER — foto, contact en de wettelijk verplichte ondernemersgegevens
 ───────────────────────────────────────────────────────────────────────── */
+const FOOTER_GROOT = 'block font-hero-serif text-2xl leading-tight tracking-[-0.02em] text-white md:text-3xl'
+const FOOTER_KLEIN = 'font-hero-sans text-sm text-white/55'
+
 function Footer() {
   const ref = useRef(null)
   const { t } = useTaal()
@@ -96,60 +99,51 @@ function Footer() {
     <footer ref={ref} className="bg-[#0A0A0A]">
       <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 md:px-10 md:pb-12 md:pt-20">
         <div className="flex flex-col gap-12 md:flex-row md:items-end md:justify-between md:gap-16">
-          {/* wie: portret op een sfeerachtergrond, zoals de kaarten bij de use cases */}
+          {/* wie: portret op een vervaagde uitsnede van de hero-foto, zelfde ochtendlicht */}
           <div className="reveal flex flex-col gap-6 sm:flex-row sm:items-end">
             <div className="relative h-56 w-44 shrink-0 overflow-hidden rounded-[1.25rem] bg-[#2f3a2e] ring-1 ring-white/10 md:h-64 md:w-52">
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/sfeer/schemer.webp)' }} />
-              {/* h-[92%] + object-bottom: het volledige hoofd past, met wat lucht erboven */}
               <img
                 src={tristanPortret}
                 alt="Tristan Distelmans, oprichter van Ainova"
-                width={680}
-                height={801}
+                width={493}
+                height={620}
                 loading="lazy"
-                className="absolute inset-x-0 bottom-0 h-[92%] w-full object-cover object-top"
+                className="absolute inset-0 h-full w-full object-cover object-top"
               />
               <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
 
             <div>
-              <p className="font-hero-serif text-3xl leading-tight tracking-[-0.02em] text-white md:text-4xl">
-                Tristan Distelmans
-              </p>
-              <p className="mt-1.5 font-hero-sans text-sm text-white/55">{t('footer.rol')}</p>
+              <p className={FOOTER_GROOT}>Tristan Distelmans</p>
+              <p className={`mt-1.5 ${FOOTER_KLEIN}`}>{t('footer.rol')}</p>
+            </div>
+          </div>
+
+          {/* contact: zelfde opbouw als naam en rol, zodat beide blokken op één lijn staan */}
+          <div className="reveal md:text-right">
+            <a href={`mailto:${EMAIL}`} className={`${FOOTER_GROOT} transition-colors hover:text-white/60`}>
+              {EMAIL}
+            </a>
+            <p className={`mt-1.5 ${FOOTER_KLEIN}`}>
+              <a href={GSM_HREF} className="transition-colors hover:text-white">{GSM}</a>
+              <span className="mx-2 text-white/25">·</span>
               <a
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 font-hero-sans text-sm text-white ring-1 ring-white/15 transition-colors hover:bg-white/20"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
               >
-                <Linkedin size={14} />
-                {t('footer.volgen')}
+                <Linkedin size={13} />
+                LinkedIn
               </a>
-            </div>
-          </div>
-
-          {/* contact */}
-          <div className="reveal flex flex-col gap-2 md:items-end md:text-right">
-            <span className="font-mono-brand text-xs uppercase tracking-[0.18em] text-white/40">
-              {t('footer.contact')}
-            </span>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="mt-1 font-hero-serif text-2xl tracking-[-0.01em] text-white transition-colors hover:text-white/60 md:text-3xl"
-            >
-              {EMAIL}
-            </a>
-            <a href={GSM_HREF} className="font-hero-sans text-base text-white/65 transition-colors hover:text-white">
-              {GSM}
-            </a>
+            </p>
           </div>
         </div>
 
         {/* wettelijke gegevens */}
-        <div className="mt-12 flex flex-col gap-2 border-t border-dashed border-white/15 pt-7 font-hero-sans text-xs text-white/40 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-dashed border-white/15 pt-7 font-hero-sans text-sm text-white/40 md:flex-row md:items-center md:justify-between">
           <span>
-            Ainova · {ADRES} · BTW {BTW}
+            Ainova · BTW {BTW} · Kantoor: {KANTOOR}
           </span>
           <span>© {JAAR} Ainova</span>
         </div>

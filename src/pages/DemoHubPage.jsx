@@ -44,9 +44,9 @@ export default function DemoHubPage() {
             </span>
           </div>
           <p className="border-t border-cream/10 pt-4 font-body text-cream/40 text-xs text-center md:text-left leading-relaxed">
-            Ainova — Prinsenstraat 47, 3500 Hasselt
+            Ainova — Ondernemingsnummer BE 1009.167.610
             <span className="mx-2 text-cream/20">·</span>
-            Ondernemingsnummer BE 1009.167.610
+            Kantoor: Corda Incubator, Kempische Steenweg 303, 3500 Hasselt
           </p>
         </div>
       </footer>
