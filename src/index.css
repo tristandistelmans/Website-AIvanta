@@ -57,7 +57,7 @@ body {
 }
 
 .font-hero-sans {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
 }
 
 /* Hero-foto: kleine WebP op mobiel, groot vanaf tablet. De gradiënt
@@ -482,12 +482,7 @@ input[type="range"].roi-slider::-moz-range-track {
 }
 
 .logostrip-band {
-  animation: logostrip 55s linear infinite;
-}
-
-.logostrip-masker {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  animation: logostrip 50s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -9,14 +9,10 @@ import { useTaal } from '@/lib/taal'
 
 /* HeroLandschap
    ------------------------------------------------------------------
-   Schermvullende foto als achtergrond, gecentreerde witte tekst met een
-   grote serif-kop. De foto staat als WebP in public/ (1200 px voor
-   mobiel, 2400 px vanaf tablet, zie .hero-foto-bron in index.css);
-   zolang die niet geladen is, toont de sectie een gradiënt in dezelfde
-   tinten.
-
-   Foto: Simon Wilkes, Unsplash-licentie
-   https://unsplash.com/photos/S297j2CsdlM                            */
+   Effen boomschaduw (#1A1A12) met een zachte veldgroene gloed en een
+   heel fijn lijnenraster dat naar de randen uitdooft. Geen foto: rustig
+   en neutraal, zoals de hero van Wonka. Koppen in Newsreader, tekst in
+   gebroken wit en zand uit de huisstijl.                              */
 
 const EMAIL = 'tristan@ainova.be'
 
@@ -26,52 +22,42 @@ export default function HeroLandschap() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo('.hero-foto',
-        { scale: 1.08 },
-        { scale: 1, duration: 2.4, ease: 'power2.out' }
-      )
       gsap.fromTo('.hero-op',
         { y: 22, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.2 }
+        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.1 }
       )
     }, ref)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={ref} className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#3b4a3a]">
-      {/* foto — met fallback-gradiënt eronder */}
+    <section ref={ref} className="relative flex min-h-[88svh] flex-col overflow-hidden bg-[#1A1A12]">
+      {/* twee traag drijvende gloeivlekken: veldgroen en een vleugje ochtendgoud */}
       <div
-        className="hero-foto hero-foto-bron pointer-events-none absolute inset-0 bg-cover bg-center"
-        style={{
-          filter: 'brightness(1.12) contrast(0.82) saturate(0.88)',
-        }}
+        className="hero-glow-a pointer-events-none absolute -inset-[20%]"
+        style={{ background: 'radial-gradient(ellipse 45% 40% at 45% 40%, rgba(74,81,48,0.6) 0%, rgba(74,81,48,0) 70%)' }}
+      />
+      <div
+        className="hero-glow-b pointer-events-none absolute -inset-[20%]"
+        style={{ background: 'radial-gradient(ellipse 35% 30% at 60% 70%, rgba(201,160,99,0.13) 0%, rgba(201,160,99,0) 70%)' }}
       />
 
-      {/* zachte waas: blauwe lucht bovenaan, warm licht in de mist */}
+      {/* fijn raster, uitgedoofd naar de randen */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
         style={{
-          background:
-            'linear-gradient(180deg, rgba(120,138,178,0.55) 0%, rgba(170,180,196,0.25) 35%, rgba(240,214,170,0.18) 62%, rgba(0,0,0,0) 80%)',
-          mixBlendMode: 'screen',
-        }}
-      />
-
-      {/* donkere lagen zodat de witte tekst leesbaar blijft */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 45% at 50% 50%, rgba(10,14,10,0.46) 0%, rgba(10,14,10,0) 100%),' +
-            'linear-gradient(180deg, rgba(10,14,10,0.45) 0%, rgba(10,14,10,0.10) 22%, rgba(10,14,10,0.10) 70%, rgba(10,14,10,0.40) 100%)',
+          backgroundImage:
+            'linear-gradient(to right, #F7F3EC 1px, transparent 1px), linear-gradient(to bottom, #F7F3EC 1px, transparent 1px)',
+          backgroundSize: '72px 72px',
+          maskImage: 'radial-gradient(ellipse 60% 55% at 50% 45%, #000 0%, transparent 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 60% 55% at 50% 45%, #000 0%, transparent 75%)',
         }}
       />
 
       {/* navigatie */}
-      <div className="relative border-b border-dashed border-white/15">
+      <div className="relative border-b border-white/10">
         <nav className="hero-op mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-5 md:px-10">
-          <a href="/" className="flex items-center gap-2.5 text-white">
+          <a href="/" className="flex items-center gap-2.5 text-[#F7F3EC]">
             <BoomMerk className="h-7 w-7" />
             <span className="font-hero-serif text-2xl tracking-tight">Ainova</span>
           </a>
@@ -80,7 +66,7 @@ export default function HeroLandschap() {
             <TaalSchakelaar variant="glas" />
             <a
               href={`mailto:${EMAIL}`}
-              className="group hidden items-center gap-2 rounded-md bg-white px-4 py-2.5 font-hero-sans text-sm font-medium text-[#0A0A0A] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition-transform hover:-translate-y-0.5 sm:inline-flex"
+              className="group hidden items-center gap-2 rounded-full bg-[#F7F3EC] px-4 py-2.5 font-hero-sans text-sm font-medium text-[#1A1A12] transition-transform hover:-translate-y-0.5 sm:inline-flex"
             >
               {t('nav.cta')}
               <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -90,26 +76,22 @@ export default function HeroLandschap() {
       </div>
 
       {/* inhoud */}
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 pb-16 pt-16 text-center md:px-10">
-
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 pb-24 pt-20 text-center md:px-10">
         <h1
-          className="hero-op font-hero-serif font-normal leading-[0.98] tracking-[-0.025em] text-white"
-          style={{ fontSize: 'clamp(2.6rem, 5.8vw, 5.25rem)', textShadow: '0 1px 2px rgba(0,0,0,0.30), 0 4px 18px rgba(0,0,0,0.28), 0 0 60px rgba(0,0,0,0.22)' }}
+          className="hero-op font-hero-serif font-normal leading-[1.02] tracking-[-0.025em] text-[#F7F3EC]"
+          style={{ fontSize: 'clamp(2.6rem, 5.8vw, 5.25rem)' }}
         >
           <span className="sm:whitespace-nowrap">{t('hero.titelA')}</span>
           <br className="hidden sm:block" /> <span className="sm:whitespace-nowrap">{t('hero.titelB')}</span>
         </h1>
 
-        <p
-          className="hero-op mt-7 max-w-xl font-hero-sans text-base font-medium leading-[1.6] text-white md:text-lg"
-          style={{ textShadow: '0 1px 2px rgba(0,0,0,0.35), 0 2px 18px rgba(0,0,0,0.45)' }}
-        >
+        <p className="hero-op mt-7 max-w-xl font-hero-sans text-base leading-[1.6] text-[#D2C9B8] md:text-lg">
           {t('hero.sub')}
         </p>
 
         <a
-          href={`mailto:${EMAIL}`}
-          className="hero-op group mt-10 inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 font-hero-sans text-[0.95rem] font-medium text-[#0A0A0A] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.45)] transition-transform hover:-translate-y-0.5"
+          href="#contact"
+          className="hero-op group mt-10 inline-flex items-center gap-2 rounded-full bg-[#F7F3EC] px-6 py-3.5 font-hero-sans text-[0.95rem] font-medium text-[#1A1A12] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.6)] transition-transform hover:-translate-y-0.5"
         >
           {t('hero.start')}
           <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />

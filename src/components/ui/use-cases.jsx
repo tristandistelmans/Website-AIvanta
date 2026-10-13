@@ -8,11 +8,14 @@ import {
   FileText,
   Inbox,
   Mail,
+  Headset,
+  Megaphone,
   Package,
+  Receipt,
   Sparkles,
-  Target,
   TrendingUp,
   TriangleAlert,
+  Users,
 } from 'lucide-react'
 
 import { BoomMerk } from '@/components/ui/merk'
@@ -20,14 +23,13 @@ import { useTaal } from '@/lib/taal'
 
 /* UseCases
    ------------------------------------------------------------------
-   Use cases, gegroepeerd in tabbladen per categorie. Elk tabblad toont
-   twee kaarten: bovenaan een paneel met een wazige sfeerachtergrond en
-   daarop een klein, nagebouwd voorbeeldscherm, daaronder de uitleg.
+   Use cases per afdeling, in tabbladen. Elk tabblad toont links een
+   klein, nagebouwd voorbeeldscherm op een neutraal vlak en rechts een
+   korte kop met drie concrete toepassingen.
 
-   - De categorieën en welke use cases erin zitten staan in teksten.js
-     (`usecases.categorieen`); een use case verplaatsen is dus alleen
-     een sleutel verschuiven. De voorbeeldschermen hangen aan dezelfde
-     sleutel (zie DEMOS)
+   - Afdelingen, teksten en voorbeelddata staan in teksten.js
+     (`usecases.categorieen`); `demo.type` kiest het voorbeeldscherm
+     (zie DEMOS)
    - Tabs volgen het ARIA-patroon: pijltjestoetsen links/rechts, Home
      en End verplaatsen de keuze en de focus
    - Alle tabbladen staan in de HTML (verborgen met `hidden`), zodat
@@ -36,11 +38,8 @@ import { useTaal } from '@/lib/taal'
    - De bedrijfsnamen in de voorbeelden zijn verzonnen                 */
 
 const STAAFHOOGTES = [38, 52, 45, 61, 57, 70, 64, 86]
-const CATEGORIE_ICONEN = [Target, TrendingUp, Package, Bot]
+const CATEGORIE_ICONEN = [TrendingUp, Megaphone, Users, Package, Headset, Receipt]
 
-// Achtergronden in public/sfeer: dezelfde kleuren en mist als de hero-
-// foto, maar abstract, zodat niet elke kaart dezelfde boom toont.
-const SFEREN = ['dageraad', 'mist', 'schemer', 'mos']
 
 /* ─── voorbeeldschermen ──────────────────────────────────────────── */
 
@@ -291,7 +290,7 @@ function DemoOfferte({ d }) {
         {d.lijnen.map(([lijn, prijs], i) => (
           <Rij key={lijn} i={i} className="flex items-center justify-between gap-4 text-sm">
             <span className="text-[#0A0A0A]/65">{lijn}</span>
-            <span className="tabular-nums">{prijs}</span>
+            <span className="shrink-0 whitespace-nowrap tabular-nums">{prijs}</span>
           </Rij>
         ))}
       </div>
@@ -340,63 +339,31 @@ const DEMOS = {
   dashboard: DemoDashboard,
   agent: DemoAgent,
   crm: DemoCrm,
-  offertes: DemoOfferte,
+  offerte: DemoOfferte,
   inbox: DemoInbox,
 }
 
-function Voorbeeld({ sleutel, item, label, sfeer = 'dageraad' }) {
-  const Demo = DEMOS[sleutel]
+/* Neutraal vlak in mistzand, met een zachte lichtval: geen foto. */
+function Voorbeeld({ demo, label }) {
+  const Demo = DEMOS[demo.type]
 
   return (
-    <div className="relative h-[25rem] overflow-hidden rounded-[1.35rem] bg-[#3b4a3a] md:h-[28rem]">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(/sfeer/${sfeer}.webp)` }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg, rgba(10,14,10,0) 60%, rgba(10,14,10,0.35) 100%)' }}
-      />
-
+    <div
+      className="relative h-[24rem] overflow-hidden rounded-[2rem] md:h-[30rem]"
+      style={{
+        background:
+          'radial-gradient(ellipse 80% 60% at 30% 0%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%),' +
+          'linear-gradient(160deg, #F5F1EA 0%, #ECE5D9 100%)',
+      }}
+    >
       <div className="relative flex h-full items-center justify-center px-3 py-12">
-        {Demo && <Demo d={item.demo} />}
+        {Demo && <Demo d={demo} />}
       </div>
 
-      <span className="absolute bottom-4 left-5 font-mono-brand text-[0.66rem] uppercase tracking-[0.14em] text-white/80">
+      <span className="absolute bottom-4 left-5 font-mono-brand text-[0.66rem] uppercase tracking-[0.14em] text-[#6E6857]">
         {label}
       </span>
     </div>
-  )
-}
-
-function UseCaseKaart({ sleutel, item, label, sfeer }) {
-  return (
-    <article className="flex w-full flex-col rounded-[1.75rem] bg-[#F5F5F2] p-2 ring-1 ring-black/[0.04]">
-      <Voorbeeld sleutel={sleutel} item={item} label={label} sfeer={sfeer} />
-
-      <div className="flex flex-1 flex-col px-4 pb-6 pt-6 md:px-6 md:pb-7">
-        <h3
-          className="font-hero-serif font-normal leading-tight tracking-[-0.02em] text-[#0A0A0A]"
-          style={{ fontSize: 'clamp(1.6rem, 2.4vw, 2.1rem)' }}
-        >
-          {item.titel}
-        </h3>
-        <p className="mt-2 font-hero-sans text-base font-medium text-[#0A0A0A]">{item.kort}</p>
-        <p className="mt-3 font-hero-sans text-[0.95rem] leading-[1.65] text-[#0A0A0A]/60">{item.tekst}</p>
-
-        <ul className="mt-6 flex flex-wrap gap-2">
-          {item.punten.map((punt) => (
-            <li
-              key={punt}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 font-hero-sans text-[0.8rem] text-[#0A0A0A]/80 ring-1 ring-black/[0.06]"
-            >
-              <Check size={12} strokeWidth={2.5} className="shrink-0 text-[#0A0A0A]" />
-              {punt}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </article>
   )
 }
 
@@ -407,7 +374,6 @@ export default function UseCases() {
   const tabRefs = useRef([])
   const { t } = useTaal()
   const categorieen = t('usecases.categorieen')
-  const items = t('usecases.items')
   const [actief, setActief] = useState(0)
 
   useEffect(() => {
@@ -434,24 +400,27 @@ export default function UseCases() {
   }
 
   return (
-    <section ref={ref} id="use-cases" className="bg-white px-6 pb-28 pt-8 md:px-10 md:pb-40">
+    <section ref={ref} id="use-cases" className="bg-[#FCFAF6] px-6 pb-24 md:px-10 md:pb-32">
       <div className="mx-auto max-w-7xl">
         {/* kop */}
-        <div className="border-t border-black/10 pt-16 md:pt-24">
+        <div className="border-t border-[#E6DFD3] pt-16 md:pt-24">
+          <p className="uc-op font-mono-brand text-xs uppercase tracking-[0.16em] text-[#4A5130]">
+            {t('usecases.label')}
+          </p>
           <h2
-            className="uc-op max-w-3xl font-hero-serif font-normal leading-[1.02] tracking-[-0.025em] text-[#0A0A0A]"
-            style={{ fontSize: 'clamp(2.5rem, 5.4vw, 4.75rem)' }}
+            className="uc-op mt-5 max-w-3xl font-hero-serif font-normal leading-[1.04] tracking-[-0.025em] text-[#1A1A12]"
+            style={{ fontSize: 'clamp(2.25rem, 4.4vw, 3.75rem)' }}
           >
             {t('usecases.titel')}
           </h2>
         </div>
 
         {/* tabbladen */}
-        <div className="uc-op -mx-6 mt-10 overflow-x-auto px-6 [scrollbar-width:none] md:mx-0 md:mt-14 md:px-0 [&::-webkit-scrollbar]:hidden">
+        <div className="uc-op -mx-6 mt-10 overflow-x-auto px-6 [scrollbar-width:none] md:mx-0 md:mt-12 md:px-0 [&::-webkit-scrollbar]:hidden">
           <div
             role="tablist"
             aria-label={t('usecases.label')}
-            className="inline-flex gap-1 rounded-full bg-black/[0.04] p-1.5"
+            className="inline-flex gap-1 rounded-full bg-[#F5F1EA] p-1.5 ring-1 ring-[#E6DFD3]"
           >
             {categorieen.map((categorie, index) => {
               const Icoon = CATEGORIE_ICONEN[index] ?? Sparkles
@@ -470,8 +439,8 @@ export default function UseCases() {
                   onKeyDown={(e) => opToets(e, index)}
                   className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 font-hero-sans text-sm font-medium transition-all duration-300 md:px-5 ${
                     open
-                      ? 'bg-[#0A0A0A] text-white shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)]'
-                      : 'text-[#0A0A0A]/60 hover:bg-black/[0.04] hover:text-[#0A0A0A]'
+                      ? 'bg-[#1A1A12] text-[#F7F3EC] shadow-[0_8px_20px_-10px_rgba(26,26,18,0.6)]'
+                      : 'text-[#6E6857] hover:bg-white hover:text-[#1A1A12]'
                   }`}
                 >
                   <Icoon size={15} strokeWidth={2} />
@@ -493,32 +462,35 @@ export default function UseCases() {
             className="uc-op mt-6 md:mt-8"
           >
             {/* altijd in de HTML; een animatie start opnieuw zodra `hidden` wegvalt */}
-            {/* mobiel: kaarten naast elkaar om horizontaal door te swipen; vanaf md een raster */}
-            <div className="usecase-in -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden">
-              {categorie.items.map((sleutel, i) => (
-                <div key={sleutel} className="flex w-[86%] shrink-0 snap-start md:w-auto">
-                  <UseCaseKaart
-                    sleutel={sleutel}
-                    item={items[sleutel]}
-                    label={t('usecases.voorbeeld')}
-                    sfeer={SFEREN[(index * 2 + i) % SFEREN.length]}
-                  />
-                </div>
-              ))}
+            <div className="usecase-in grid gap-8 md:grid-cols-[1.15fr_1fr] md:items-center md:gap-14">
+              <Voorbeeld demo={categorie.demo} label={t('usecases.voorbeeld')} />
+
+              <div>
+                <h3
+                  className="font-hero-serif font-normal leading-tight tracking-[-0.02em] text-[#1A1A12]"
+                  style={{ fontSize: 'clamp(1.75rem, 2.8vw, 2.4rem)' }}
+                >
+                  {categorie.titel}
+                </h3>
+                <ul className="mt-7 divide-y divide-[#E6DFD3] border-y border-[#E6DFD3]">
+                  {categorie.punten.map((punt) => (
+                    <li key={punt} className="flex items-start gap-3 py-4 font-hero-sans text-base text-[#1A1A12]">
+                      <Check size={16} strokeWidth={2.25} className="mt-1 shrink-0 text-[#4A5130]" />
+                      {punt}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#contact"
+                  className="group mt-8 inline-flex items-center gap-2 font-hero-sans text-[0.95rem] font-medium text-[#1A1A12]"
+                >
+                  {t('usecases.cta')}
+                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
+              </div>
             </div>
           </div>
         ))}
-
-        {/* afsluiter */}
-        <div className="uc-op mt-14 flex justify-center md:mt-20">
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2 rounded-md bg-[#0A0A0A] px-6 py-3.5 font-hero-sans text-[0.95rem] font-medium text-white transition-transform hover:-translate-y-0.5"
-          >
-            {t('usecases.cta')}
-            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-          </a>
-        </div>
       </div>
     </section>
   )

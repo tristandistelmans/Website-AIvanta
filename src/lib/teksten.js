@@ -4,105 +4,137 @@
    dat is wat zoekmachines en bezoekers zonder JavaScript te zien
    krijgen. Engels is een keuze die de bezoeker zelf maakt.
 
-   Nederlandse teksten staan in de u-vorm, zoals de rest van het merk. */
+   Toon: Ainova spreekt als "wij" en de bezoeker als "je". Kort en
+   neutraal, één kop en één zin per blok. Geen prijzen of garanties op
+   de site: die komen in het gesprek.
+
+   Use cases: per afdeling een voorbeeldscherm (`demo.type` wijst naar
+   een component in use-cases.jsx) en drie concrete toepassingen.      */
 
 export const TALEN = ['nl', 'en']
 export const STANDAARDTAAL = 'nl'
 
 export const TEKSTEN = {
   nl: {
-    nav: { cta: 'Neem contact op', taal: 'Taal' },
+    nav: { cta: 'Contact', taal: 'Taal' },
     hero: {
-      label: 'AI-groeisystemen voor B2B',
-      titelA: 'Uw AI-groeipartner',
-      titelB: 'voor meer omzet en efficiëntie.',
-      sub: 'AI-systemen die leads genereren, deals sluiten en de dagelijkse werking opschalen.',
-      start: 'Begin nu',
-      contact: 'Contact',
+      titelA: 'Maak AI het beste hulpmiddel',
+      titelB: 'van je bedrijf.',
+      sub: 'Ainova kijkt waar AI kan worden ingezet, en wat het kan opleveren.',
+      start: 'Neem vrijblijvend contact op',
     },
-    logos: { klanten: 'Enkele klanten', tools: 'Wij bouwen met' },
-    visie: {
-      zinnen: [
-        'De hype rond AI en automatisatie is alomtegenwoordig, maar we staan nog maar aan het begin.',
-        'Het verandert hoe bedrijven werken, beslissen en creëren. Niet als doel op zich, maar als hefboom voor efficiëntie, snelheid en groei.',
-        'We bekijken samen uw processen, identificeren knelpunten en ontdekken waar AI het verschil kan maken.',
+    logos: { klanten: 'Gewerkt voor', tools: 'Wij bouwen met' },
+    probleem: {
+      label: 'Het probleem',
+      titel: 'Iedereen wil iets met AI. Weinig bedrijven merken er iets van.',
+      punten: [
+        {
+          titel: 'Werk dat blijft liggen.',
+          tekst: 'Offertes, bestellingen en mails kosten elke week uren, vaak buiten de werkuren.',
+        },
+        {
+          titel: 'Geen extra handen.',
+          tekst: 'Nieuwe mensen vinden is moeilijk. De tijd moet uit het bestaande werk komen.',
+        },
+        {
+          titel: 'Tools die niet gebruikt worden.',
+          tekst: 'Software wordt aangekocht, maar raakt nooit echt ingeburgerd in het dagelijkse werk.',
+        },
+        {
+          titel: 'AI zonder richting.',
+          tekst: 'Medewerkers testen zelf tools, zonder afspraken over wat werkt en wat veilig is.',
+        },
+      ],
+    },
+    aanpak: {
+      label: 'Onze aanpak',
+      titel: 'AI invoeren is meer dan software.',
+      intro: 'We zoeken de taken waar AI het meest oplevert, bouwen de oplossing en zorgen dat je team ermee werkt.',
+      stappen: [
+        {
+          titel: 'Analyse',
+          tekst: 'We brengen in kaart waar AI tijd en geld oplevert, en wat je beter laat zoals het is.',
+        },
+        {
+          titel: 'Implementatie',
+          tekst: 'We bouwen en koppelen de oplossing in de tools die je team al gebruikt.',
+        },
+        {
+          titel: 'Adoptie',
+          tekst: 'We trainen je team, volgen het gebruik op en breiden uit wat werkt.',
+        },
       ],
     },
     usecases: {
       label: 'Use cases',
-      titel: 'Waar AI vandaag al het verschil maakt',
-      cta: 'Bespreek uw use case',
+      titel: 'AI in elke afdeling.',
+      cta: 'Bespreek je use case',
       voorbeeld: 'Voorbeeld',
       categorieen: [
-        { naam: 'Leads & sales', items: ['leads', 'opvolging'] },
-        { naam: 'CRM & inzicht', items: ['crm', 'dashboard'] },
-        { naam: 'Operations', items: ['orders', 'offertes'] },
-        { naam: 'Agents & klantcontact', items: ['agent', 'inbox'] },
-      ],
-      items: {
-        leads: {
-          titel: 'Leadgeneratie',
-          kort: 'Een gevulde pipeline met bedrijven die echt bij u passen.',
-          tekst: 'AI zoekt dagelijks bedrijven binnen uw ideale klantprofiel, verrijkt ze met beslissers en bedrijfsgegevens en zet de beste matches klaar voor uw salesteam.',
-          punten: ['Doelgroep op sector, regio en grootte', 'Beslissers met geverifieerde e-mailadressen', 'Elke lead gescoord op hoe goed hij past'],
+        {
+          naam: 'Sales',
+          titel: 'Sneller van aanvraag naar offerte.',
+          punten: [
+            'Offertes opgesteld op basis van je eigen prijzen',
+            'Elke aanvraag binnen enkele minuten beantwoord',
+            'Automatische opvolging van openstaande offertes',
+          ],
           demo: {
-            kop: 'Nieuwe leads vandaag',
-            filter: 'B2B · Vlaanderen · 20–200 medewerkers',
+            type: 'offerte',
+            kop: 'Offerte OF-2026-118',
+            klant: 'Bouwbedrijf Vermeulen',
+            lijnen: [['Circulatiepomp CP-40 · 3 stuks', '€ 2.940'], ['Leidingwerk en montage', '€ 1.280'], ['Transport', '€ 95']],
+            totaal: ['Totaal excl. btw', '€ 4.315'],
+            status: 'Klaar om na te kijken',
+          },
+        },
+        {
+          naam: 'Marketing',
+          titel: 'Meer bereik met hetzelfde team.',
+          punten: [
+            'Doelgroepen en prospectlijsten opbouwen',
+            'Nieuwsbrieven en posts in jullie eigen toon',
+            'Campagnes opvolgen en rapporteren',
+          ],
+          demo: {
+            type: 'leads',
+            kop: 'Doelgroep · deze week',
+            filter: 'Vlaanderen · 15–50 medewerkers',
             rijen: [
-              ['Novalis Logistics', 'Logistiek · Antwerpen', 96],
-              ['Orbis Software', 'SaaS · Gent', 91],
-              ['Helder Accountancy', 'Financiële diensten · Leuven', 88],
-              ['Mercator Groothandel', 'Groothandel · Hasselt', 84],
+              ['Mercator Groothandel', 'Groothandel · Hasselt', 94],
+              ['Bouwbedrijf Vermeulen', 'Bouw · Genk', 89],
+              ['Garage Peeters', 'Automotive · Lommel', 85],
+              ['Bakkerij Claes', 'Voeding · Beringen', 81],
             ],
           },
         },
-        opvolging: {
-          titel: 'Lead-opvolging',
-          kort: 'Elke aanvraag binnen de minuut beantwoord.',
-          tekst: 'Een nieuwe aanvraag krijgt meteen een persoonlijk antwoord. Het systeem volgt op tot er een reactie is, beantwoordt vragen en plant de afspraak rechtstreeks in uw agenda.',
-          punten: ['Persoonlijke reactie op elke aanvraag', 'Herinneringen via e-mail en sms', 'Afspraken rechtstreeks in uw agenda'],
+        {
+          naam: 'Human resources',
+          titel: 'Minder administratie rond je mensen.',
+          punten: [
+            'Snelle antwoorden op vragen over verlof en loon',
+            'Vacatureteksten en onboarding voorbereid',
+            'Documenten en attesten sneller verwerkt',
+          ],
           demo: {
-            kop: 'Opvolging · Orbis Software',
-            badge: 'Reactietijd 1 min',
-            stappen: [
-              ['09:12', 'Demo-aanvraag via de website'],
-              ['09:13', 'Persoonlijke e-mail verstuurd'],
-              ['Dag 3', 'Herinnering met klantcase'],
-              ['Dag 4', 'Afspraak ingepland · do 14:00'],
-            ],
+            type: 'agent',
+            naam: 'HR-assistent',
+            vraag: 'Hoeveel verlofdagen heb ik nog dit jaar?',
+            antwoord: 'Je hebt nog 7 verlofdagen voor 2026. Zal ik een aanvraag voor 24 december klaarzetten?',
+            bronnen: ['Sociaal secretariaat', 'Planning'],
+            bron: 'Bronnen',
           },
         },
-        crm: {
-          titel: 'CRM- & salesautomatisering',
-          kort: 'Een CRM dat zichzelf bijhoudt.',
-          tekst: 'Gesprekken, mails en afspraken komen automatisch in uw CRM terecht. Deals schuiven door, taken worden aangemaakt en niemand typt nog gegevens over.',
-          punten: ['Gespreksverslagen en mails automatisch gelogd', 'Deals en taken bewegen mee met de realiteit', 'Werkt met de CRM die u al gebruikt'],
+        {
+          naam: 'Operations',
+          titel: 'Bestellingen zonder overtypen.',
+          punten: [
+            'Bestelbonnen uit mail en pdf automatisch ingelezen',
+            'Orders gecontroleerd tegen je ERP',
+            'Planning en levertijden altijd actueel',
+          ],
           demo: {
-            kolommen: [
-              ['Nieuw', [['Helder Accountancy', '€ 12k']]],
-              ['Offerte', [['Orbis Software', '€ 24k'], ['Lumen Health', '€ 9k']]],
-              ['Gewonnen', [['Novalis Logistics', '€ 31k']]],
-            ],
-            melding: 'Deal verplaatst naar Offerte · opvolgtaak aangemaakt',
-          },
-        },
-        dashboard: {
-          titel: 'Sales intelligence dashboard',
-          kort: 'Uw cijfers, met uitleg over wat ertoe doet.',
-          tekst: 'Alle salesdata uit CRM, boekhouding en mailbox samen in één overzicht. AI legt verbanden, signaleert deals die stilvallen en vertelt u waar de kansen liggen.',
-          punten: ['Pipeline, omzet en conversie altijd actueel', 'Signalen bij vastgelopen deals', 'Wekelijkse samenvatting in gewone taal'],
-          demo: {
-            kop: 'Pipeline · laatste 8 weken',
-            kpis: [['Pipeline', '€ 482k'], ['Winratio', '31%'], ['Gem. deal', '€ 18,4k']],
-            inzicht: '3 deals staan al 14 dagen stil, samen goed voor € 61k.',
-          },
-        },
-        orders: {
-          titel: 'Verwerking van verkooporders',
-          kort: 'Bestellingen uit mail en pdf, foutloos in uw ERP.',
-          tekst: 'Orders komen binnen in allerlei vormen. AI leest ze uit, controleert artikels en prijzen tegen uw systemen en zet de order klaar in uw ERP. Uw team kijkt alleen nog na wat afwijkt.',
-          punten: ['Leest pdf’s, e-mails en scans', 'Controle op artikelcodes, prijzen en voorraad', 'Afwijkingen gemarkeerd, niet doorgeschoven'],
-          demo: {
+            type: 'orders',
             bestand: 'Bestelbon_20931.pdf',
             ontvangen: 'Ontvangen via e-mail',
             velden: [
@@ -111,55 +143,60 @@ export const TEKSTEN = {
               ['Aantal', '1.200 stuks'],
               ['Levering', '18 september'],
             ],
-            status: 'Klaar voor ERP',
+            status: 'Klaar voor je ERP',
             controle: '4 van 4 velden gecontroleerd',
           },
         },
-        offertes: {
-          titel: 'Offertes op maat',
-          kort: 'Van aanvraag naar offerte in enkele minuten.',
-          tekst: 'AI stelt een offerte op met uw prijzen, voorwaarden en huisstijl, op basis van een aanvraag, gesprek of briefing. U controleert, past aan waar nodig en verstuurt.',
-          punten: ['Gebaseerd op uw prijslijsten en eerdere offertes', 'In uw eigen huisstijl', 'Altijd eerst ter controle bij u'],
+        {
+          naam: 'Customer support',
+          titel: 'Elke klantvraag bij de juiste persoon.',
+          punten: [
+            'Mails gesorteerd en doorgestuurd',
+            'Antwoordvoorstellen voor terugkerende vragen',
+            'Order- en leverinfo meteen opgezocht',
+          ],
           demo: {
-            kop: 'Offerte OF-2026-118',
-            klant: 'Lumen Health',
-            lijnen: [['Implementatie en koppelingen', '€ 4.800'], ['Opleiding team · 2 dagen', '€ 1.600'], ['Support · 12 maanden', '€ 1.200']],
-            totaal: ['Totaal excl. btw', '€ 7.600'],
-            status: 'Concept klaar ter controle',
-          },
-        },
-        agent: {
-          titel: 'Custom AI-agents',
-          kort: 'Een digitale collega, getraind op uw bedrijf.',
-          tekst: 'Agents die uw producten, prijzen en processen kennen. Ze beantwoorden vragen van klanten en collega’s, zoeken informatie op in uw systemen en voeren taken zelfstandig uit.',
-          punten: ['Getraind op uw documenten en data', 'Gekoppeld aan ERP, CRM en mailbox', 'U bepaalt wat een agent zelf mag doen'],
-          demo: {
-            naam: 'Uw agent',
-            vraag: 'Wanneer wordt order 4471 geleverd?',
-            antwoord: 'Order 4471 vertrekt donderdag uit het magazijn en wordt vrijdag voor de middag geleverd. Zal ik de klant een bevestiging sturen?',
-            bronnen: ['ERP', 'Planning'],
-            bron: 'Bronnen',
-          },
-        },
-        inbox: {
-          titel: 'Slimme inbox',
-          kort: 'Elke mail meteen bij de juiste persoon.',
-          tekst: 'Binnenkomende mails worden gelezen, gelabeld en doorgestuurd naar wie ze moet behandelen. Voor veelgestelde vragen staat er meteen een antwoord klaar.',
-          punten: ['Sorteert op onderwerp en urgentie', 'Stuurt door naar de juiste collega', 'Stelt antwoorden voor in uw eigen toon'],
-          demo: {
+            type: 'inbox',
             kop: 'Inbox · vandaag',
             mails: [
-              ['Offerteaanvraag voor 40 licenties', 'Sales'],
-              ['Vraag over factuur 2026-311', 'Boekhouding'],
-              ['Levering vandaag nog mogelijk?', 'Klantendienst'],
+              ['Offerteaanvraag voor 12 pompen', 'Sales'],
+              ['Vraag over factuur 2026-311', 'Finance'],
+              ['Vandaag nog leveren?', 'Logistiek'],
             ],
             klaar: 'Antwoord voorbereid',
           },
         },
-      },
+        {
+          naam: 'Finance',
+          titel: 'Grip op facturen en cashflow.',
+          punten: [
+            'Aankoopfacturen ingelezen en klaargezet voor de boekhouding',
+            'Herinneringen voor openstaande facturen',
+            'Een wekelijks overzicht in gewone taal',
+          ],
+          demo: {
+            type: 'dashboard',
+            kop: 'Ontvangen betalingen · 8 weken',
+            kpis: [['Openstaand', '€ 48,2k'], ['Vervallen', '€ 6,1k'], ['Betaaltermijn', '38 d']],
+            inzicht: '4 facturen staan langer dan 30 dagen open. Herinneringen klaar om te versturen.',
+          },
+        },
+      ],
+    },
+    overmij: {
+      label: 'Over Ainova',
+      titel: 'Persoonlijk aanspreekpunt, technisch sterk team.',
+      alineas: [
+        'Ainova is opgericht door Tristan Distelmans, met een achtergrond in arbeids- en organisatiepsychologie. Samen met technische specialisten bouwen we AI-oplossingen voor Vlaamse kmo’s.',
+        'Ons kantoor is gevestigd in de Corda Incubator in Hasselt.',
+      ],
+      bijschrift: 'Tristan Distelmans, oprichter',
     },
     contact: {
-      titel: 'Ontdek wat AI voor u kan doen',
+      titel: 'Benieuwd wat AI voor jullie kan doen?',
+      sub: 'Neem vrijblijvend contact op. Stuur ons een mail of een bericht op LinkedIn, we antwoorden binnen een werkdag.',
+      mail: 'Mail ons',
+      linkedin: 'Via LinkedIn',
     },
     formulier: {
       naam: 'Naam',
@@ -167,111 +204,138 @@ export const TEKSTEN = {
       telefoon: 'Telefoon',
       bedrijf: 'Bedrijf',
       optioneel: 'optioneel',
-      bericht: 'Waar kan ik u mee helpen?',
+      bericht: 'Waar kunnen we je mee helpen?',
       verstuur: 'Verstuur',
     },
-    footer: { contact: 'Contact', rol: 'Oprichter van Ainova', volgen: 'Volg mij op LinkedIn' },
+    footer: { contact: 'Contact', rol: 'Oprichter van Ainova', volgen: 'Volg ons op LinkedIn' },
     bedankt: {
       label: 'Bericht ontvangen',
-      titel: 'Bedankt voor uw bericht',
-      tekst: 'Ik lees elk bericht zelf en neem binnen 24 uur contact met u op.',
+      titel: 'Bedankt voor je bericht',
+      tekst: 'We lezen elk bericht en nemen binnen een werkdag contact met je op.',
       terug: 'Terug naar de homepage',
     },
   },
 
   en: {
-    nav: { cta: 'Get in touch', taal: 'Language' },
+    nav: { cta: 'Contact', taal: 'Language' },
     hero: {
-      label: 'AI growth systems for B2B',
-      titelA: 'Your AI growth partner',
-      titelB: 'for more revenue and efficiency.',
-      sub: 'AI systems that generate leads, close deals and scale operations.',
-      start: 'Start now',
-      contact: 'Contact',
+      titelA: 'Make AI the best tool',
+      titelB: 'in your company.',
+      sub: 'Ainova looks at where AI can be used, and what it can deliver.',
+      start: 'Get in touch, no strings attached',
     },
-    logos: { klanten: 'Some of our clients', tools: 'We build with' },
-    visie: {
-      zinnen: [
-        'The hype around AI and automation is everywhere, yet we are only at the very beginning.',
-        'It is changing how companies work, decide and create. Not as a goal in itself, but as a lever for efficiency, speed and growth.',
-        'Together we review your processes, pinpoint the bottlenecks and find where AI can make the difference.',
+    logos: { klanten: 'Worked for', tools: 'We build with' },
+    probleem: {
+      label: 'The problem',
+      titel: 'Everyone wants to do something with AI. Few companies notice a difference.',
+      punten: [
+        {
+          titel: 'Work that piles up.',
+          tekst: 'Quotes, orders and email take hours every week, often outside working hours.',
+        },
+        {
+          titel: 'No extra hands.',
+          tekst: 'New people are hard to find. The time has to come from existing work.',
+        },
+        {
+          titel: 'Tools nobody uses.',
+          tekst: 'Software gets bought, but never really becomes part of daily work.',
+        },
+        {
+          titel: 'AI without direction.',
+          tekst: 'Employees try tools on their own, without agreements on what works and what is safe.',
+        },
+      ],
+    },
+    aanpak: {
+      label: 'Our approach',
+      titel: 'Rolling out AI takes more than software.',
+      intro: 'We find the tasks where AI delivers most, build the solution and make sure your team uses it.',
+      stappen: [
+        {
+          titel: 'Analysis',
+          tekst: 'We map where AI saves time and money, and what you are better off leaving as it is.',
+        },
+        {
+          titel: 'Implementation',
+          tekst: 'We build and connect the solution inside the tools your team already uses.',
+        },
+        {
+          titel: 'Adoption',
+          tekst: 'We train your team, follow up on usage and expand what works.',
+        },
       ],
     },
     usecases: {
       label: 'Use cases',
-      titel: 'Where AI already makes the difference',
+      titel: 'AI in every department.',
       cta: 'Discuss your use case',
       voorbeeld: 'Example',
       categorieen: [
-        { naam: 'Leads & sales', items: ['leads', 'opvolging'] },
-        { naam: 'CRM & insights', items: ['crm', 'dashboard'] },
-        { naam: 'Operations', items: ['orders', 'offertes'] },
-        { naam: 'Agents & support', items: ['agent', 'inbox'] },
-      ],
-      items: {
-        leads: {
-          titel: 'Lead generation',
-          kort: 'A full pipeline of companies that truly fit.',
-          tekst: 'Every day, AI finds companies within your ideal customer profile, enriches them with decision makers and company data, and lines up the best matches for your sales team.',
-          punten: ['Targeting by sector, region and size', 'Decision makers with verified emails', 'Every lead scored on how well it fits'],
+        {
+          naam: 'Sales',
+          titel: 'From enquiry to quote, faster.',
+          punten: [
+            'Quotes drafted from your own prices',
+            'Every enquiry answered within minutes',
+            'Automatic follow-up on open quotes',
+          ],
           demo: {
-            kop: 'New leads today',
-            filter: 'B2B · Flanders · 20–200 staff',
+            type: 'offerte',
+            kop: 'Quote OF-2026-118',
+            klant: 'Bouwbedrijf Vermeulen',
+            lijnen: [['Circulation pump CP-40 · 3 pcs', '€2,940'], ['Pipework and installation', '€1,280'], ['Transport', '€95']],
+            totaal: ['Total excl. VAT', '€4,315'],
+            status: 'Ready to review',
+          },
+        },
+        {
+          naam: 'Marketing',
+          titel: 'More reach with the same team.',
+          punten: [
+            'Build target groups and prospect lists',
+            'Newsletters and posts in your own voice',
+            'Track and report on campaigns',
+          ],
+          demo: {
+            type: 'leads',
+            kop: 'Target group · this week',
+            filter: 'Flanders · 15–50 employees',
             rijen: [
-              ['Novalis Logistics', 'Logistics · Antwerp', 96],
-              ['Orbis Software', 'SaaS · Ghent', 91],
-              ['Helder Accountancy', 'Financial services · Leuven', 88],
-              ['Mercator Groothandel', 'Wholesale · Hasselt', 84],
+              ['Mercator Groothandel', 'Wholesale · Hasselt', 94],
+              ['Bouwbedrijf Vermeulen', 'Construction · Genk', 89],
+              ['Garage Peeters', 'Automotive · Lommel', 85],
+              ['Bakkerij Claes', 'Food · Beringen', 81],
             ],
           },
         },
-        opvolging: {
-          titel: 'Lead follow-up',
-          kort: 'Every enquiry answered within a minute.',
-          tekst: 'A new enquiry gets a personal reply straight away. The system follows up until there is a response, answers questions and books the meeting directly into your calendar.',
-          punten: ['Personal reply to every enquiry', 'Reminders by email and text', 'Meetings booked straight into your calendar'],
+        {
+          naam: 'Human resources',
+          titel: 'Less admin around your people.',
+          punten: [
+            'Quick answers to questions about leave and pay',
+            'Job ads and onboarding prepared',
+            'Documents and certificates processed faster',
+          ],
           demo: {
-            kop: 'Follow-up · Orbis Software',
-            badge: 'Response time 1 min',
-            stappen: [
-              ['09:12', 'Demo request via the website'],
-              ['09:13', 'Personal email sent'],
-              ['Day 3', 'Reminder with customer case'],
-              ['Day 4', 'Meeting booked · Thu 2 pm'],
-            ],
+            type: 'agent',
+            naam: 'HR assistant',
+            vraag: 'How many days off do I have left this year?',
+            antwoord: 'You have 7 days left for 2026. Shall I prepare a request for 24 December?',
+            bronnen: ['Payroll', 'Planning'],
+            bron: 'Sources',
           },
         },
-        crm: {
-          titel: 'CRM & sales automation',
-          kort: 'A CRM that keeps itself up to date.',
-          tekst: 'Calls, emails and meetings land in your CRM automatically. Deals move forward, tasks are created and nobody retypes data again.',
-          punten: ['Call notes and emails logged automatically', 'Deals and tasks move with reality', 'Works with the CRM you already use'],
+        {
+          naam: 'Operations',
+          titel: 'Orders without retyping.',
+          punten: [
+            'Purchase orders from email and PDF read automatically',
+            'Orders checked against your ERP',
+            'Planning and delivery times always current',
+          ],
           demo: {
-            kolommen: [
-              ['New', [['Helder Accountancy', '€12k']]],
-              ['Quote', [['Orbis Software', '€24k'], ['Lumen Health', '€9k']]],
-              ['Won', [['Novalis Logistics', '€31k']]],
-            ],
-            melding: 'Deal moved to Quote · follow-up task created',
-          },
-        },
-        dashboard: {
-          titel: 'Sales intelligence dashboard',
-          kort: 'Your numbers, explained where it matters.',
-          tekst: 'All sales data from CRM, accounting and inbox in one view. AI connects the dots, flags deals that stall and tells you where the opportunities are.',
-          punten: ['Pipeline, revenue and conversion always current', 'Alerts on stalled deals', 'Weekly summary in plain language'],
-          demo: {
-            kop: 'Pipeline · last 8 weeks',
-            kpis: [['Pipeline', '€482k'], ['Win rate', '31%'], ['Avg. deal', '€18.4k']],
-            inzicht: '3 deals have been idle for 14 days, worth €61k combined.',
-          },
-        },
-        orders: {
-          titel: 'Sales order processing',
-          kort: 'Orders from email and PDF, flawless in your ERP.',
-          tekst: 'Orders arrive in every shape. AI reads them, checks items and prices against your systems and prepares the order in your ERP. Your team only reviews what deviates.',
-          punten: ['Reads PDFs, emails and scans', 'Checks item codes, prices and stock', 'Deviations flagged, never passed on'],
-          demo: {
+            type: 'orders',
             bestand: 'Purchase_order_20931.pdf',
             ontvangen: 'Received by email',
             velden: [
@@ -280,55 +344,60 @@ export const TEKSTEN = {
               ['Quantity', '1,200 pcs'],
               ['Delivery', '18 September'],
             ],
-            status: 'Ready for ERP',
+            status: 'Ready for your ERP',
             controle: '4 of 4 fields verified',
           },
         },
-        offertes: {
-          titel: 'Tailored quotes',
-          kort: 'From enquiry to quote in minutes.',
-          tekst: 'AI drafts a quote with your prices, terms and branding, based on an enquiry, a call or a briefing. You review, adjust where needed and send.',
-          punten: ['Based on your price lists and past quotes', 'In your own branding', 'Always reviewed by you first'],
+        {
+          naam: 'Customer support',
+          titel: 'Every customer question to the right person.',
+          punten: [
+            'Emails sorted and routed',
+            'Suggested replies for recurring questions',
+            'Order and delivery info looked up instantly',
+          ],
           demo: {
-            kop: 'Quote OF-2026-118',
-            klant: 'Lumen Health',
-            lijnen: [['Implementation and integrations', '€4,800'], ['Team training · 2 days', '€1,600'], ['Support · 12 months', '€1,200']],
-            totaal: ['Total excl. VAT', '€7,600'],
-            status: 'Draft ready for review',
-          },
-        },
-        agent: {
-          titel: 'Custom AI agents',
-          kort: 'A digital colleague, trained on your business.',
-          tekst: 'Agents that know your products, prices and processes. They answer questions from customers and colleagues, look things up in your systems and carry out tasks on their own.',
-          punten: ['Trained on your documents and data', 'Connected to ERP, CRM and inbox', 'You decide what an agent may do on its own'],
-          demo: {
-            naam: 'Your agent',
-            vraag: 'When will order 4471 be delivered?',
-            antwoord: 'Order 4471 leaves the warehouse on Thursday and will be delivered Friday before noon. Shall I send the customer a confirmation?',
-            bronnen: ['ERP', 'Planning'],
-            bron: 'Sources',
-          },
-        },
-        inbox: {
-          titel: 'Smart inbox',
-          kort: 'Every email straight to the right person.',
-          tekst: 'Incoming emails are read, labelled and routed to whoever should handle them. For frequent questions, a reply is ready right away.',
-          punten: ['Sorts by topic and urgency', 'Routes to the right colleague', 'Suggests replies in your own tone'],
-          demo: {
+            type: 'inbox',
             kop: 'Inbox · today',
             mails: [
-              ['Quote request for 40 licences', 'Sales'],
-              ['Question about invoice 2026-311', 'Accounting'],
-              ['Delivery still possible today?', 'Customer service'],
+              ['Quote request for 12 pumps', 'Sales'],
+              ['Question about invoice 2026-311', 'Finance'],
+              ['Delivery still possible today?', 'Logistics'],
             ],
             klaar: 'Reply drafted',
           },
         },
-      },
+        {
+          naam: 'Finance',
+          titel: 'A grip on invoices and cash flow.',
+          punten: [
+            'Purchase invoices read and prepared for accounting',
+            'Reminders for outstanding invoices',
+            'A weekly overview in plain language',
+          ],
+          demo: {
+            type: 'dashboard',
+            kop: 'Payments received · 8 weeks',
+            kpis: [['Outstanding', '€48.2k'], ['Overdue', '€6.1k'], ['Payment term', '38 d']],
+            inzicht: '4 invoices have been open for more than 30 days. Reminders ready to send.',
+          },
+        },
+      ],
+    },
+    overmij: {
+      label: 'About Ainova',
+      titel: 'A personal point of contact, a strong technical team.',
+      alineas: [
+        'Ainova was founded by Tristan Distelmans, with a background in work and organisational psychology. Together with technical specialists we build AI solutions for Flemish SMEs.',
+        'Our office is at the Corda Incubator in Hasselt.',
+      ],
+      bijschrift: 'Tristan Distelmans, founder',
     },
     contact: {
-      titel: 'Discover what AI can do for you',
+      titel: 'Curious what AI can do for you?',
+      sub: 'Get in touch, no strings attached. Send us an email or a message on LinkedIn, we reply within one working day.',
+      mail: 'Email us',
+      linkedin: 'Via LinkedIn',
     },
     formulier: {
       naam: 'Name',
@@ -336,14 +405,14 @@ export const TEKSTEN = {
       telefoon: 'Phone',
       bedrijf: 'Company',
       optioneel: 'optional',
-      bericht: 'How can I help you?',
+      bericht: 'How can we help?',
       verstuur: 'Send',
     },
-    footer: { contact: 'Contact', rol: 'Founder of Ainova', volgen: 'Follow me on LinkedIn' },
+    footer: { contact: 'Contact', rol: 'Founder of Ainova', volgen: 'Follow us on LinkedIn' },
     bedankt: {
       label: 'Message received',
-      titel: 'Thanks for reaching out',
-      tekst: 'I read every message myself and will get back to you within 24 hours.',
+      titel: 'Thanks for your message',
+      tekst: 'We read every message and will get back to you within one working day.',
       terug: 'Back to homepage',
     },
   },

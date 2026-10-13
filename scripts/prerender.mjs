@@ -23,12 +23,12 @@ const ROUTES = [
     titel: 'Bedankt | Ainova',
     // Anders erft de bedankpagina de deelteksten van de homepage.
     meta: {
-      description: 'Bedankt voor uw bericht. Ik neem binnen 24 uur contact op.',
+      description: 'Bedankt voor je bericht. Ik neem binnen een werkdag contact met je op.',
       'og:title': 'Bedankt | Ainova',
-      'og:description': 'Bedankt voor uw bericht. Ik neem binnen 24 uur contact op.',
+      'og:description': 'Bedankt voor je bericht. Ik neem binnen een werkdag contact met je op.',
       'og:url': 'https://ainova.be/bedankt',
       'twitter:title': 'Bedankt | Ainova',
-      'twitter:description': 'Bedankt voor uw bericht. Ik neem binnen 24 uur contact op.',
+      'twitter:description': 'Bedankt voor je bericht. Ik neem binnen een werkdag contact met je op.',
       // Een bedankpagina hoort niet in de zoekresultaten: hij is alleen
       // zinvol na het versturen van het formulier.
       robots: 'noindex, nofollow',

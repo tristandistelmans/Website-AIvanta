@@ -26,16 +26,16 @@ const siMicrosoft = {
 }
 
 const KLANTEN = [
-  { naam: 'MediaTales', src: '/logos/klanten/mediatales.png', className: 'h-9' },
-  { naam: 'paddle.be', src: '/logos/klanten/paddle.png', className: 'h-[1.35rem]' },
-  { naam: 'Billington Structures', src: '/logos/klanten/billington-structures.svg', className: 'h-7' },
+  { naam: 'MediaTales', src: '/logos/klanten/mediatales.png', className: 'h-7' },
+  { naam: 'paddle.be', src: '/logos/klanten/paddle.png', className: 'h-[1.05rem]' },
+  { naam: 'Billington Structures', src: '/logos/klanten/billington-structures.svg', className: 'h-6' },
 ]
 
 const TOOLS = [siClaude, siOpenai, siGooglegemini, siHubspot, siGooglecloud, siMicrosoft, siElevenlabs, siPerplexity, siN8n]
 
 function Label({ children }) {
   return (
-    <span className="whitespace-nowrap font-hero-sans text-[0.7rem] font-medium uppercase tracking-[0.16em] text-white/85">
+    <span className="whitespace-nowrap font-hero-sans text-[10px] font-medium uppercase tracking-[0.07em] text-white/90">
       {children}
     </span>
   )
@@ -43,7 +43,7 @@ function Label({ children }) {
 
 function Groep({ children }) {
   return (
-    <div className="flex shrink-0 items-center gap-10 border-r border-dashed border-white/25 px-10">
+    <div className="flex h-full shrink-0 items-center gap-5 border-r border-dashed border-white/25 px-7">
       {children}
     </div>
   )
@@ -51,7 +51,7 @@ function Groep({ children }) {
 
 function Reeks({ t, verborgen }) {
   return (
-    <div className="flex shrink-0 items-center" aria-hidden={verborgen || undefined}>
+    <div className="flex h-full shrink-0 items-stretch" aria-hidden={verborgen || undefined}>
       <Groep>
         <Label>{t('logos.klanten')}</Label>
         {KLANTEN.map((logo) => (
@@ -67,11 +67,11 @@ function Reeks({ t, verborgen }) {
       <Groep>
         <Label>{t('logos.tools')}</Label>
         {TOOLS.map((icoon) => (
-          <span key={icoon.title} className="flex items-center gap-2 whitespace-nowrap text-white">
-            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" role="img" aria-hidden="true">
+          <span key={icoon.title} className="flex items-center gap-1.5 whitespace-nowrap text-white">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" role="img" aria-hidden="true">
               <path d={icoon.path} />
             </svg>
-            <span className="font-hero-sans text-[0.95rem] font-medium tracking-tight">{icoon.title}</span>
+            <span className="font-hero-sans text-[0.8rem] font-semibold tracking-[-0.01em]">{icoon.title}</span>
           </span>
         ))}
       </Groep>
@@ -83,9 +83,9 @@ export default function HeroLogostrip() {
   const { t } = useTaal()
 
   return (
-    <div className="hero-op relative border-t border-dashed border-white/25 bg-black/15 backdrop-blur-[2px]">
-      <div className="logostrip-masker overflow-hidden">
-        <div className="logostrip-band flex w-max py-5 hover:[animation-play-state:paused]">
+    <div className="hero-op relative border-t border-dashed border-white/25 bg-white/[0.06]">
+      <div className="overflow-hidden">
+        <div className="logostrip-band flex h-14 w-max items-stretch hover:[animation-play-state:paused]">
           <Reeks t={t} />
           <Reeks t={t} verborgen />
         </div>
