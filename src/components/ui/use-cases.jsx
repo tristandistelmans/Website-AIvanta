@@ -46,7 +46,7 @@ const CATEGORIE_ICONEN = [TrendingUp, Megaphone, Users, Package, Headset, Receip
 function Kaart({ children, className = '' }) {
   return (
     <div
-      className={`usecase-in w-[min(95%,26rem)] rounded-2xl bg-white/[0.88] p-4 font-hero-sans text-[#0A0A0A] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.55)] ring-1 ring-white/70 backdrop-blur-xl sm:p-5 md:p-6 ${className}`}
+      className={`usecase-in w-[min(95%,26rem)] rounded-2xl bg-white/[0.88] p-4 font-ui text-[#0A0A0A] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.55)] ring-1 ring-white/70 backdrop-blur-xl sm:p-5 md:p-6 ${className}`}
     >
       {children}
     </div>
@@ -438,7 +438,7 @@ export default function UseCases() {
                   className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 font-hero-sans text-sm font-medium transition-all duration-300 md:px-5 ${
                     open
                       ? 'bg-[#0B1B2E] text-[#F4F7FA] shadow-[0_8px_20px_-10px_rgba(11,27,46,0.6)]'
-                      : 'text-[#566577] hover:bg-white hover:text-[#0B1B2E]'
+                      : 'text-[#2F3D50] hover:bg-white hover:text-[#0B1B2E]'
                   }`}
                 >
                   <Icoon size={15} strokeWidth={2} />

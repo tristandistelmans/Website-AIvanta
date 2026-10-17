@@ -71,7 +71,7 @@ function Reeks({ t, verborgen }) {
             <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" role="img" aria-hidden="true">
               <path d={icoon.path} />
             </svg>
-            <span className="font-hero-sans text-[0.8rem] font-semibold tracking-[-0.01em]">{icoon.title}</span>
+            <span className="font-ui text-[0.8rem] font-semibold tracking-[-0.01em]">{icoon.title}</span>
           </span>
         ))}
       </Groep>

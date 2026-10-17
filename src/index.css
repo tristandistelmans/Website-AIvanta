@@ -57,6 +57,23 @@ body {
 }
 
 .font-hero-sans {
+  /* Sinds 17 okt: alle lopende tekst in Newsreader, net als de koppen.
+     De klasse heet nog "sans" om niet elke component te moeten herschrijven. */
+  font-family: 'Newsreader', 'Times New Roman', serif;
+  font-optical-sizing: auto;
+  /* Newsreader heeft een lage x-hoogte: zo leest de tekst even groot als
+     voordien in het schreefloze lettertype */
+  font-size-adjust: 0.5;
+}
+
+/* Lopende tekst iets voller dan 400. :where() houdt de specificiteit op
+   nul, zodat font-medium en co. het nog altijd winnen. */
+:where(.font-hero-sans) {
+  font-weight: 450;
+}
+
+/* Schreefloos, alleen voor de nagebouwde schermen en de logoband */
+.font-ui {
   font-family: 'Instrument Sans', 'Inter', system-ui, sans-serif;
 }
 

@@ -9,7 +9,7 @@ import UseCases from '@/components/ui/use-cases'
 import TaalProvider from '@/components/ui/taal-provider'
 import { useTaal } from '@/lib/taal'
 import Bedankt from '@/pages/bedankt'
-import tristanPortret from './assets/tristan-portret-sfeer.webp'
+import tristanPortret from './assets/tristan-portret.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -37,7 +37,7 @@ function useReveal(ref, selector = '.reveal') {
 
 /* Kleuren uit de huisstijl (ochtendmist, boomschaduw, veldgroen, ...). */
 const INKT = 'text-[#0B1B2E]'
-const BIJTEKST = 'text-[#566577]'
+const BIJTEKST = 'text-[#2F3D50]'
 
 /* ─────────────────────────────────────────────────────────────────────────
    SECTIEKOP — kop in Newsreader, zonder bovenschrift. Zelfde maat overal.
@@ -92,11 +92,16 @@ function Probleem() {
         </h2>
       </div>
 
-      <div className="relative mx-auto mt-14 w-full max-w-6xl md:mt-20">
+      {/* de rij loopt over de volle schermbreedte; de eerste kaart lijnt uit
+          met de rest van de pagina (max-w-7xl met px-10) */}
+      <div className="relative -mx-6 mt-14 md:-mx-10 md:mt-20">
         <ul
           ref={rij}
-          style={{ maskImage: 'linear-gradient(to right, #000 85%, transparent)', WebkitMaskImage: 'linear-gradient(to right, #000 85%, transparent)' }}
-          className="geen-scrollbalk -mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-6 px-6 pb-2 md:mx-0 md:scroll-px-0 md:px-0"
+          style={{
+            maskImage: 'linear-gradient(to right, #000 92%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, #000 92%, transparent)',
+          }}
+          className="geen-scrollbalk flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-6 px-6 pb-2 md:[padding-inline:max(2.5rem,calc((100%-80rem)/2))] md:[scroll-padding-inline:max(2.5rem,calc((100%-80rem)/2))]"
         >
           {punten.map((punt, i) => {
             const Icoon = PROBLEEM_ICONEN[i % PROBLEEM_ICONEN.length]
@@ -221,7 +226,7 @@ function OverAinova() {
 
   return (
     <section ref={ref} id="over" className="bg-[#FBFCFD] px-6 pb-24 md:px-10 md:pb-32">
-      <div className="mx-auto grid max-w-7xl gap-10 border-t border-[#E2E8EF] pt-16 md:grid-cols-[1fr_minmax(0,20rem)] md:gap-20 md:pt-24">
+      <div className="mx-auto grid max-w-7xl gap-10 border-t border-[#E2E8EF] pt-16 md:grid-cols-[1fr_minmax(0,10rem)] md:gap-20 md:pt-24">
         <div>
           <SectieKop sleutel="overmij" />
           <div className="mt-8 max-w-2xl space-y-4">
@@ -233,15 +238,18 @@ function OverAinova() {
           </div>
         </div>
 
-        <figure className="reveal w-full max-w-[20rem]">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#F1F4F8] ring-1 ring-[#E2E8EF]">
+        <figure className="reveal w-full max-w-[7rem] sm:max-w-[10rem]">
+          <div
+            className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#13345f] bg-cover bg-center"
+            style={{ backgroundImage: 'linear-gradient(180deg, rgba(8,22,44,0.1) 0%, rgba(8,22,44,0.3) 100%), url(/hero-blauw.webp)' }}
+          >
             <img
               src={tristanPortret}
               alt={t('overmij.bijschrift')}
-              width={493}
-              height={620}
+              width={680}
+              height={801}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-top"
+              className="absolute left-1/2 top-[7%] w-[140%] max-w-none -translate-x-[53%]"
             />
           </div>
           <figcaption className={`mt-3 font-hero-sans text-sm ${BIJTEKST}`}>
@@ -265,7 +273,7 @@ function Contact() {
   return (
     <section ref={ref} id="contact" className="bg-[#FBFCFD] px-4 pb-4 sm:px-6 sm:pb-6">
       <div
-        className="mx-auto flex max-w-7xl flex-col items-center overflow-hidden rounded-[2rem] bg-[#13345f] bg-cover bg-center px-6 py-20 text-center sm:px-10 md:py-28"
+        className="flex min-h-[70svh] w-full flex-col items-center justify-center overflow-hidden rounded-[2rem] bg-[#13345f] bg-cover bg-center px-6 py-20 text-center sm:px-10 md:py-28"
         style={{ backgroundImage: 'linear-gradient(180deg, rgba(8,22,44,0.5) 0%, rgba(8,22,44,0.35) 50%, rgba(8,22,44,0.6) 100%), url(/hero-blauw.webp)' }}
       >
         <h2
@@ -274,7 +282,7 @@ function Contact() {
         >
           {t('contact.titel')}
         </h2>
-        <p className="reveal mt-6 max-w-lg font-hero-sans text-base leading-[1.6] text-[#C9D6E4] md:text-lg">
+        <p className="reveal mt-6 max-w-lg font-hero-sans text-base leading-[1.6] text-[#EEF3F8] md:text-lg">
           {t('contact.sub')}
         </p>
 
@@ -285,7 +293,7 @@ function Contact() {
           >
             <Mail size={16} />
             {t('contact.mail')}
-            <span className="text-[#566577]">· {EMAIL}</span>
+            <span className="text-[#2F3D50]">· {EMAIL}</span>
           </a>
           <a
             href={LINKEDIN_URL}

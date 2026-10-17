@@ -76,7 +76,7 @@ export default function HeroLandschap() {
           <br className="hidden sm:block" /> <span className="sm:whitespace-nowrap">{t('hero.titelB')}</span>
         </h1>
 
-        <p className="hero-op mt-7 max-w-2xl font-hero-serif text-[1.15rem] leading-[1.5] tracking-[-0.005em] text-[#A9BBD0] md:text-[1.35rem]">
+        <p className="hero-op mt-7 max-w-2xl font-hero-serif text-[1.15rem] font-medium leading-[1.5] tracking-[-0.005em] text-[#EEF3F8] [text-shadow:0_1px_12px_rgba(8,22,44,0.35)] md:text-[1.35rem]">
           {t('hero.sub')}
         </p>
 
