@@ -1,73 +1,56 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Richtlijnen voor Claude Code in deze repo: ainova.be.
 
-## Commands
+## Commando's
 
 ```bash
-npm run dev      # Start dev server at http://localhost:5173
-npm run build    # Production build to dist/
-npm run preview  # Preview production build locally
-npm run lint     # ESLint check
+npm run dev      # dev-server op http://localhost:5173
+npm run build    # productiebuild naar dist/, prerendert / en /bedankt
+npm run preview  # productiebuild lokaal bekijken
+npm run lint     # ESLint
 ```
 
-## Architecture
+**Push naar `main` = live.** Vercel deployt binnen een minuut. Nooit pushen
+zonder akkoord van Tristan.
 
-**Single-file component model**: All page sections live in `src/App.jsx` as named functions (not exported). New sections should follow the same pattern — define the component in `App.jsx`, then add it to the `App()` root render at the bottom.
+## Opbouw
 
-**Page structure (top to bottom):**
-`Navbar` → `Hero` → `Features` (process flow) → `ServicesSection` → `Philosophy` → `AboutMe` → `Protocol` → `ContactCTA` → `Footer`
+- Alle secties van de homepage staan in `src/App.jsx` als losse functies:
+  `Probleem` (obstakels) → `Aanpak` → `UseCases` → `OverAinova` → `Contact`
+  → `Footer`. De hero staat in `src/components/ui/hero-landschap.jsx`.
+- **Alle zichtbare tekst staat in `src/lib/teksten.js`**, in het Nederlands
+  (standaard) en het Engels. Pas tekst daar aan, niet in de componenten.
+- Contactformulier: `src/components/ui/contact-form.jsx`, een gewone POST
+  naar Web3Forms die doorstuurt naar `/bedankt`. Werkt (getest 17 okt).
+- `scripts/prerender.mjs` rendert de pagina's naar statische HTML voor
+  zoekmachines. Titel, meta en structured data staan in `index.html`.
+- `src/components/demo-hub/` en een deel van `src/components/ui/` zijn oude
+  onderdelen die nergens meer gebruikt worden.
 
-**Reusable UI components** go in `src/components/ui/`. Import via the `@` alias (`@/components/ui/...` resolves to `src/`). Currently: `category-list.jsx`, `cybernetic-bento-grid.jsx`.
+## Huisstijl
 
-**Utility**: `src/lib/utils.js` exports a single `cn(...classes)` helper for conditional classnames.
+De bron is de skill `ainova-huisstijl` (`~/.claude/skills/ainova-huisstijl/`).
+Kort:
 
-## Design System
+| Wat | Waarde |
+|---|---|
+| Achtergrond | `#FBFCFD`, vlakken `#F1F4F8`, lijnen `#E2E8EF` |
+| Inkt / tekst | `#0B1B2E` koppen, `#2F3D50` lopende tekst |
+| Accent | `#1F5A94` |
+| Beeld | `public/hero-blauw.webp` met een donkere laag, in hero, contact en use cases |
+| Lettertype | Newsreader voor alles (`font-hero-serif`, `font-hero-sans`, `.woordmerk`). `font-ui` (Instrument Sans) alleen voor nagebouwde schermen en de logoband |
 
-All colors, fonts and radii are defined in `tailwind.config.js` — use these tokens, never raw hex values in JSX.
+De klasse `font-hero-sans` heet nog zo, maar is sinds 17 okt Newsreader.
 
-| Token | Value | Usage |
-|---|---|---|
-| `cream` | `#F2F0E9` | Light section backgrounds, primary text on dark |
-| `charcoal` | `#1A1A1A` | Dark section backgrounds, primary text on light |
-| `moss` | `#2E4036` | Accents, highlighted step (process flow) |
-| `clay` | `#CC5833` | CTAs, icons, hover states, brand accent |
+## Toon
 
-**Typography classes** (defined in `src/index.css`, not Tailwind plugins):
-- `font-heading` — Plus Jakarta Sans (UI text, headings)
-- `font-drama` — Cormorant Garamond italic (large decorative headlines)
-- `font-body` — Outfit (body paragraphs)
-- `font-mono-brand` — IBM Plex Mono (labels, tags, live feed)
+Vlaams, **"je"**, nooit "u". Ainova spreekt als **"wij"**. Kort en concreet,
+geen AI-jargon, geen verzonnen cases of cijfers. Geen prijzen of garanties
+op de site.
 
-**Section pattern**: Dark sections use `style={{ background: 'linear-gradient(135deg, #1e2b24 0%, #1A1A1A 100%)' }}`. Light sections use `className="bg-cream"`.
+## Animaties
 
-## Animations
-
-GSAP + ScrollTrigger is registered once at the top of `App.jsx`. All scroll animations use the same pattern:
-
-```js
-const sectionRef = useRef(null)
-useEffect(() => {
-  const ctx = gsap.context(() => {
-    gsap.fromTo('.target-class', { y: 40, opacity: 0 }, {
-      y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.12,
-      scrollTrigger: { trigger: sectionRef.current, start: 'top 72%' }
-    })
-  }, sectionRef)
-  return () => ctx.revert()
-}, [])
-```
-
-Always clean up with `ctx.revert()` and scope animations to `sectionRef` via `gsap.context()`.
-
-## Key CSS
-
-Custom CSS in `src/index.css` (beyond Tailwind):
-- `.btn-magnetic` / `.btn-bg` / `.btn-label` — hover fill-up button effect
-- `.aurora-layer` / `.aurora-mask` — animated hero background
-- `.bento-item` / `.bento-grid` — spotlight mouse-follow effect using `--mouse-x` / `--mouse-y` CSS vars
-- `.cursor-blink`, `.pulse-dot`, `.ekg-path`, `.laser-line`, `.slow-rotate` — animation classes
-
-## Language & Tone
-
-The site targets Dutch-speaking KMOs and self-employed entrepreneurs. All copy is in **Dutch**, using formal "u" (not "jij"). The brand voice is: clear, direct, no jargon, urgency without panic.
+GSAP met ScrollTrigger, geregistreerd bovenaan `App.jsx`. Elke sectie
+gebruikt `useReveal(ref)` voor een zachte fade-in en ruimt op met
+`ctx.revert()`. Respecteer `prefers-reduced-motion` (zie `rustig()`).
