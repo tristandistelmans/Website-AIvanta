@@ -95,7 +95,7 @@ function Probleem() {
 
       {/* tot tablet een scrollbare rij over de volle schermbreedte, waarvan
           de eerste kaart uitlijnt met de rest van de pagina (max-w-7xl met
-          px-10); vanaf laptop vier per rij, de laatste rij gecentreerd */}
+          px-10); vanaf laptop twee rijen van drie */}
       <div className="relative -mx-6 mt-14 md:-mx-10 md:mt-20">
         <ul
           ref={rij}
@@ -109,7 +109,7 @@ function Probleem() {
             return (
               <li
                 key={punt.titel}
-                className="reveal group flex w-[16.5rem] shrink-0 snap-start flex-col lg:w-[calc((100%-2.25rem)/4)] items-center gap-7 overflow-hidden rounded-2xl border border-[#E2E8EF] bg-[#FBFCFD] px-8 pb-9 pt-11 text-center transition-colors duration-500 hover:bg-[#F1F4F8]/60 sm:w-[19rem]"
+                className="reveal group flex w-[16.5rem] shrink-0 snap-start flex-col lg:w-[calc((100%-1.5rem)/3)] items-center gap-7 overflow-hidden rounded-2xl border border-[#E2E8EF] bg-[#FBFCFD] px-8 pb-9 pt-11 text-center transition-colors duration-500 hover:bg-[#F1F4F8]/60 sm:w-[19rem]"
               >
                 <span className="relative flex h-28 w-28 items-center justify-center rounded-full border border-[#E2E8EF] bg-[#FBFCFD] shadow-[0_1px_2px_rgba(11,27,46,0.05)] outline outline-1 outline-offset-4 outline-[#E2E8EF] transition-transform duration-500 group-hover:scale-[1.03]">
                   <span

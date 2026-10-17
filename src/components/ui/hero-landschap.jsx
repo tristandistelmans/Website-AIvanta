@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { Fragment, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ArrowRight } from 'lucide-react'
 
@@ -20,10 +20,17 @@ export default function HeroLandschap() {
   const { t } = useTaal()
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const ctx = gsap.context(() => {
+      // de titel schuift woord per woord omhoog uit een onzichtbare rand,
+      // daarna komen ondertitel en knop zacht in beeld
+      gsap.fromTo('.hero-woord',
+        { yPercent: 110, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 1.1, ease: 'power4.out', stagger: 0.09, delay: 0.15 }
+      )
       gsap.fromTo('.hero-op',
         { y: 22, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.1 }
+        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.55 }
       )
     }, ref)
     return () => ctx.revert()
@@ -67,11 +74,18 @@ export default function HeroLandschap() {
       {/* inhoud */}
       <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 pb-24 pt-20 text-center md:px-10">
         <h1
-          className="hero-op font-hero-serif font-normal leading-[1.02] tracking-[-0.025em] text-[#F4F7FA]"
+          className="font-hero-serif font-normal leading-[1.02] tracking-[-0.025em] text-[#F4F7FA]"
           style={{ fontSize: 'clamp(2.6rem, 5.8vw, 5.25rem)' }}
+          aria-label={t('hero.titel')}
         >
-          <span className="sm:whitespace-nowrap">{t('hero.titelA')}</span>
-          <br className="hidden sm:block" /> <span className="sm:whitespace-nowrap">{t('hero.titelB')}</span>
+          {t('hero.titel').split(' ').map((woord, i) => (
+            <Fragment key={i}>
+              {i > 0 && ' '}
+              <span aria-hidden="true" className="inline-block overflow-hidden pb-[0.14em] align-bottom">
+                <span className="hero-woord inline-block">{woord}</span>
+              </span>
+            </Fragment>
+          ))}
         </h1>
 
         <p className="hero-op mt-7 max-w-2xl font-hero-serif text-[1.15rem] font-medium leading-[1.5] tracking-[-0.005em] text-[#EEF3F8] [text-shadow:0_1px_12px_rgba(8,22,44,0.35)] md:text-[1.35rem]">

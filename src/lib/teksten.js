@@ -18,8 +18,7 @@ export const TEKSTEN = {
   nl: {
     nav: { cta: 'Contact', taal: 'Taal' },
     hero: {
-      titelA: 'Jouw AI-partner die effectief',
-      titelB: 'oplevert voor je bedrijf.',
+      titel: 'Jouw AI-groeipartner.',
       sub: 'Bij Ainova ondersteunen we Vlaamse kmo’s met hun AI-transformatie door het identificeren, implementeren en optimaliseren van AI-systemen die meetbare groei opleveren.',
       start: 'Neem vrijblijvend contact op',
     },
@@ -215,8 +214,7 @@ export const TEKSTEN = {
   en: {
     nav: { cta: 'Contact', taal: 'Language' },
     hero: {
-      titelA: 'Your AI partner that actually',
-      titelB: 'pays off for your business.',
+      titel: 'Your AI growth partner.',
       sub: 'At Ainova, we support Flemish SMEs in their AI transformation by identifying, implementing and optimising AI systems that deliver measurable growth.',
       start: 'Get in touch, no strings attached',
     },
