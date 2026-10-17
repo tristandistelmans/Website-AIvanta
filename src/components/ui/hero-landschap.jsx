@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ArrowRight } from 'lucide-react'
 
-import { BoomMerk } from '@/components/ui/merk'
 import HeroLogostrip from '@/components/ui/hero-logostrip'
 import TaalSchakelaar from '@/components/ui/taal-schakelaar'
 import { useTaal } from '@/lib/taal'
@@ -48,9 +47,8 @@ export default function HeroLandschap() {
       {/* navigatie */}
       <div className="relative border-b border-white/10">
         <nav className="hero-op mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-5 md:px-10">
-          <a href="/" className="flex items-center gap-2.5 text-[#F4F7FA]">
-            <BoomMerk className="h-7 w-7" />
-            <span className="font-hero-serif text-2xl tracking-tight">Ainova</span>
+          <a href="/" className="flex items-center text-[#F4F7FA]">
+            <span className="woordmerk text-[1.7rem] leading-none">Ainova</span>
           </a>
 
           <div className="flex items-center gap-2">

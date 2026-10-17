@@ -190,8 +190,8 @@ export const TEKSTEN = {
     },
     contact: {
       titel: 'Benieuwd wat AI voor jullie kan doen?',
-      sub: 'Neem vrijblijvend contact op. Stuur ons een mail of een bericht op LinkedIn, we antwoorden binnen een werkdag.',
-      mail: 'Mail ons',
+      sub: 'Laat een bericht achter en we antwoorden binnen een werkdag. Vrijblijvend.',
+      mail: 'Liever rechtstreeks mailen?',
       linkedin: 'Via LinkedIn',
     },
     formulier: {
@@ -387,8 +387,8 @@ export const TEKSTEN = {
     },
     contact: {
       titel: 'Curious what AI can do for you?',
-      sub: 'Get in touch, no strings attached. Send us an email or a message on LinkedIn, we reply within one working day.',
-      mail: 'Email us',
+      sub: 'Leave a message and we will reply within one working day. No strings attached.',
+      mail: 'Prefer to email directly?',
       linkedin: 'Via LinkedIn',
     },
     formulier: {

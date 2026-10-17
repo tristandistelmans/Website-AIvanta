@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import HeroLandschap from '@/components/ui/hero-landschap'
 import UseCases from '@/components/ui/use-cases'
+import ContactForm from '@/components/ui/contact-form'
 import TaalProvider from '@/components/ui/taal-provider'
 import { useTaal } from '@/lib/taal'
 import Bedankt from '@/pages/bedankt'
@@ -92,23 +93,23 @@ function Probleem() {
         </h2>
       </div>
 
-      {/* de rij loopt over de volle schermbreedte; de eerste kaart lijnt uit
-          met de rest van de pagina (max-w-7xl met px-10) */}
+      {/* tot tablet een scrollbare rij over de volle schermbreedte, waarvan
+          de eerste kaart uitlijnt met de rest van de pagina (max-w-7xl met
+          px-10); vanaf laptop vier per rij, de laatste rij gecentreerd */}
       <div className="relative -mx-6 mt-14 md:-mx-10 md:mt-20">
         <ul
           ref={rij}
           style={{
-            maskImage: 'linear-gradient(to right, #000 92%, transparent)',
-            WebkitMaskImage: 'linear-gradient(to right, #000 92%, transparent)',
+            '--rand': 'linear-gradient(to right, #000 92%, transparent)',
           }}
-          className="geen-scrollbalk flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-6 px-6 pb-2 md:[padding-inline:max(2.5rem,calc((100%-80rem)/2))] md:[scroll-padding-inline:max(2.5rem,calc((100%-80rem)/2))]"
+          className="geen-scrollbalk flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-6 px-6 pb-2 [mask-image:var(--rand)] md:[padding-inline:max(2.5rem,calc((100%-80rem)/2))] md:[scroll-padding-inline:max(2.5rem,calc((100%-80rem)/2))] lg:mx-auto lg:max-w-[80rem] lg:flex-wrap lg:justify-center lg:overflow-visible lg:px-10 lg:pb-0 lg:[mask-image:none]"
         >
           {punten.map((punt, i) => {
             const Icoon = PROBLEEM_ICONEN[i % PROBLEEM_ICONEN.length]
             return (
               <li
                 key={punt.titel}
-                className="reveal group flex w-[16.5rem] shrink-0 snap-start flex-col items-center gap-7 overflow-hidden rounded-2xl border border-[#E2E8EF] bg-[#FBFCFD] px-8 pb-9 pt-11 text-center transition-colors duration-500 hover:bg-[#F1F4F8]/60 sm:w-[19rem]"
+                className="reveal group flex w-[16.5rem] shrink-0 snap-start flex-col lg:w-[calc((100%-2.25rem)/4)] items-center gap-7 overflow-hidden rounded-2xl border border-[#E2E8EF] bg-[#FBFCFD] px-8 pb-9 pt-11 text-center transition-colors duration-500 hover:bg-[#F1F4F8]/60 sm:w-[19rem]"
               >
                 <span className="relative flex h-28 w-28 items-center justify-center rounded-full border border-[#E2E8EF] bg-[#FBFCFD] shadow-[0_1px_2px_rgba(11,27,46,0.05)] outline outline-1 outline-offset-4 outline-[#E2E8EF] transition-transform duration-500 group-hover:scale-[1.03]">
                   <span
@@ -127,7 +128,7 @@ function Probleem() {
         </ul>
 
         {/* pijlen voor wie met een muis zit; op gsm volstaat vegen */}
-        <div className="mt-8 hidden justify-center gap-2 md:flex">
+        <div className="mt-8 hidden justify-center gap-2 md:flex lg:hidden">
           {[
             { richting: -1, Pijl: ChevronLeft, label: t('probleem.vorige') },
             { richting: 1, Pijl: ChevronRight, label: t('probleem.volgende') },
@@ -226,7 +227,7 @@ function OverAinova() {
 
   return (
     <section ref={ref} id="over" className="bg-[#FBFCFD] px-6 pb-24 md:px-10 md:pb-32">
-      <div className="mx-auto grid max-w-7xl gap-10 border-t border-[#E2E8EF] pt-16 md:grid-cols-[1fr_minmax(0,10rem)] md:gap-20 md:pt-24">
+      <div className="mx-auto grid max-w-7xl gap-10 border-t border-[#E2E8EF] pt-16 md:grid-cols-[1fr_minmax(0,17rem)] md:gap-20 md:pt-24">
         <div>
           <SectieKop sleutel="overmij" />
           <div className="mt-8 max-w-2xl space-y-4">
@@ -238,7 +239,7 @@ function OverAinova() {
           </div>
         </div>
 
-        <figure className="reveal w-full max-w-[7rem] sm:max-w-[10rem]">
+        <figure className="reveal w-full max-w-[7rem] sm:max-w-[10rem] md:max-w-[17rem]">
           <div
             className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#13345f] bg-cover bg-center"
             style={{ backgroundImage: 'linear-gradient(180deg, rgba(8,22,44,0.1) 0%, rgba(8,22,44,0.3) 100%), url(/hero-blauw.webp)' }}
@@ -252,9 +253,6 @@ function OverAinova() {
               className="absolute left-1/2 top-[7%] w-[140%] max-w-none -translate-x-[53%]"
             />
           </div>
-          <figcaption className={`mt-3 font-hero-sans text-sm ${BIJTEKST}`}>
-            {t('overmij.bijschrift')}
-          </figcaption>
         </figure>
       </div>
     </section>
@@ -262,8 +260,8 @@ function OverAinova() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   CONTACT — geen formulier: een knop naar de mail en een naar LinkedIn.
-   Drempel zo laag mogelijk, en het antwoord komt rechtstreeks van Tristan.
+   CONTACT — links de kop en een knop om rechtstreeks te mailen, rechts
+   het formulier (Web3Forms). Op gsm onder elkaar.
 ───────────────────────────────────────────────────────────────────────── */
 function Contact() {
   const ref = useRef(null)
@@ -273,38 +271,34 @@ function Contact() {
   return (
     <section ref={ref} id="contact" className="bg-[#FBFCFD] px-4 pb-4 sm:px-6 sm:pb-6">
       <div
-        className="flex min-h-[70svh] w-full flex-col items-center justify-center overflow-hidden rounded-[2rem] bg-[#13345f] bg-cover bg-center px-6 py-20 text-center sm:px-10 md:py-28"
+        className="flex min-h-[70svh] w-full items-center overflow-hidden rounded-[2rem] bg-[#13345f] bg-cover bg-center px-5 py-16 sm:px-10 md:py-24"
         style={{ backgroundImage: 'linear-gradient(180deg, rgba(8,22,44,0.5) 0%, rgba(8,22,44,0.35) 50%, rgba(8,22,44,0.6) 100%), url(/hero-blauw.webp)' }}
       >
-        <h2
-          className="reveal max-w-3xl font-hero-serif font-normal leading-[1.04] tracking-[-0.025em] text-[#F4F7FA]"
-          style={{ fontSize: 'clamp(2.25rem, 4.4vw, 3.75rem)' }}
-        >
-          {t('contact.titel')}
-        </h2>
-        <p className="reveal mt-6 max-w-lg font-hero-sans text-base leading-[1.6] text-[#EEF3F8] md:text-lg">
-          {t('contact.sub')}
-        </p>
+        <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[1fr_minmax(0,32rem)] lg:items-center lg:gap-20">
+          <div className="text-center lg:text-left">
+            <h2
+              className="reveal font-hero-serif font-normal leading-[1.04] tracking-[-0.025em] text-[#F4F7FA]"
+              style={{ fontSize: 'clamp(2.25rem, 4.4vw, 3.75rem)' }}
+            >
+              {t('contact.titel')}
+            </h2>
+            <p className="reveal mx-auto mt-6 max-w-md font-hero-sans text-base leading-[1.6] text-[#EEF3F8] md:text-lg lg:mx-0">
+              {t('contact.sub')}
+            </p>
 
-        <div className="reveal mt-10 flex flex-col items-center gap-3 sm:flex-row">
-          <a
-            href={`mailto:${EMAIL}`}
-            className="group inline-flex items-center gap-2.5 rounded-full bg-[#F4F7FA] px-6 py-3.5 font-hero-sans text-[0.95rem] font-medium text-[#0B1B2E] transition-transform hover:-translate-y-0.5"
-          >
-            <Mail size={16} />
-            {t('contact.mail')}
-            <span className="text-[#2F3D50]">· {EMAIL}</span>
-          </a>
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 font-hero-sans text-[0.95rem] font-medium text-[#F4F7FA] ring-1 ring-white/30 transition-all hover:-translate-y-0.5 hover:ring-white/60"
-          >
-            <Linkedin size={16} />
-            {t('contact.linkedin')}
-            <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-          </a>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="reveal group mt-10 inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 font-hero-sans text-[0.95rem] font-medium text-[#F4F7FA] ring-1 ring-white/30 transition-all hover:-translate-y-0.5 hover:ring-white/60"
+            >
+              <Mail size={16} className="shrink-0" />
+              <span className="hidden whitespace-nowrap sm:inline">{t('contact.mail')}</span>
+              <span className="whitespace-nowrap sm:text-[#C9D6E4]">{EMAIL}</span>
+            </a>
+          </div>
+
+          <div className="reveal">
+            <ContactForm />
+          </div>
         </div>
       </div>
     </section>
@@ -315,6 +309,7 @@ function Contact() {
    FOOTER — contact en de wettelijk verplichte ondernemersgegevens
 ───────────────────────────────────────────────────────────────────────── */
 const FOOTER_GROOT = 'block font-hero-serif text-2xl leading-tight tracking-[-0.02em] text-[#F4F7FA] md:text-3xl'
+const FOOTER_MERK = 'woordmerk block text-3xl leading-tight text-[#F4F7FA] md:text-4xl'
 const FOOTER_KLEIN = 'font-hero-sans text-sm text-[#A9BBD0]'
 
 function Footer() {
@@ -326,7 +321,7 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 md:px-10 md:pb-12 md:pt-20">
         <div className="flex flex-col gap-12 md:flex-row md:items-end md:justify-between md:gap-16">
           <div className="reveal">
-            <p className={FOOTER_GROOT}>Ainova</p>
+            <p className={FOOTER_MERK}>Ainova</p>
             <p className={`mt-1.5 ${FOOTER_KLEIN}`}>Corda Incubator, Hasselt</p>
           </div>
 

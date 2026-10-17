@@ -1,11 +1,11 @@
 {
   "name": "Ainova",
   "short_name": "Ainova",
-  "description": "Uw AI-groeipartner voor meer omzet en efficiëntie.",
+  "description": "Jouw AI-partner die effectief oplevert voor je bedrijf.",
   "start_url": "/",
   "display": "browser",
   "background_color": "#ffffff",
-  "theme_color": "#1b231d",
+  "theme_color": "#0e2a4a",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },

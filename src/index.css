@@ -56,6 +56,16 @@ body {
   font-optical-sizing: auto;
 }
 
+/* Woordmerk "Ainova": Newsreader vast op de titelversie (opsz 72), zoals
+   de hero-kop. Zonder dit kiest de browser bij kleine maten de steviger
+   leesversie en lijkt het een ander lettertype. */
+.woordmerk {
+  font-family: 'Newsreader', 'Times New Roman', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 72;
+  letter-spacing: -0.025em;
+}
+
 .font-hero-sans {
   /* Sinds 17 okt: alle lopende tekst in Newsreader, net als de koppen.
      De klasse heet nog "sans" om niet elke component te moeten herschrijven. */
