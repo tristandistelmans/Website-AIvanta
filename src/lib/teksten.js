@@ -18,50 +18,46 @@ export const TEKSTEN = {
   nl: {
     nav: { cta: 'Contact', taal: 'Taal' },
     hero: {
-      titelA: 'Maak AI het beste hulpmiddel',
-      titelB: 'van je bedrijf.',
-      sub: 'Ainova kijkt waar AI kan worden ingezet, en wat het kan opleveren.',
+      titelA: 'Jouw AI-partner die effectief',
+      titelB: 'oplevert voor je bedrijf.',
+      sub: 'Bij Ainova ondersteunen we Vlaamse kmo’s met hun AI-transformatie door het identificeren, implementeren en optimaliseren van AI-systemen die meetbare groei opleveren.',
       start: 'Neem vrijblijvend contact op',
     },
     logos: { klanten: 'Gewerkt voor', tools: 'Wij bouwen met' },
     probleem: {
       label: 'Het probleem',
-      titel: 'Iedereen wil iets met AI. Weinig bedrijven merken er iets van.',
+      titel: 'Waarom het vaak misloopt.',
+      vorige: 'Vorige',
+      volgende: 'Volgende',
       punten: [
-        {
-          titel: 'Werk dat blijft liggen.',
-          tekst: 'Offertes, bestellingen en mails kosten elke week uren, vaak buiten de werkuren.',
-        },
-        {
-          titel: 'Geen extra handen.',
-          tekst: 'Nieuwe mensen vinden is moeilijk. De tijd moet uit het bestaande werk komen.',
-        },
-        {
-          titel: 'Tools die niet gebruikt worden.',
-          tekst: 'Software wordt aangekocht, maar raakt nooit echt ingeburgerd in het dagelijkse werk.',
-        },
-        {
-          titel: 'AI zonder richting.',
-          tekst: 'Medewerkers testen zelf tools, zonder afspraken over wat werkt en wat veilig is.',
-        },
+        { titel: 'Geen diagnose vooraf' },
+        { titel: 'Beginnen bij de technologie' },
+        { titel: 'Niet weten waar te beginnen' },
+        { titel: 'Medewerkers gebruiken het niet' },
+        { titel: 'Slechte data' },
+        { titel: 'Geen AI-beleid' },
       ],
     },
     aanpak: {
       label: 'Onze aanpak',
-      titel: 'AI invoeren is meer dan software.',
+      titel: 'Hoe wij het aanpakken.',
       intro: 'We zoeken de taken waar AI het meest oplevert, bouwen de oplossing en zorgen dat je team ermee werkt.',
       stappen: [
         {
-          titel: 'Analyse',
+          titel: 'Strategie: AI-audit',
           tekst: 'We brengen in kaart waar AI tijd en geld oplevert, en wat je beter laat zoals het is.',
+        },
+        {
+          titel: 'Adoptie',
+          tekst: 'We betrekken je team van bij het begin en leren het ermee werken.',
         },
         {
           titel: 'Implementatie',
           tekst: 'We bouwen en koppelen de oplossing in de tools die je team al gebruikt.',
         },
         {
-          titel: 'Adoptie',
-          tekst: 'We trainen je team, volgen het gebruik op en breiden uit wat werkt.',
+          titel: 'Optimalisatie',
+          tekst: 'We volgen op hoe je team het gebruikt en breiden uit wat werkt.',
         },
       ],
     },
@@ -219,50 +215,46 @@ export const TEKSTEN = {
   en: {
     nav: { cta: 'Contact', taal: 'Language' },
     hero: {
-      titelA: 'Make AI the best tool',
-      titelB: 'in your company.',
-      sub: 'Ainova looks at where AI can be used, and what it can deliver.',
+      titelA: 'Your AI partner that actually',
+      titelB: 'pays off for your business.',
+      sub: 'At Ainova, we support Flemish SMEs in their AI transformation by identifying, implementing and optimising AI systems that deliver measurable growth.',
       start: 'Get in touch, no strings attached',
     },
     logos: { klanten: 'Worked for', tools: 'We build with' },
     probleem: {
       label: 'The problem',
-      titel: 'Everyone wants to do something with AI. Few companies notice a difference.',
+      titel: 'Why it often goes wrong.',
+      vorige: 'Previous',
+      volgende: 'Next',
       punten: [
-        {
-          titel: 'Work that piles up.',
-          tekst: 'Quotes, orders and email take hours every week, often outside working hours.',
-        },
-        {
-          titel: 'No extra hands.',
-          tekst: 'New people are hard to find. The time has to come from existing work.',
-        },
-        {
-          titel: 'Tools nobody uses.',
-          tekst: 'Software gets bought, but never really becomes part of daily work.',
-        },
-        {
-          titel: 'AI without direction.',
-          tekst: 'Employees try tools on their own, without agreements on what works and what is safe.',
-        },
+        { titel: 'No diagnosis up front' },
+        { titel: 'Starting with the technology' },
+        { titel: 'Not knowing where to start' },
+        { titel: 'Employees don’t use it' },
+        { titel: 'Poor data' },
+        { titel: 'No AI policy' },
       ],
     },
     aanpak: {
       label: 'Our approach',
-      titel: 'Rolling out AI takes more than software.',
+      titel: 'How we approach it.',
       intro: 'We find the tasks where AI delivers most, build the solution and make sure your team uses it.',
       stappen: [
         {
-          titel: 'Analysis',
+          titel: 'Strategy: AI audit',
           tekst: 'We map where AI saves time and money, and what you are better off leaving as it is.',
+        },
+        {
+          titel: 'Adoption',
+          tekst: 'We involve your team from the start and teach them to work with it.',
         },
         {
           titel: 'Implementation',
           tekst: 'We build and connect the solution inside the tools your team already uses.',
         },
         {
-          titel: 'Adoption',
-          tekst: 'We train your team, follow up on usage and expand what works.',
+          titel: 'Optimisation',
+          tekst: 'We track how your team uses it and expand what works.',
         },
       ],
     },

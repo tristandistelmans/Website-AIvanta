@@ -343,7 +343,7 @@ const DEMOS = {
   inbox: DemoInbox,
 }
 
-/* Neutraal vlak in mistzand, met een zachte lichtval: geen foto. */
+/* Het blauwe verloop uit de hero, met een lichte donkere laag. */
 function Voorbeeld({ demo, label }) {
   const Demo = DEMOS[demo.type]
 
@@ -351,16 +351,17 @@ function Voorbeeld({ demo, label }) {
     <div
       className="relative h-[24rem] overflow-hidden rounded-[2rem] md:h-[30rem]"
       style={{
-        background:
-          'radial-gradient(ellipse 80% 60% at 30% 0%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%),' +
-          'linear-gradient(160deg, #F5F1EA 0%, #ECE5D9 100%)',
+        backgroundColor: '#13345f',
+        backgroundImage: 'linear-gradient(180deg, rgba(8,22,44,0.15) 0%, rgba(8,22,44,0.35) 100%), url(/hero-blauw.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       <div className="relative flex h-full items-center justify-center px-3 py-12">
         {Demo && <Demo d={demo} />}
       </div>
 
-      <span className="absolute bottom-4 left-5 font-mono-brand text-[0.66rem] uppercase tracking-[0.14em] text-[#6E6857]">
+      <span className="absolute bottom-4 left-5 font-hero-sans text-xs text-white/70">
         {label}
       </span>
     </div>
@@ -400,15 +401,12 @@ export default function UseCases() {
   }
 
   return (
-    <section ref={ref} id="use-cases" className="bg-[#FCFAF6] px-6 pb-24 md:px-10 md:pb-32">
+    <section ref={ref} id="use-cases" className="bg-[#FBFCFD] px-6 pb-24 md:px-10 md:pb-32">
       <div className="mx-auto max-w-7xl">
         {/* kop */}
-        <div className="border-t border-[#E6DFD3] pt-16 md:pt-24">
-          <p className="uc-op font-mono-brand text-xs uppercase tracking-[0.16em] text-[#4A5130]">
-            {t('usecases.label')}
-          </p>
+        <div className="border-t border-[#E2E8EF] pt-16 md:pt-24">
           <h2
-            className="uc-op mt-5 max-w-3xl font-hero-serif font-normal leading-[1.04] tracking-[-0.025em] text-[#1A1A12]"
+            className="uc-op max-w-3xl font-hero-serif font-normal leading-[1.04] tracking-[-0.025em] text-[#0B1B2E]"
             style={{ fontSize: 'clamp(2.25rem, 4.4vw, 3.75rem)' }}
           >
             {t('usecases.titel')}
@@ -420,7 +418,7 @@ export default function UseCases() {
           <div
             role="tablist"
             aria-label={t('usecases.label')}
-            className="inline-flex gap-1 rounded-full bg-[#F5F1EA] p-1.5 ring-1 ring-[#E6DFD3]"
+            className="inline-flex gap-1 rounded-full bg-[#F1F4F8] p-1.5 ring-1 ring-[#E2E8EF]"
           >
             {categorieen.map((categorie, index) => {
               const Icoon = CATEGORIE_ICONEN[index] ?? Sparkles
@@ -439,8 +437,8 @@ export default function UseCases() {
                   onKeyDown={(e) => opToets(e, index)}
                   className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 font-hero-sans text-sm font-medium transition-all duration-300 md:px-5 ${
                     open
-                      ? 'bg-[#1A1A12] text-[#F7F3EC] shadow-[0_8px_20px_-10px_rgba(26,26,18,0.6)]'
-                      : 'text-[#6E6857] hover:bg-white hover:text-[#1A1A12]'
+                      ? 'bg-[#0B1B2E] text-[#F4F7FA] shadow-[0_8px_20px_-10px_rgba(11,27,46,0.6)]'
+                      : 'text-[#566577] hover:bg-white hover:text-[#0B1B2E]'
                   }`}
                 >
                   <Icoon size={15} strokeWidth={2} />
@@ -467,22 +465,22 @@ export default function UseCases() {
 
               <div>
                 <h3
-                  className="font-hero-serif font-normal leading-tight tracking-[-0.02em] text-[#1A1A12]"
+                  className="font-hero-serif font-normal leading-tight tracking-[-0.02em] text-[#0B1B2E]"
                   style={{ fontSize: 'clamp(1.75rem, 2.8vw, 2.4rem)' }}
                 >
                   {categorie.titel}
                 </h3>
-                <ul className="mt-7 divide-y divide-[#E6DFD3] border-y border-[#E6DFD3]">
+                <ul className="mt-7 divide-y divide-[#E2E8EF] border-y border-[#E2E8EF]">
                   {categorie.punten.map((punt) => (
-                    <li key={punt} className="flex items-start gap-3 py-4 font-hero-sans text-base text-[#1A1A12]">
-                      <Check size={16} strokeWidth={2.25} className="mt-1 shrink-0 text-[#4A5130]" />
+                    <li key={punt} className="flex items-start gap-3 py-4 font-hero-sans text-base text-[#0B1B2E]">
+                      <Check size={16} strokeWidth={2.25} className="mt-1 shrink-0 text-[#1F5A94]" />
                       {punt}
                     </li>
                   ))}
                 </ul>
                 <a
                   href="#contact"
-                  className="group mt-8 inline-flex items-center gap-2 font-hero-sans text-[0.95rem] font-medium text-[#1A1A12]"
+                  className="group mt-8 inline-flex items-center gap-2 font-hero-sans text-[0.95rem] font-medium text-[#0B1B2E]"
                 >
                   {t('usecases.cta')}
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

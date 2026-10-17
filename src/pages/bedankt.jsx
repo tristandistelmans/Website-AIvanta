@@ -25,36 +25,30 @@ export default function Bedankt() {
   }, [])
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-white px-6">
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(ellipse 70% 60% at 12% 88%, rgba(206,190,247,0.38) 0%, rgba(206,190,247,0) 100%),' +
-            'radial-gradient(ellipse 80% 75% at 92% 20%, rgba(178,238,238,0.45) 0%, rgba(178,238,238,0) 100%)',
-        }}
-      />
-
+    <main
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#13345f] bg-cover bg-center px-6"
+      style={{ backgroundImage: 'linear-gradient(180deg, rgba(8,22,44,0.5) 0%, rgba(8,22,44,0.35) 50%, rgba(8,22,44,0.6) 100%), url(/hero-blauw.webp)' }}
+    >
       <div className="relative w-full max-w-xl text-center">
-        <p className="flex items-center justify-center gap-2.5 font-mono-brand text-xs uppercase tracking-[0.18em] text-[#0A0A0A]/70">
-          <BoomMerk className="h-4 w-4 text-[#0A0A0A]" />
+        <p className="flex items-center justify-center gap-2.5 font-hero-sans text-sm text-[#C9D6E4]">
+          <BoomMerk className="h-4 w-4 text-[#F4F7FA]" />
           {t('bedankt.label')}
         </p>
 
         <h1
-          className="mt-7 font-body font-normal leading-[1.08] tracking-[-0.02em] text-[#0A0A0A]"
-          style={{ fontSize: 'clamp(2rem, 4.6vw, 3rem)' }}
+          className="mt-7 font-hero-serif font-normal leading-[1.06] tracking-[-0.025em] text-[#F4F7FA]"
+          style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)' }}
         >
           {t('bedankt.titel')}
         </h1>
 
-        <p className="mx-auto mt-6 max-w-md font-body text-base leading-[1.7] text-[#0A0A0A]/55 md:text-lg">
+        <p className="mx-auto mt-6 max-w-md font-hero-sans text-base leading-[1.65] text-[#C9D6E4] md:text-lg">
           {t('bedankt.tekst')}
         </p>
 
         <a
           href="/"
-          className="mt-10 inline-flex items-center rounded-full border border-[#0A0A0A]/20 bg-white/60 px-6 py-3.5 font-mono-brand text-xs uppercase tracking-[0.14em] text-[#0A0A0A] backdrop-blur-sm transition-colors hover:border-[#0A0A0A]/45"
+          className="mt-10 inline-flex items-center rounded-full bg-[#F4F7FA] px-6 py-3.5 font-hero-sans text-[0.95rem] font-medium text-[#0B1B2E] transition-transform hover:-translate-y-0.5"
         >
           {t('bedankt.terug')}
         </a>

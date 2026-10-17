@@ -57,7 +57,7 @@ body {
 }
 
 .font-hero-sans {
-  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  font-family: 'Instrument Sans', 'Inter', system-ui, sans-serif;
 }
 
 /* Hero-foto: kleine WebP op mobiel, groot vanaf tablet. De gradiënt
@@ -545,4 +545,12 @@ input[type="range"].roi-slider::-moz-range-track {
   .usecase-rij.usecase-verplaatst {
     animation: none;
   }
+}
+
+/* Horizontale rij zonder zichtbare scrollbalk (obstakels) */
+.geen-scrollbalk {
+  scrollbar-width: none;
+}
+.geen-scrollbalk::-webkit-scrollbar {
+  display: none;
 }

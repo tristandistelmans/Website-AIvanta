@@ -26,7 +26,7 @@ export default function TaalSchakelaar({ variant = 'licht' }) {
             type="button"
             onClick={() => wissel(code)}
             aria-pressed={actief}
-            className={`rounded-full px-2.5 py-1.5 font-mono-brand text-xs uppercase tracking-[0.12em] transition-colors ${
+            className={`rounded-full px-2.5 py-1.5 font-hero-sans text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
               glas
                 ? actief
                   ? 'bg-white text-[#0A0A0A]'
